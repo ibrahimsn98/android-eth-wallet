@@ -5,6 +5,7 @@ import io.reactivex.schedulers.Schedulers
 import me.ibrahimsn.wallet.entity.Wallet
 import org.ethereum.geth.KeyStore
 import java.io.File
+import java.nio.charset.Charset
 
 class WalletRepository {
 
@@ -17,6 +18,13 @@ class WalletRepository {
         }.subscribeOn(Schedulers.io())
     }
 
+    fun importKeyStore(store: String, password: String, newPassword: String): Single<Wallet> {
+        return Single.fromCallable<Wallet> {
+            val account = keyStore.importKey(store.toByteArray(Charset.forName("UTF-8")),
+                    password, newPassword)
 
+            Wallet(account.address.hex.toLowerCase())
+        }.subscribeOn(Schedulers.io())
+    }
 
 }
