@@ -12,7 +12,7 @@ import me.ibrahimsn.wallet.util.Constants.POA_SYMBOL
 import me.ibrahimsn.wallet.util.Constants.ROPSTEN_NETWORK_NAME
 import java.util.HashSet
 
-class EthereumNetworkRepository(private val preferenceRepository: PreferenceRepository) {
+class EthereumNetworkRepository(private val preferencesRepository: PreferencesRepository) {
 
     private val NETWORKS = arrayOf(NetworkInfo(ETHEREUM_NETWORK_NAME, ETH_SYMBOL,
             "https://mainnet.infura.io/llyrtzQ3YhkdESt2Fzrk",
@@ -30,7 +30,7 @@ class EthereumNetworkRepository(private val preferenceRepository: PreferenceRepo
             "https://ropsten.trustwalletapp.com/",
             "https://ropsten.etherscan.io", 3, false))
 
-    private var defaultNetwork = getByName(preferenceRepository.getDefaultNetwork()) ?: NETWORKS[0]
+    private var defaultNetwork = getByName(preferencesRepository.getDefaultNetwork()) ?: NETWORKS[0]
     private val onNetworkChangedListeners = HashSet<OnNetworkChangeListener>()
 
     fun getAvailableNetworkList(): Array<NetworkInfo> {
@@ -39,7 +39,7 @@ class EthereumNetworkRepository(private val preferenceRepository: PreferenceRepo
 
     fun setDefaultNetworkInfo(networkInfo: NetworkInfo) {
         defaultNetwork = networkInfo
-        preferenceRepository.setDefaultNetwork(defaultNetwork!!.name)
+        preferencesRepository.setDefaultNetwork(defaultNetwork!!.name)
 
         for (listener in onNetworkChangedListeners)
             listener.onNetworkChanged(networkInfo)

@@ -12,7 +12,7 @@ import org.web3j.protocol.http.HttpService
 import java.math.BigInteger
 
 class WalletRepository(private var gethAccountManager: GethAccountManager,
-                       private var preferenceRepository: PreferenceRepository,
+                       private var preferencesRepository: PreferencesRepository,
                        private var networkRepository: EthereumNetworkRepository,
                        private var httpClient: OkHttpClient) {
 
@@ -47,12 +47,12 @@ class WalletRepository(private var gethAccountManager: GethAccountManager,
     }
 
     fun setDefaultWallet(wallet: Wallet): Completable {
-        return Completable.fromAction { preferenceRepository.setCurrentWalletAddress(wallet.address) }
+        return Completable.fromAction { preferencesRepository.setCurrentWalletAddress(wallet.address) }
     }
 
     fun getDefaultWallet(): Single<Wallet> {
         return Single.fromCallable<String> {
-            preferenceRepository.getCurrentWalletAddress()
+            preferencesRepository.getCurrentWalletAddress()
         }.flatMap<Wallet> {
             this.findWallet(it)
         }

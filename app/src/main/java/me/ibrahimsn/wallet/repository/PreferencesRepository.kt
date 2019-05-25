@@ -6,7 +6,7 @@ import me.ibrahimsn.wallet.entity.GasSettings
 import me.ibrahimsn.wallet.util.Constants
 import java.math.BigInteger
 
-class PreferenceRepository(context: Context) {
+class PreferencesRepository(context: Context) {
 
     private val CURRENT_ACCOUNT_ADDRESS_KEY = "current_account_address"
     private val DEFAULT_NETWORK_NAME_KEY = "default_network_name"
