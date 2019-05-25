@@ -5,14 +5,14 @@ import android.os.Parcelable
 
 class Wallet : Parcelable {
 
-    private var address: String?
+    var address: String
 
     constructor(address: String) {
         this.address = address
     }
 
     constructor(source: Parcel) {
-        this.address = source.readString()
+        this.address = source.readString()!!
     }
 
     override fun writeToParcel(dest: Parcel?, flags: Int) {
