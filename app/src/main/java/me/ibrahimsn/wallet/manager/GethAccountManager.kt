@@ -11,8 +11,9 @@ import java.io.File
 import java.lang.Exception
 import java.math.BigInteger
 import java.nio.charset.Charset
+import javax.inject.Inject
 
-class GethAccountManager(private val keyStoreFile: File) {
+class GethAccountManager @Inject constructor(keyStoreFile: File) {
 
     private val keyStore = KeyStore(keyStoreFile.absolutePath, Geth.LightScryptN, Geth.LightScryptP)
 

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">wallet</string>
+
+	<string name="menu_wallet">Wallet</string>
+	<string name="menu_transactions">Transactions</string>
+	<string name="menu_receive">Receive</string>
+	<string name="menu_send">Send</string>
+	<string name="menu_menu">Menu</string>
 </resources>

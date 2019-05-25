@@ -2,18 +2,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<item
-		android:id="@+id/wallet"
-		android:title="@string/app_name"
+		android:id="@+id/nav_wallet"
+		android:title="@string/menu_wallet"
 		android:icon="@drawable/ic_wallet" />
 
 	<item
-		android:id="@+id/wallet2"
-		android:title="@string/app_name"
+		android:id="@+id/nav_transactions"
+		android:title="@string/menu_transactions"
 		android:icon="@drawable/ic_wallet" />
 
 	<item
-		android:id="@+id/wallet3"
-		android:title="@string/app_name"
+		android:id="@+id/nav_receive"
+		android:title="@string/menu_receive"
+		android:icon="@drawable/ic_wallet" />
+
+	<item
+		android:id="@+id/nav_send"
+		android:title="@string/menu_send"
+		android:icon="@drawable/ic_wallet" />
+
+	<item
+		android:id="@+id/nav_menu"
+		android:title="@string/menu_menu"
 		android:icon="@drawable/ic_wallet" />
 
 </menu>
