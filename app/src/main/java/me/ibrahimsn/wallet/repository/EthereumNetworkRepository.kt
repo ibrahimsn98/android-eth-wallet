@@ -11,8 +11,9 @@ import me.ibrahimsn.wallet.util.Constants.POA_NETWORK_NAME
 import me.ibrahimsn.wallet.util.Constants.POA_SYMBOL
 import me.ibrahimsn.wallet.util.Constants.ROPSTEN_NETWORK_NAME
 import java.util.HashSet
+import javax.inject.Inject
 
-class EthereumNetworkRepository(private val preferencesRepository: PreferencesRepository) {
+class EthereumNetworkRepository @Inject constructor(private val preferencesRepository: PreferencesRepository) {
 
     private val NETWORKS = arrayOf(NetworkInfo(ETHEREUM_NETWORK_NAME, ETH_SYMBOL,
             "https://mainnet.infura.io/llyrtzQ3YhkdESt2Fzrk",
@@ -39,7 +40,7 @@ class EthereumNetworkRepository(private val preferencesRepository: PreferencesRe
 
     fun setDefaultNetworkInfo(networkInfo: NetworkInfo) {
         defaultNetwork = networkInfo
-        preferencesRepository.setDefaultNetwork(defaultNetwork!!.name)
+        preferencesRepository.setDefaultNetwork(defaultNetwork.name)
 
         for (listener in onNetworkChangedListeners)
             listener.onNetworkChanged(networkInfo)
@@ -49,7 +50,7 @@ class EthereumNetworkRepository(private val preferencesRepository: PreferencesRe
         return defaultNetwork
     }
 
-    private fun getByName(name: String): NetworkInfo? {
+    private fun getByName(name: String?): NetworkInfo? {
         if (!TextUtils.isEmpty(name))
             for (NETWORK in NETWORKS)
                 if (name == NETWORK.name)

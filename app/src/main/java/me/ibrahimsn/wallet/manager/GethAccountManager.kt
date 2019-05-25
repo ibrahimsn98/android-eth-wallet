@@ -3,6 +3,7 @@ package me.ibrahimsn.wallet.manager
 import android.util.Log
 import io.reactivex.Completable
 import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import me.ibrahimsn.wallet.entity.Wallet
 import org.ethereum.geth.*
@@ -18,7 +19,7 @@ class GethAccountManager(private val keyStoreFile: File) {
     fun createAccount(password: String): Single<Wallet> {
         return Single.fromCallable<Wallet> {
             Wallet(keyStore.newAccount(password).address.hex.toLowerCase())
-        }.subscribeOn(Schedulers.io())
+        }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
     }
 
     fun importKeyStore(store: String, password: String, newPassword: String): Single<Wallet> {
@@ -27,7 +28,7 @@ class GethAccountManager(private val keyStoreFile: File) {
                     password, newPassword)
 
             Wallet(account.address.hex.toLowerCase())
-        }.subscribeOn(Schedulers.io())
+        }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
     }
 
     fun exportAccount(wallet: Wallet, password: String, newPassword: String): Single<String> {
@@ -37,7 +38,7 @@ class GethAccountManager(private val keyStoreFile: File) {
             Single.fromCallable {
                 String(keyStore.exportKey(it, password, newPassword))
             }
-        }.subscribeOn(Schedulers.io())
+        }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
     }
 
     fun deleteAccount(address: String, password: String): Completable {
@@ -47,7 +48,7 @@ class GethAccountManager(private val keyStoreFile: File) {
             Completable.fromAction {
                 keyStore.deleteAccount(it, password)
             }
-        }.subscribeOn(Schedulers.io())
+        }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
     }
 
     fun hasAccount(address: String): Boolean {
@@ -75,7 +76,7 @@ class GethAccountManager(private val keyStoreFile: File) {
             keyStore.lock(gethAccount.address)
 
             signed.encodeRLP()
-        }.subscribeOn(Schedulers.io())
+        }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
     }
 
     fun fetchAccounts(): Single<MutableList<Wallet>> {
@@ -87,7 +88,7 @@ class GethAccountManager(private val keyStoreFile: File) {
                 result.add(Wallet(accounts.get(i).address.hex.toLowerCase()))
 
             result
-        }.subscribeOn(Schedulers.io())
+        }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
     }
 
     private fun findAccount(address: String): Account {

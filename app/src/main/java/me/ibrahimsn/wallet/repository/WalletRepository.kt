@@ -10,8 +10,9 @@ import org.web3j.protocol.Web3jFactory
 import org.web3j.protocol.core.DefaultBlockParameterName
 import org.web3j.protocol.http.HttpService
 import java.math.BigInteger
+import javax.inject.Inject
 
-class WalletRepository(private var gethAccountManager: GethAccountManager,
+class WalletRepository @Inject constructor(private var gethAccountManager: GethAccountManager,
                        private var preferencesRepository: PreferencesRepository,
                        private var networkRepository: EthereumNetworkRepository,
                        private var httpClient: OkHttpClient) {

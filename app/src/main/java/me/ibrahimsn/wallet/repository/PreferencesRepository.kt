@@ -5,8 +5,9 @@ import android.preference.PreferenceManager
 import me.ibrahimsn.wallet.entity.GasSettings
 import me.ibrahimsn.wallet.util.Constants
 import java.math.BigInteger
+import javax.inject.Inject
 
-class PreferencesRepository(context: Context) {
+class PreferencesRepository @Inject constructor(context: Context) {
 
     private val CURRENT_ACCOUNT_ADDRESS_KEY = "current_account_address"
     private val DEFAULT_NETWORK_NAME_KEY = "default_network_name"
@@ -24,8 +25,8 @@ class PreferencesRepository(context: Context) {
         prefs.edit().putString(CURRENT_ACCOUNT_ADDRESS_KEY, address).apply()
     }
 
-    fun getDefaultNetwork(): String {
-        return prefs.getString(DEFAULT_NETWORK_NAME_KEY, null)!!
+    fun getDefaultNetwork(): String? {
+        return prefs.getString(DEFAULT_NETWORK_NAME_KEY, null)
     }
 
     fun setDefaultNetwork(netName: String) {

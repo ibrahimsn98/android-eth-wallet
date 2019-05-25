@@ -2,6 +2,8 @@ package me.ibrahimsn.wallet.util
 
 object Constants {
 
+    val TAG = "###"
+
     val IMPORT_REQUEST_CODE = 1001
     val EXPORT_REQUEST_CODE = 1002
     val SHARE_REQUEST_CODE = 1003

@@ -1,13 +1,12 @@
 package me.ibrahimsn.wallet.ui.main
 
+import android.content.Intent
 import android.os.Bundle
-import io.reactivex.disposables.CompositeDisposable
 import me.ibrahimsn.wallet.R
 import me.ibrahimsn.wallet.base.BaseActivity
+import me.ibrahimsn.wallet.ui.home.HomeActivity
 
 class MainActivity : BaseActivity() {
-
-    private val disposable = CompositeDisposable()
 
     override fun layoutRes(): Int {
         return R.layout.activity_main
@@ -15,8 +14,8 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
+        startActivity(Intent(this, HomeActivity::class.java))
+        finish()
     }
 }
 

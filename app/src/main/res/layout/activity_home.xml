@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:background="@color/colorBackground">
+
+	<fragment
+		android:id="@+id/host"
+		android:name="androidx.navigation.fragment.NavHostFragment"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		app:defaultNavHost="true"
+		android:layout_marginBottom="52dp"
+		app:navGraph="@navigation/home_graph"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintBottom_toTopOf="@id/bottomBar"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+	<me.ibrahimsn.lib.NiceBottomBar
+		android:id="@+id/bottomBar"
+		android:layout_width="match_parent"
+		android:layout_height="58dp"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:backgroundColor="@color/colorBackground"
+		app:textColor="@color/colorTextSecondary"
+		app:textColorActive="@color/colorAccent"
+		app:indicatorColor="@color/colorAccent"
+		app:badgeColor="@color/colorAccent"
+		app:textSize="13sp"
+		app:iconMargin="4dp"
+		app:menu="@menu/bottom_menu"/>
+
+</android.support.constraint.ConstraintLayout>
