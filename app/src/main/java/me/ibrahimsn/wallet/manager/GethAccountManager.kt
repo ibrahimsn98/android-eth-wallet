@@ -1,4 +1,4 @@
-package me.ibrahimsn.wallet.core
+package me.ibrahimsn.wallet.manager
 
 import android.util.Log
 import io.reactivex.Completable
