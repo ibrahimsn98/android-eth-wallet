@@ -52,11 +52,13 @@ class WalletViewModel @Inject constructor(private val walletRepository: WalletRe
                         Log.d(Constants.TAG, "Get default wallet error:", e)
                     }
                 }))
+
+        fetchTransaction(Wallet(""))
     }
 
     fun fetchTransaction(wallet: Wallet) {
         disposable.add(Observable.interval(0, 10L, TimeUnit.SECONDS).doOnNext {
-            disposable.add(transactionRepository.fetchTransaction(wallet.address)
+            disposable.add(transactionRepository.fetchTransaction("0xc1E2Ec12849e4F1a30ab9988357E273a96951C0b", 1, 20)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {

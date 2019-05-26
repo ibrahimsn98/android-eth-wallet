@@ -7,11 +7,6 @@
 		android:icon="@drawable/ic_wallet" />
 
 	<item
-		android:id="@+id/nav_transactions"
-		android:title="@string/menu_transactions"
-		android:icon="@drawable/ic_wallet" />
-
-	<item
 		android:id="@+id/nav_receive"
 		android:title="@string/menu_receive"
 		android:icon="@drawable/ic_wallet" />

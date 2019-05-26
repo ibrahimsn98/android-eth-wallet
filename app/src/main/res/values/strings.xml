@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">wallet</string>
+    <string name="app_name">Ethereum Wallet</string>
 
 	<string name="menu_wallet">Wallet</string>
 	<string name="menu_transactions">Transactions</string>

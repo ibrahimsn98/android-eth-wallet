@@ -36,7 +36,7 @@ class TransactionManager @Inject constructor(okHttpClient: OkHttpClient, gson: G
                 .create(EtherScanApiClient::class.java)
     }
 
-    fun fetchTransaction(address: String): Observable<EtherScanResponse> {
+    fun fetchTransaction(address: String, page: Int, offset: Int): Observable<EtherScanResponse> {
         return etherScanApiClient.fetchTransactions(address, 1, 10, "ASC",
                 "SGPX7HN5MJNWMMYDFUKUW7XTM21EDG2T1N")
     }

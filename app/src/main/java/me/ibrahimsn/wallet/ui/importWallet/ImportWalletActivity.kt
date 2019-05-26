@@ -26,7 +26,7 @@ class ImportWalletActivity : BaseActivity() {
 
         btImport.setOnClickListener {
             val name = etWalletName.text.toString()
-            val address = etWalletAddress.text.toString()
+            val address = "0xc1E2Ec12849e4F1a30ab9988357E273a96951C0b"//etWalletAddress.text.toString()
 
             if (validateForm(name, address))
                 viewModel.importPublicAddress(name, address)

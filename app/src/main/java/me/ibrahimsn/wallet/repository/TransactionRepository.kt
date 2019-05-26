@@ -20,12 +20,12 @@ class TransactionRepository @Inject constructor(private val networkRepository: E
                                                 private val accountManager: GethAccountManager,
                                                 private val transactionManager: TransactionManager) {
 
-    fun fetchTransaction(address: String): Observable<EtherScanResponse> {
-        return transactionManager.fetchTransaction(address)
+    fun fetchTransaction(address: String, page: Int, offset: Int): Observable<EtherScanResponse> {
+        return transactionManager.fetchTransaction(address, page, offset)
     }
 
     fun findTransaction(wallet: Wallet, transactionHash: String): Maybe<Transaction> {
-        return fetchTransaction(wallet.address).firstElement().flatMap {
+        return fetchTransaction(wallet.address, 1, 20).firstElement().flatMap {
             for (transaction in it.result)
                 if (transaction.hash == transactionHash)
                     Maybe.just(transaction)

@@ -36,6 +36,7 @@ class WalletAdapter : RecyclerView.Adapter<WalletAdapter.ViewHolder>() {
         fun bind(wallet: Wallet) {
             this.wallet = wallet
             view.tvAddress.text = wallet.address
+            view.tvName.text = wallet.name
         }
     }
 }

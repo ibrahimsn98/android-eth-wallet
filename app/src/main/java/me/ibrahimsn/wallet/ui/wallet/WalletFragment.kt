@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer
@@ -27,12 +28,16 @@ class WalletFragment : BaseFragment<HomeActivity>() {
         viewModel = ViewModelProviders.of(activity, viewModelFactory).get(WalletViewModel::class.java)
 
         val walletAdapter = WalletAdapter()
+        val transactionAdapter = TransactionAdapter()
 
         walletPicker.setItemTransformer(ScaleTransformer.Builder()
                 .setMinScale(0.8f)
                 .build())
 
         walletPicker.adapter = walletAdapter
+
+        rvTransactions.layoutManager = LinearLayoutManager(activity)
+        rvTransactions.adapter = transactionAdapter
 
         viewModel.wallets.observe(this, Observer {
             if (it != null)
@@ -46,8 +51,7 @@ class WalletFragment : BaseFragment<HomeActivity>() {
 
         viewModel.transactions.observe(this, Observer {
             if (it != null)
-                for (tra in it)
-                    Log.d("###", tra.from)
+                transactionAdapter.setItems(it)
         })
     }
 }

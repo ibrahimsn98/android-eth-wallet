@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:paddingStart="16dp"
+	android:paddingEnd="16dp"
+	android:paddingTop="10dp"
+	android:paddingBottom="10dp"
+	android:clickable="true"
+	android:focusable="true"
+	android:background="?android:attr/selectableItemBackground">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:layout_marginBottom="2dp">
+
+		<TextView
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="Sent ETH"
+			android:textColor="@color/colorTextPrimary"
+			android:textStyle="bold"
+			android:textSize="14sp"
+			android:layout_marginStart="0dp"
+			android:layout_marginEnd="10dp"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="-132342.00 ETH"
+			android:textColor="@color/colorTextPrimary"
+			android:textStyle="bold"
+			android:textSize="14sp"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<TextView
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="20:13 Aug 13"
+			android:textColor="@color/colorTextSecondary"
+			android:textSize="12sp"
+			android:layout_marginStart="0dp"
+			android:layout_marginEnd="10dp"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="-$250"
+			android:textColor="@color/colorTextSecondary"
+			android:textSize="12sp"/>
+
+	</LinearLayout>
+
+</LinearLayout>
