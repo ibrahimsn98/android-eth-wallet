@@ -30,6 +30,18 @@
 		    android:name=".ui.home.HomeActivity"
 		    android:theme="@style/AppThemeNoActionBar"/>
 
+	    <activity
+		    android:name=".ui.start.StartActivity"
+		    android:theme="@style/AppThemeNoActionBar"/>
+
+	    <activity
+		    android:name=".ui.addWallet.AddWalletActivity"
+		    android:theme="@style/AppThemeNoActionBar"/>
+
+	    <activity
+		    android:name=".ui.importWallet.ImportWalletActivity"
+		    android:theme="@style/AppThemeNoActionBar"/>
+
     </application>
 
 </manifest>

@@ -26,6 +26,13 @@ class WalletRepository @Inject constructor(private var gethAccountManager: GethA
         return walletDao.getAll()
     }
 
+    fun deleteAll(): Single<Boolean> {
+        return Single.fromCallable {
+            walletDao.deleteAll()
+            true
+        }
+    }
+
     fun fetchGethWallets(): Single<MutableList<Wallet>> {
         return gethAccountManager.fetchAccounts()
     }
@@ -34,10 +41,12 @@ class WalletRepository @Inject constructor(private var gethAccountManager: GethA
         return walletDao.find(address)
     }
 
-    fun importAddress(name: String, address: String): Wallet {
-        val wallet = Wallet(name, address)
-        wallet.id = walletDao.insert(wallet)
-        return wallet
+    fun importPublicAddress(name: String, address: String): Single<Wallet> {
+        return Single.fromCallable {
+            val wallet = Wallet(name, address)
+            wallet.id = walletDao.insert(wallet)
+            wallet
+        }
     }
 
     fun createWallet(name: String, password: String): Single<Wallet> {

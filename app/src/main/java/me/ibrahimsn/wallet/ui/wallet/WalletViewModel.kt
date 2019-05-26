@@ -27,12 +27,6 @@ class WalletViewModel @Inject constructor(private val walletRepository: WalletRe
     val transactions: MutableLiveData<List<Transaction>> = MutableLiveData()
 
     init {
-        Single.fromCallable {
-            walletRepository.importAddress("deneme", "0xB81Ff63c6f096247dc6990555ED2943A284b4eD4")
-        }.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe()
-
-
         disposable.add(walletRepository.fetchWallets().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object: DisposableSingleObserver<List<Wallet>>() {

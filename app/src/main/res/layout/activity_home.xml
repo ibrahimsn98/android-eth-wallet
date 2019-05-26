@@ -14,8 +14,7 @@
 		android:layout_marginBottom="52dp"
 		app:navGraph="@navigation/home_graph"
 		app:layout_constraintTop_toTopOf="parent"
-		app:layout_constraintBottom_toTopOf="@id/bottomBar"
-		app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+		app:layout_constraintBottom_toTopOf="@id/bottomBar" />
 
 	<me.ibrahimsn.lib.NiceBottomBar
 		android:id="@+id/bottomBar"
@@ -29,6 +28,6 @@
 		app:badgeColor="@color/colorAccent"
 		app:textSize="13sp"
 		app:iconMargin="4dp"
-		app:menu="@menu/bottom_menu"/>
+		app:menu="@menu/bottom_menu" />
 
 </android.support.constraint.ConstraintLayout>

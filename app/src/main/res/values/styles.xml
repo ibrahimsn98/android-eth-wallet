@@ -4,12 +4,19 @@
 		<item name="colorPrimary">@color/colorPrimary</item>
 		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 		<item name="colorAccent">@color/colorAccent</item>
+		<item name="android:fontFamily">@font/quicksand</item>
 	</style>
 
 	<style name="AppThemeNoActionBar" parent="Theme.AppCompat.DayNight.NoActionBar">
 		<item name="colorPrimary">@color/colorBackground</item>
 		<item name="colorPrimaryDark">@color/colorBackground</item>
 		<item name="colorAccent">@color/colorAccent</item>
+		<item name="android:fontFamily">@font/quicksand</item>
+	</style>
+
+	<style name="AppTheme.LighterEditText" parent="Widget.AppCompat.EditText">
+		<item name="colorControlActivated">@color/colorAccent</item>
+		<item name="colorControlNormal">#90F5F5F5</item>
 	</style>
 
 </resources>

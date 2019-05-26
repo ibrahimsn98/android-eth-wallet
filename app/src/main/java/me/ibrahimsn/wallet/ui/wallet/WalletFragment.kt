@@ -28,8 +28,6 @@ class WalletFragment : BaseFragment<HomeActivity>() {
 
         val walletAdapter = WalletAdapter()
 
-        walletPicker.setSlideOnFling(true)
-
         walletPicker.setItemTransformer(ScaleTransformer.Builder()
                 .setMinScale(0.8f)
                 .build())
