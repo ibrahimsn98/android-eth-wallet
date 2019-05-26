@@ -11,6 +11,7 @@ import me.ibrahimsn.wallet.repository.EthereumNetworkRepository
 import me.ibrahimsn.wallet.repository.PreferencesRepository
 import me.ibrahimsn.wallet.repository.TransactionRepository
 import me.ibrahimsn.wallet.repository.WalletRepository
+import me.ibrahimsn.wallet.room.AppDatabase
 import me.ibrahimsn.wallet.util.LogInterceptor
 import okhttp3.OkHttpClient
 import java.io.File
@@ -31,6 +32,12 @@ class AppModule {
         return OkHttpClient.Builder()
                 .addInterceptor(LogInterceptor())
                 .build()
+    }
+
+    @Singleton
+    @Provides
+    internal fun provideAppDatabase(context: Context): AppDatabase {
+        return AppDatabase.getDatabase(context)
     }
 
     @Singleton
@@ -57,8 +64,10 @@ class AppModule {
     internal fun provideWalletRepository(gethAccountManager: GethAccountManager,
                                          preferencesRepository: PreferencesRepository,
                                          networkRepository: EthereumNetworkRepository,
+                                         appDatabase: AppDatabase,
                                          okHttpClient: OkHttpClient): WalletRepository {
-        return WalletRepository(gethAccountManager, preferencesRepository, networkRepository, okHttpClient)
+        return WalletRepository(gethAccountManager, preferencesRepository,
+                networkRepository, appDatabase, okHttpClient)
     }
 
     @Singleton

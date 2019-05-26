@@ -42,6 +42,7 @@ dependencies {
     def okHttpVersion = "3.9.0"
     def gsonVersion = "2.8.2"
     def retrofitVersion = "2.3.0"
+    def roomVersion = '1.1.1'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -81,6 +82,10 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    implementation "android.arch.persistence.room:runtime:$roomVersion"
+    kapt "android.arch.persistence.room:compiler:$roomVersion"
+    implementation "android.arch.persistence.room:rxjava2:$roomVersion"
 
     implementation 'com.github.ibrahimsn98:NiceBottomBar:1.4'
     implementation 'com.yarolegovich:discrete-scrollview:1.4.9'

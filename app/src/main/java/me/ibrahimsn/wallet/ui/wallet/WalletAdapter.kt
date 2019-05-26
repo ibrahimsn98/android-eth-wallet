@@ -10,7 +10,7 @@ import me.ibrahimsn.wallet.entity.Wallet
 
 class WalletAdapter : RecyclerView.Adapter<WalletAdapter.ViewHolder>() {
 
-    private var wallets = listOf<Wallet>()
+    var wallets = listOf<Wallet>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_wallet, parent, false))

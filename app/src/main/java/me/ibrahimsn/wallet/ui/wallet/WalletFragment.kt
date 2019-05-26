@@ -36,10 +36,20 @@ class WalletFragment : BaseFragment<HomeActivity>() {
 
         walletPicker.adapter = walletAdapter
 
-
         viewModel.wallets.observe(this, Observer {
             if (it != null)
                 walletAdapter.setItems(it)
+        })
+
+        viewModel.defaultWallet.observe(this, Observer {
+            if (it != null)
+                walletPicker.scrollToPosition(walletAdapter.wallets.indexOf(it))
+        })
+
+        viewModel.transactions.observe(this, Observer {
+            if (it != null)
+                for (tra in it)
+                    Log.d("###", tra.from)
         })
     }
 }

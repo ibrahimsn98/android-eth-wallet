@@ -2,7 +2,6 @@ package me.ibrahimsn.wallet.manager
 
 import com.google.gson.Gson
 import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
 import me.ibrahimsn.wallet.entity.EtherScanResponse
 import me.ibrahimsn.wallet.repository.EthereumNetworkRepository
 import okhttp3.OkHttpClient
@@ -39,6 +38,6 @@ class TransactionManager @Inject constructor(okHttpClient: OkHttpClient, gson: G
 
     fun fetchTransaction(address: String): Observable<EtherScanResponse> {
         return etherScanApiClient.fetchTransactions(address, 1, 10, "ASC",
-                "SGPX7HN5MJNWMMYDFUKUW7XTM21EDG2T1N").subscribeOn(Schedulers.io())
+                "SGPX7HN5MJNWMMYDFUKUW7XTM21EDG2T1N")
     }
 }

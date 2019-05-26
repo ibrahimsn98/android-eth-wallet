@@ -1,39 +1,37 @@
 package me.ibrahimsn.wallet.entity
 
-import android.os.Parcel
-import android.os.Parcelable
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.Ignore
+import android.arch.persistence.room.PrimaryKey
 
-class Wallet : Parcelable {
+@Entity(tableName = "wallets")
+class Wallet {
 
+    @PrimaryKey var id: Long?
+    var name: String?
     var address: String
 
-    constructor(address: String) {
+    constructor(id: Long, name: String, address: String) {
+        this.id = id
+        this.name = name
         this.address = address
     }
 
-    constructor(source: Parcel) {
-        this.address = source.readString()!!
+    @Ignore
+    constructor(address: String) {
+        this.id = null
+        this.name = null
+        this.address = address
     }
 
-    override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.writeString(address)
+    @Ignore
+    constructor(name: String, address: String) {
+        this.id = null
+        this.name = name
+        this.address = address
     }
 
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    public fun sameAddress(address: String): Boolean {
+    fun sameAddress(address: String): Boolean {
         return this.address == address
-    }
-
-    companion object CREATOR : Parcelable.Creator<Wallet> {
-        override fun createFromParcel(source: Parcel): Wallet {
-            return Wallet(source)
-        }
-
-        override fun newArray(size: Int): Array<Wallet?> {
-            return arrayOfNulls(size)
-        }
     }
 }

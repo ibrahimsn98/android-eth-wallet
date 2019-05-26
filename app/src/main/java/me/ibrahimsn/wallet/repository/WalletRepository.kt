@@ -1,10 +1,12 @@
 package me.ibrahimsn.wallet.repository
 
+import android.util.Log
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import me.ibrahimsn.wallet.manager.GethAccountManager
 import me.ibrahimsn.wallet.entity.Wallet
+import me.ibrahimsn.wallet.room.AppDatabase
 import okhttp3.OkHttpClient
 import org.web3j.protocol.Web3jFactory
 import org.web3j.protocol.core.DefaultBlockParameterName
@@ -13,30 +15,42 @@ import java.math.BigInteger
 import javax.inject.Inject
 
 class WalletRepository @Inject constructor(private var gethAccountManager: GethAccountManager,
-                       private var preferencesRepository: PreferencesRepository,
-                       private var networkRepository: EthereumNetworkRepository,
-                       private var httpClient: OkHttpClient) {
+                                           private var preferencesRepository: PreferencesRepository,
+                                           private var networkRepository: EthereumNetworkRepository,
+                                           appDatabase: AppDatabase,
+                                           private var httpClient: OkHttpClient) {
 
-    fun fetchWallets(): Single<MutableList<Wallet>> {
+    private val walletDao = appDatabase.walletDao()
+
+    fun fetchWallets(): Single<List<Wallet>> {
+        return walletDao.getAll()
+    }
+
+    fun fetchGethWallets(): Single<MutableList<Wallet>> {
         return gethAccountManager.fetchAccounts()
     }
 
-    fun findWallet(address: String): Single<Wallet?> {
-        return fetchWallets().flatMap {
-            for (wallet in it)
-                if (wallet.sameAddress(address))
-                    Single.just(wallet)
+    private fun findWallet(address: String): Single<Wallet?> {
+        return walletDao.find(address)
+    }
 
-            null
+    fun importAddress(name: String, address: String): Wallet {
+        val wallet = Wallet(name, address)
+        wallet.id = walletDao.insert(wallet)
+        return wallet
+    }
+
+    fun createWallet(name: String, password: String): Single<Wallet> {
+        return gethAccountManager.createAccount(password).doAfterSuccess {
+            it.name = name
+            walletDao.insert(it)
         }
     }
 
-    fun createWallet(password: String): Single<Wallet> {
-        return gethAccountManager.createAccount(password)
-    }
-
-    fun importKeystoreToWallet(store: String, password: String, newPassword: String): Single<Wallet> {
-        return gethAccountManager.importKeyStore(store, password, newPassword)
+    fun importKeystoreToWallet(name: String, store: String, password: String, newPassword: String): Single<Wallet> {
+        return gethAccountManager.importKeyStore(store, password, newPassword).doAfterSuccess {
+            walletDao.insert(it)
+        }
     }
 
     fun exportWallet(wallet: Wallet, password: String, newPassword: String): Single<String> {
@@ -44,17 +58,19 @@ class WalletRepository @Inject constructor(private var gethAccountManager: GethA
     }
 
     fun deleteWallet(address: String, password: String): Completable {
-        return gethAccountManager.deleteAccount(address, password)
+        return gethAccountManager.deleteAccount(address, password).doOnComplete {
+            walletDao.delete(address)
+        }
     }
 
-    fun setDefaultWallet(wallet: Wallet): Completable {
-        return Completable.fromAction { preferencesRepository.setCurrentWalletAddress(wallet.address) }
+    fun setDefaultWallet(wallet: Wallet) {
+        preferencesRepository.setCurrentWalletAddress(wallet.address)
     }
 
-    fun getDefaultWallet(): Single<Wallet> {
+    fun getDefaultWallet(): Single<Wallet?> {
         return Single.fromCallable<String> {
             preferencesRepository.getCurrentWalletAddress()
-        }.flatMap<Wallet> {
+        }.flatMap {
             this.findWallet(it)
         }
     }
