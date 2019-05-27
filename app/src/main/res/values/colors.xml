@@ -7,6 +7,7 @@
     <color name="colorAccent3">#2A2768</color>
 
 	<color name="colorBackground">#1f212f</color>
+	<color name="colorBorder">#27293A</color>
 
 	<color name="white">#ffffff</color>
 	<color name="colorTextPrimary">#ffffff</color>

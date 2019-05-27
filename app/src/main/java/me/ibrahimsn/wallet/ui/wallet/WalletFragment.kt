@@ -30,12 +30,6 @@ class WalletFragment : BaseFragment<HomeActivity>() {
         val walletAdapter = WalletAdapter()
         val transactionAdapter = TransactionAdapter()
 
-        walletPicker.setItemTransformer(ScaleTransformer.Builder()
-                .setMinScale(0.8f)
-                .build())
-
-        walletPicker.adapter = walletAdapter
-
         rvTransactions.layoutManager = LinearLayoutManager(activity)
         rvTransactions.adapter = transactionAdapter
 
@@ -44,14 +38,14 @@ class WalletFragment : BaseFragment<HomeActivity>() {
                 walletAdapter.setItems(it)
         })
 
-        viewModel.defaultWallet.observe(this, Observer {
-            if (it != null)
-                walletPicker.scrollToPosition(walletAdapter.wallets.indexOf(it))
-        })
-
         viewModel.transactions.observe(this, Observer {
             if (it != null)
                 transactionAdapter.setItems(it)
         })
+
+        /*viewModel.walletBalance.observe(this, Observer {
+            if (it != null)
+                Log.d("###", "Wallet: ${it.first.name} Balance: ${it.second}")
+        })*/
     }
 }

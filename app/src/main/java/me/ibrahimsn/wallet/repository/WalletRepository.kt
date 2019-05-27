@@ -72,18 +72,6 @@ class WalletRepository @Inject constructor(private var gethAccountManager: GethA
         }
     }
 
-    fun setDefaultWallet(wallet: Wallet) {
-        preferencesRepository.setCurrentWalletAddress(wallet.address)
-    }
-
-    fun getDefaultWallet(): Single<Wallet?> {
-        return Single.fromCallable<String> {
-            preferencesRepository.getCurrentWalletAddress()
-        }.flatMap {
-            this.findWallet(it)
-        }
-    }
-
     fun balanceInWei(wallet: Wallet): Single<BigInteger> {
         return Single.fromCallable {
             Web3jFactory.build(HttpService(networkRepository.getDefaultNetwork().rpcServerUrl, httpClient, false))

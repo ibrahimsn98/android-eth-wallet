@@ -3,9 +3,20 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/home_graph.xml"
 	app:startDestination="@id/walletFragment">
 
-
 	<fragment
 		android:id="@+id/walletFragment"
 		android:name="me.ibrahimsn.wallet.ui.wallet.WalletFragment"
 		android:label="WalletFragment" />
+	<fragment
+		android:id="@+id/menuFragment"
+		android:name="me.ibrahimsn.wallet.ui.menu.MenuFragment"
+		android:label="MenuFragment" >
+		<action
+			android:id="@+id/action_menuFragment_to_walletsFragment"
+			app:destination="@id/walletsFragment" />
+	</fragment>
+	<fragment
+		android:id="@+id/walletsFragment"
+		android:name="me.ibrahimsn.wallet.ui.wallets.WalletsFragment"
+		android:label="WalletsFragment" />
 </navigation>

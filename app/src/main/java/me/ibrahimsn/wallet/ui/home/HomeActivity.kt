@@ -1,15 +1,16 @@
 package me.ibrahimsn.wallet.ui.home
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import kotlinx.android.synthetic.main.activity_home.*
+import me.ibrahimsn.lib.NiceBottomBar
 import me.ibrahimsn.wallet.R
 import me.ibrahimsn.wallet.base.BaseActivity
-import me.ibrahimsn.wallet.ui.importWallet.ImportWalletActivity
 
 class HomeActivity : BaseActivity() {
 
-    private lateinit var navController: NavController
+    lateinit var navController: NavController
 
     override fun layoutRes(): Int {
         return R.layout.activity_home
@@ -17,6 +18,20 @@ class HomeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        startActivity(Intent(this, ImportWalletActivity::class.java))
+
+        navController = Navigation.findNavController(this, R.id.host)
+
+        bottomBar.setBottomBarCallback(object: NiceBottomBar.BottomBarCallback {
+            override fun onItemSelect(pos: Int) {
+                when (pos) {
+                    0 -> navController.navigate(R.id.walletFragment)
+                    3 -> navController.navigate(R.id.menuFragment)
+                }
+            }
+
+            override fun onItemReselect(pos: Int) {
+
+            }
+        })
     }
 }

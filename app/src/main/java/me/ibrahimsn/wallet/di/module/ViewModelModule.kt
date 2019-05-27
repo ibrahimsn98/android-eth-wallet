@@ -9,6 +9,7 @@ import me.ibrahimsn.wallet.di.util.ViewModelFactory
 import me.ibrahimsn.wallet.di.util.ViewModelKey
 import me.ibrahimsn.wallet.ui.importWallet.ImportWalletViewModel
 import me.ibrahimsn.wallet.ui.wallet.WalletViewModel
+import me.ibrahimsn.wallet.ui.wallets.WalletsViewModel
 
 @Module
 abstract class ViewModelModule {
@@ -25,4 +26,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ImportWalletViewModel::class)
     internal abstract fun bindImportWalletViewModel(viewModel: ImportWalletViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(WalletsViewModel::class)
+    internal abstract fun bindWalletsViewModel(viewModel: WalletsViewModel): ViewModel
 }

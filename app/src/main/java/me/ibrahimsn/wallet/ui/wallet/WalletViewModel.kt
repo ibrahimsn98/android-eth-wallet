@@ -14,6 +14,7 @@ import me.ibrahimsn.wallet.entity.Wallet
 import me.ibrahimsn.wallet.repository.TransactionRepository
 import me.ibrahimsn.wallet.repository.WalletRepository
 import me.ibrahimsn.wallet.util.Constants
+import java.math.BigInteger
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -25,6 +26,7 @@ class WalletViewModel @Inject constructor(private val walletRepository: WalletRe
     val wallets: MutableLiveData<List<Wallet>> = MutableLiveData()
     val defaultWallet: MutableLiveData<Wallet> = MutableLiveData()
     val transactions: MutableLiveData<List<Transaction>> = MutableLiveData()
+    val walletBalance: MutableLiveData<Pair<Wallet, Double>> = MutableLiveData()
 
     init {
         disposable.add(walletRepository.fetchWallets().subscribeOn(Schedulers.io())
@@ -36,20 +38,6 @@ class WalletViewModel @Inject constructor(private val walletRepository: WalletRe
 
                     override fun onError(e: Throwable) {
                         Log.d(Constants.TAG, "Fetch wallets error:", e)
-                    }
-                }))
-
-        disposable.add(walletRepository.getDefaultWallet().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object: DisposableSingleObserver<Wallet>() {
-                    override fun onSuccess(t: Wallet) {
-                        Log.d(Constants.TAG, "Get default wallet: ${t.address}")
-                        defaultWallet.postValue(t)
-                        fetchTransaction(t)
-                    }
-
-                    override fun onError(e: Throwable) {
-                        Log.d(Constants.TAG, "Get default wallet error:", e)
                     }
                 }))
 
@@ -69,8 +57,17 @@ class WalletViewModel @Inject constructor(private val walletRepository: WalletRe
                 .subscribe())
     }
 
-    fun setDefaultWallet(wallet: Wallet) {
-        walletRepository.setDefaultWallet(wallet)
+    fun loadWalletBalance(wallet: Wallet) {
+        disposable.add(walletRepository.balanceInWei(wallet).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribeWith(object: DisposableSingleObserver<BigInteger>() {
+                    override fun onSuccess(t: BigInteger) {
+                        walletBalance.postValue(Pair(wallet, t.toDouble()))
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Log.d(Constants.TAG, "Load balance error:", e)
+                    }
+                }))
     }
 
     override fun onCleared() {

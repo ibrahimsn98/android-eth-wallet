@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:background="@color/colorBackground">
+
+	<LinearLayout
+		android:id="@+id/lyWallets"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="center_vertical"
+		android:padding="12dp"
+		android:background="?android:attr/selectableItemBackground"
+		android:clickable="true"
+		android:focusable="true">
+
+		<ImageView
+			android:layout_width="32dp"
+			android:layout_height="32dp"
+			android:layout_marginStart="0dp"
+			android:layout_marginEnd="12dp"
+			android:src="@drawable/ic_ethereum"
+			android:tint="@color/white" />
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="2dp"
+				android:text="Wallets"
+				android:textSize="14sp"
+				android:textColor="@color/colorTextPrimary"
+				android:textStyle="bold" />
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="2dp"
+				android:text="Ethereum Wallet 1"
+				android:textSize="14sp"
+				android:textColor="@color/colorTextSecondary" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="@color/colorBorder"/>
+
+</LinearLayout>
