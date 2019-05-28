@@ -1,27 +1,30 @@
 package me.ibrahimsn.wallet.repository
 
 import android.text.TextUtils
+import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 import me.ibrahimsn.wallet.entity.NetworkInfo
+import me.ibrahimsn.wallet.entity.Wallet
+import me.ibrahimsn.wallet.manager.GethAccountManager
 import me.ibrahimsn.wallet.util.Constants.ETHEREUM_NETWORK_NAME
 import me.ibrahimsn.wallet.util.Constants.ETH_SYMBOL
 import me.ibrahimsn.wallet.util.Constants.KOVAN_NETWORK_NAME
 import me.ibrahimsn.wallet.util.Constants.ROPSTEN_NETWORK_NAME
+import org.web3j.protocol.Web3j
+import org.web3j.protocol.core.DefaultBlockParameterName
+import org.web3j.protocol.http.HttpService
+import java.lang.Exception
+import java.math.BigInteger
 import java.util.HashSet
 import javax.inject.Inject
 
-class EthereumNetworkRepository @Inject constructor(private val preferencesRepository: PreferencesRepository) {
-
-    // SGPX7HN5MJNWMMYDFUKUW7XTM21EDG2T1N
+class EthereumNetworkRepository @Inject constructor(private val preferencesRepository: PreferencesRepository,
+                                                    private val accountManager: GethAccountManager) {
 
     private val NETWORKS = arrayOf(NetworkInfo(ETHEREUM_NETWORK_NAME, ETH_SYMBOL,
             "https://mainnet.infura.io/llyrtzQ3YhkdESt2Fzrk",
             "https://api.etherscan.io/api/",
             "https://etherscan.io/", 1, true),
-
-            /*NetworkInfo(CLASSIC_NETWORK_NAME, ETC_SYMBOL,
-                    "https://mewapi.epool.io/",
-                    "https://classic.trustwalletapp.com",
-                    "https://gastracker.io", 61, true),*/
 
             NetworkInfo(KOVAN_NETWORK_NAME, ETH_SYMBOL,
                     "https://kovan.infura.io/llyrtzQ3YhkdESt2Fzrk",
@@ -34,7 +37,7 @@ class EthereumNetworkRepository @Inject constructor(private val preferencesRepos
                     "https://ropsten.etherscan.io", 3, false))
 
     private var defaultNetwork = getByName(preferencesRepository.getDefaultNetwork()) ?: NETWORKS[0]
-    private val onNetworkChangedListeners = HashSet<OnNetworkChangeListener>()
+    private var web3j = Web3j.build(HttpService(getDefaultNetwork().rpcServerUrl))
 
     fun getAvailableNetworkList(): Array<NetworkInfo> {
         return NETWORKS
@@ -43,9 +46,6 @@ class EthereumNetworkRepository @Inject constructor(private val preferencesRepos
     fun setDefaultNetworkInfo(networkInfo: NetworkInfo) {
         defaultNetwork = networkInfo
         preferencesRepository.setDefaultNetwork(defaultNetwork.name)
-
-        for (listener in onNetworkChangedListeners)
-            listener.onNetworkChanged(networkInfo)
     }
 
     fun getDefaultNetwork(): NetworkInfo {
@@ -60,11 +60,31 @@ class EthereumNetworkRepository @Inject constructor(private val preferencesRepos
         return null
     }
 
-    fun addOnChangeDefaultNetwork(onNetworkChanged: OnNetworkChangeListener) {
-        onNetworkChangedListeners.add(onNetworkChanged)
+    fun getWalletBalance(wallet: Wallet): Single<BigInteger> {
+        return Single.fromCallable {
+            web3j.ethGetBalance(wallet.address, DefaultBlockParameterName.LATEST).send().balance
+        }
     }
 
-    interface OnNetworkChangeListener {
-        fun onNetworkChanged(networkInfo: NetworkInfo)
+    fun createTransaction(from: Wallet, toAddress: String, subUnitAmount: BigInteger,
+                          gasPrice: BigInteger, gasLimit: Long,
+                          data: ByteArray, password: String): Single<String> {
+
+        return Single.fromCallable<Long> {
+            web3j.ethGetTransactionCount(from.address, DefaultBlockParameterName.LATEST)
+                    .send().transactionCount.toLong()
+        }.flatMap<ByteArray> {
+            accountManager.signTransaction(from, password, toAddress, subUnitAmount, gasPrice, gasLimit,
+                    it, data, getDefaultNetwork().chainId.toLong())
+        }.flatMap {
+            Single.fromCallable {
+                val raw = web3j.ethSendRawTransaction(String.format("%02X", it)).send()
+
+                if (raw.hasError())
+                    throw Exception(raw.error.message)
+
+                raw.transactionHash
+            }
+        }.subscribeOn(Schedulers.io())
     }
 }

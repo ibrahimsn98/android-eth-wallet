@@ -2,8 +2,10 @@
 <android.support.v7.widget.CardView
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:layout_width="280dp"
+	android:layout_width="match_parent"
 	android:layout_height="170dp"
+	android:layout_marginStart="28dp"
+	android:layout_marginEnd="28dp"
 	app:cardBackgroundColor="#525c89"
 	app:cardCornerRadius="5dp"
 	app:cardUseCompatPadding="true"

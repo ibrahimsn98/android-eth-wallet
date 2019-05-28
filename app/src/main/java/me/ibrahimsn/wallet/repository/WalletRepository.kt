@@ -1,32 +1,21 @@
 package me.ibrahimsn.wallet.repository
 
-import android.util.Log
 import io.reactivex.Completable
 import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
 import me.ibrahimsn.wallet.manager.GethAccountManager
 import me.ibrahimsn.wallet.entity.Wallet
 import me.ibrahimsn.wallet.room.AppDatabase
-import okhttp3.OkHttpClient
-import org.web3j.protocol.Web3jFactory
-import org.web3j.protocol.core.DefaultBlockParameterName
-import org.web3j.protocol.http.HttpService
-import java.math.BigInteger
+import me.ibrahimsn.wallet.room.WalletDao
 import javax.inject.Inject
 
 class WalletRepository @Inject constructor(private var gethAccountManager: GethAccountManager,
-                                           private var preferencesRepository: PreferencesRepository,
-                                           private var networkRepository: EthereumNetworkRepository,
-                                           appDatabase: AppDatabase,
-                                           private var httpClient: OkHttpClient) {
-
-    private val walletDao = appDatabase.walletDao()
+                                           private var walletDao: WalletDao) {
 
     fun fetchWallets(): Single<List<Wallet>> {
         return walletDao.getAll()
     }
 
-    fun deleteAll(): Single<Boolean> {
+    fun deleteAllWallets(): Single<Boolean> {
         return Single.fromCallable {
             walletDao.deleteAll()
             true
@@ -70,12 +59,5 @@ class WalletRepository @Inject constructor(private var gethAccountManager: GethA
         return gethAccountManager.deleteAccount(address, password).doOnComplete {
             walletDao.delete(address)
         }
-    }
-
-    fun balanceInWei(wallet: Wallet): Single<BigInteger> {
-        return Single.fromCallable {
-            Web3jFactory.build(HttpService(networkRepository.getDefaultNetwork().rpcServerUrl, httpClient, false))
-                    .ethGetBalance(wallet.address, DefaultBlockParameterName.LATEST).send().balance
-        }.subscribeOn(Schedulers.io())
     }
 }

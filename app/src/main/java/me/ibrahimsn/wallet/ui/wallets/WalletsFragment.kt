@@ -3,14 +3,16 @@ package me.ibrahimsn.wallet.ui.wallets
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer
-import kotlinx.android.synthetic.main.fragment_wallets.walletPicker
+import kotlinx.android.synthetic.main.fragment_wallets.*
 import me.ibrahimsn.wallet.R
 import me.ibrahimsn.wallet.base.BaseFragment
 import me.ibrahimsn.wallet.ui.home.HomeActivity
-import me.ibrahimsn.wallet.ui.wallet.WalletAdapter
+import me.ibrahimsn.wallet.ui.importWallet.ImportWalletActivity
 import javax.inject.Inject
 
 class WalletsFragment : BaseFragment<HomeActivity>() {
@@ -28,13 +30,12 @@ class WalletsFragment : BaseFragment<HomeActivity>() {
 
         val walletAdapter = WalletAdapter()
 
-        walletPicker.setItemTransformer(ScaleTransformer.Builder()
-                .setMinScale(0.8f)
-                .build())
+        rvWallets.layoutManager = LinearLayoutManager(activity)
+        rvWallets.adapter = walletAdapter
 
-        walletPicker.setSlideOnFling(true)
-        walletPicker.setOffscreenItems(5)
-        walletPicker.adapter = walletAdapter
+        btAdd.setOnClickListener {
+            startActivity(Intent(activity, ImportWalletActivity::class.java))
+        }
 
         viewModel.wallets.observe(this, Observer {
             if (it != null)

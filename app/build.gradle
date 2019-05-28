@@ -37,7 +37,7 @@ dependencies {
     def daggerVersion = '2.13'
     def lifeCycleVersion = '1.1.1'
     def navigationVersion = '1.0.0'
-    def web3jVersion = '3.0.1-android'
+    def web3jVersion = '4.2.0-android'//'3.0.1-android'
     def gethVersion = '1.8.8'
     def okHttpVersion = "3.9.0"
     def gsonVersion = "2.8.2"

@@ -6,12 +6,12 @@ import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import me.ibrahimsn.wallet.manager.GethAccountManager
-import me.ibrahimsn.wallet.manager.TransactionManager
+import me.ibrahimsn.wallet.repository.EtherScanRepository
 import me.ibrahimsn.wallet.repository.EthereumNetworkRepository
 import me.ibrahimsn.wallet.repository.PreferencesRepository
-import me.ibrahimsn.wallet.repository.TransactionRepository
 import me.ibrahimsn.wallet.repository.WalletRepository
 import me.ibrahimsn.wallet.room.AppDatabase
+import me.ibrahimsn.wallet.room.WalletDao
 import me.ibrahimsn.wallet.util.LogInterceptor
 import okhttp3.OkHttpClient
 import java.io.File
@@ -42,6 +42,12 @@ class AppModule {
 
     @Singleton
     @Provides
+    internal fun provideWalletDao(appDatabase: AppDatabase): WalletDao {
+        return appDatabase.walletDao()
+    }
+
+    @Singleton
+    @Provides
     internal fun provideGethAccountManager(context: Context): GethAccountManager {
         val file = File(context.filesDir, "keystore/keystore")
         return GethAccountManager(file)
@@ -55,33 +61,22 @@ class AppModule {
 
     @Singleton
     @Provides
-    internal fun provideEthereumNetworkRepository(preferencesRepository: PreferencesRepository): EthereumNetworkRepository {
-        return EthereumNetworkRepository(preferencesRepository)
+    internal fun provideEthereumNetworkRepository(preferencesRepository: PreferencesRepository,
+                                                  accountManager: GethAccountManager): EthereumNetworkRepository {
+        return EthereumNetworkRepository(preferencesRepository, accountManager)
+    }
+
+    @Singleton
+    @Provides
+    internal fun provideEtherScanRepository(okHttpClient: OkHttpClient,
+                                            networkRepository: EthereumNetworkRepository): EtherScanRepository {
+        return EtherScanRepository(okHttpClient, Gson(), networkRepository)
     }
 
     @Singleton
     @Provides
     internal fun provideWalletRepository(gethAccountManager: GethAccountManager,
-                                         preferencesRepository: PreferencesRepository,
-                                         networkRepository: EthereumNetworkRepository,
-                                         appDatabase: AppDatabase,
-                                         okHttpClient: OkHttpClient): WalletRepository {
-        return WalletRepository(gethAccountManager, preferencesRepository,
-                networkRepository, appDatabase, okHttpClient)
-    }
-
-    @Singleton
-    @Provides
-    internal fun provideTransactionManager(okHttpClient: OkHttpClient,
-                                           networkRepository: EthereumNetworkRepository): TransactionManager {
-        return TransactionManager(okHttpClient, Gson(), networkRepository)
-    }
-
-    @Singleton
-    @Provides
-    internal fun provideTransactionRepository(networkRepository: EthereumNetworkRepository,
-                                              accountManager: GethAccountManager,
-                                              transactionManager: TransactionManager): TransactionRepository {
-        return TransactionRepository(networkRepository, accountManager, transactionManager)
+                                         walletDao: WalletDao): WalletRepository {
+        return WalletRepository(gethAccountManager, walletDao)
     }
 }

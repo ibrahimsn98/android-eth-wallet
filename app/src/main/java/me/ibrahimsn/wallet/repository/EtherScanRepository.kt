@@ -1,9 +1,8 @@
-package me.ibrahimsn.wallet.manager
+package me.ibrahimsn.wallet.repository
 
 import com.google.gson.Gson
 import io.reactivex.Observable
 import me.ibrahimsn.wallet.entity.EtherScanResponse
-import me.ibrahimsn.wallet.repository.EthereumNetworkRepository
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -12,8 +11,8 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 import javax.inject.Inject
 
-class TransactionManager @Inject constructor(okHttpClient: OkHttpClient, gson: Gson,
-                                             networkRepository: EthereumNetworkRepository) {
+class EtherScanRepository @Inject constructor(okHttpClient: OkHttpClient, gson: Gson,
+                                              networkRepository: EthereumNetworkRepository) {
 
     private val etherScanApiClient: EtherScanApiClient
 

@@ -5,10 +5,36 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:background="@color/colorBackground">
 
-	<com.yarolegovich.discretescrollview.DiscreteScrollView
-		android:id="@+id/walletPicker"
+	<android.support.v7.widget.RecyclerView
+		android:id="@+id/rvWallets"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		app:dsv_orientation="vertical"/>
+		android:layout_height="0dp"
+		android:paddingBottom="100dp"
+		android:clipToPadding="false"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintBottom_toBottomOf="parent"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingStart="20dp"
+		android:paddingEnd="20dp"
+		android:paddingTop="40dp"
+		android:paddingBottom="20dp"
+		android:background="@drawable/ic_gradient_black"
+		app:layout_constraintBottom_toBottomOf="parent">
+
+		<Button
+			android:id="@+id/btAdd"
+			android:layout_width="match_parent"
+			android:layout_height="50dp"
+			android:textColor="@color/colorTextPrimary"
+			android:textSize="15sp"
+			android:textStyle="bold"
+			android:text="+ Add Wallet"
+			android:textAllCaps="false"
+			android:background="@drawable/ic_button_background" />
+
+	</LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -1,4 +1,4 @@
-package me.ibrahimsn.wallet.ui.wallet
+package me.ibrahimsn.wallet.ui.wallets
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
