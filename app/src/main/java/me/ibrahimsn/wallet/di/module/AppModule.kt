@@ -76,7 +76,8 @@ class AppModule {
     @Singleton
     @Provides
     internal fun provideWalletRepository(gethAccountManager: GethAccountManager,
-                                         walletDao: WalletDao): WalletRepository {
-        return WalletRepository(gethAccountManager, walletDao)
+                                         walletDao: WalletDao,
+                                         preferencesRepository: PreferencesRepository): WalletRepository {
+        return WalletRepository(gethAccountManager, walletDao, preferencesRepository)
     }
 }

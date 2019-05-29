@@ -4,17 +4,22 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
 import android.graphics.Paint.ANTI_ALIAS_FLAG
+import android.graphics.drawable.Drawable
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.DecelerateInterpolator
-import android.view.animation.OvershootInterpolator
+import me.ibrahimsn.wallet.R
 
-class WaveView constructor(context: Context, attrs: AttributeSet? = null) : View(context, attrs) {
+class WaveView : View {
 
     private val waveGap = 90f
     private var maxRadius = 0f
     private var center = PointF(0f, 0f)
     private var initialRadius = 0f
+
+    private var icon: Drawable? = null
+    private var iconSize = 0f
 
     private val green = Color.parseColor("#1f212f")
     private val gradientColors = intArrayOf(modifyAlpha(green, 0.8f), modifyAlpha(green, 0.9f), green, green)
@@ -34,6 +39,21 @@ class WaveView constructor(context: Context, attrs: AttributeSet? = null) : View
 
     private val gradientPaint = Paint(ANTI_ALIAS_FLAG).apply {
         xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP)
+    }
+
+    private val iconPaint = Paint(ANTI_ALIAS_FLAG).apply {
+
+    }
+
+    constructor(context: Context) : super(context)
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+        val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.WaveView, 0, 0)
+        val iconRes = typedArray.getResourceId(R.styleable.WaveView_icon, 0)
+        iconSize = typedArray.getDimension(R.styleable.WaveView_iconSize, this.iconSize)
+        typedArray.recycle()
+
+        if (iconRes != 0)
+            icon = ContextCompat.getDrawable(context, iconRes)
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -60,6 +80,15 @@ class WaveView constructor(context: Context, attrs: AttributeSet? = null) : View
         }
 
         canvas.drawPaint(gradientPaint)
+
+        if (icon != null) {
+            icon!!.setBounds((center.x - iconSize/2).toInt(),
+                    (center.y - iconSize/2).toInt(),
+                    (center.x + iconSize/2).toInt(),
+                    (center.y + iconSize/2).toInt())
+
+            icon!!.draw(canvas)
+        }
     }
 
     override fun onAttachedToWindow() {

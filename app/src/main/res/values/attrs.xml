@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<declare-styleable name="WaveView">
+		<attr name="icon" format="reference" />
+		<attr name="iconSize" format="dimension" />
+	</declare-styleable>
+</resources>

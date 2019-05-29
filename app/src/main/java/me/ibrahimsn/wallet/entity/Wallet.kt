@@ -30,12 +30,4 @@ class Wallet {
         this.name = name
         this.address = address
     }
-
-    fun sameAddress(address: String): Boolean {
-        return this.address == address
-    }
-
-    override fun toString(): String {
-        return "$name"
-    }
 }

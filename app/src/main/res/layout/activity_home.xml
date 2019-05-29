@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:background="@color/colorBackground">
+
+	<fragment
+		android:id="@+id/host"
+		android:name="androidx.navigation.fragment.NavHostFragment"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		app:defaultNavHost="true"
+		app:navGraph="@navigation/home_graph"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintBottom_toTopOf="@id/bottomBar" />
 
 	<android.support.v7.widget.Toolbar
 		android:id="@+id/toolbar"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:paddingStart="0dp"
+		android:layout_marginTop="18dp"
+		android:paddingStart="2dp"
 		android:paddingEnd="4dp"
 		android:elevation="0dp"
-		android:background="@color/colorBackground"
 		app:layout_constraintTop_toTopOf="parent">
 
 		<TextView
@@ -26,16 +36,6 @@
 			android:text="@string/app_name" />
 
 	</android.support.v7.widget.Toolbar>
-
-	<fragment
-		android:id="@+id/host"
-		android:name="androidx.navigation.fragment.NavHostFragment"
-		android:layout_width="match_parent"
-		android:layout_height="0dp"
-		app:defaultNavHost="true"
-		app:navGraph="@navigation/home_graph"
-		app:layout_constraintTop_toBottomOf="@id/toolbar"
-		app:layout_constraintBottom_toTopOf="@id/bottomBar" />
 
 	<me.ibrahimsn.lib.NiceBottomBar
 		android:id="@+id/bottomBar"

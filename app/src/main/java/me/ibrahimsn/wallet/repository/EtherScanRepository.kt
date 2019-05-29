@@ -1,7 +1,7 @@
 package me.ibrahimsn.wallet.repository
 
 import com.google.gson.Gson
-import io.reactivex.Observable
+import io.reactivex.Single
 import me.ibrahimsn.wallet.entity.EtherScanResponse
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -22,7 +22,7 @@ class EtherScanRepository @Inject constructor(okHttpClient: OkHttpClient, gson: 
                               @Query("page") page: Int,
                               @Query("offset") offset: Int,
                               @Query("sort") sort: String,
-                              @Query("apikey") apiKey: String): Observable<EtherScanResponse>
+                              @Query("apikey") apiKey: String): Single<EtherScanResponse>
     }
 
     init {
@@ -35,7 +35,7 @@ class EtherScanRepository @Inject constructor(okHttpClient: OkHttpClient, gson: 
                 .create(EtherScanApiClient::class.java)
     }
 
-    fun fetchTransaction(address: String, page: Int, offset: Int): Observable<EtherScanResponse> {
+    fun fetchTransaction(address: String, page: Int, offset: Int): Single<EtherScanResponse> {
         return etherScanApiClient.fetchTransactions(address, 1, 10, "ASC",
                 "SGPX7HN5MJNWMMYDFUKUW7XTM21EDG2T1N")
     }

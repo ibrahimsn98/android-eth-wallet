@@ -1,7 +1,9 @@
 package me.ibrahimsn.wallet.repository
 
 import android.arch.lifecycle.LiveData
+import android.util.Log
 import io.reactivex.Completable
+import io.reactivex.Maybe
 import io.reactivex.Single
 import me.ibrahimsn.wallet.manager.GethAccountManager
 import me.ibrahimsn.wallet.entity.Wallet
@@ -10,10 +12,28 @@ import me.ibrahimsn.wallet.room.WalletDao
 import javax.inject.Inject
 
 class WalletRepository @Inject constructor(private var gethAccountManager: GethAccountManager,
-                                           private var walletDao: WalletDao) {
+                                           private var walletDao: WalletDao,
+                                           private var preferencesRepository: PreferencesRepository) {
 
     fun fetchWallets(): LiveData<List<Wallet>> {
         return walletDao.getAll()
+    }
+
+    fun getCurrentWallet(): Maybe<Wallet?> {
+        return walletDao.getAllRx().flatMapMaybe {
+            val currentAddress = preferencesRepository.getCurrentWalletAddress()
+            var w : Wallet? = null
+
+            it.forEach { wallet ->
+                if (wallet.address == currentAddress)
+                    w = wallet
+            }
+
+            if (w != null)
+                Maybe.just(w)
+            else
+                Maybe.empty()
+        }
     }
 
     fun deleteAllWallets(): Single<Boolean> {
