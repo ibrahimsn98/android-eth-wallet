@@ -13,6 +13,7 @@
 		app:layout_constraintTop_toTopOf="parent">
 
 		<me.ibrahimsn.wallet.view.WaveView
+			android:id="@+id/waveView"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			app:icon="@drawable/ic_ethereum"

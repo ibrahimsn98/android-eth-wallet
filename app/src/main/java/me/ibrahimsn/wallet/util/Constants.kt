@@ -4,25 +4,13 @@ object Constants {
 
     val TAG = "###"
 
-    val IMPORT_REQUEST_CODE = 1001
-    val EXPORT_REQUEST_CODE = 1002
-    val SHARE_REQUEST_CODE = 1003
-
     val ETHEREUM_NETWORK_NAME = "Ethereum"
     val CLASSIC_NETWORK_NAME = "Ethereum Classic"
     val POA_NETWORK_NAME = "POA Network"
     val KOVAN_NETWORK_NAME = "Kovan (Test)"
     val ROPSTEN_NETWORK_NAME = "Ropsten (Test)"
 
-    val ETHEREUM_TIKER = "ethereum"
-    val POA_TIKER = "poa"
-
-    val USD_SYMBOL = "$"
     val ETH_SYMBOL = "ETH"
-    val POA_SYMBOL = "POA"
-    val ETC_SYMBOL = "ETC"
-
-    val GWEI_UNIT = "Gwei"
 
     val EXTRA_ADDRESS = "ADDRESS"
     val EXTRA_CONTRACT_ADDRESS = "CONTRACT_ADDRESS"

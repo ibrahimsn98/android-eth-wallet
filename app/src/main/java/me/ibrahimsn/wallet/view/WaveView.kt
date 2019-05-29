@@ -87,8 +87,7 @@ class WaveView : View {
         }
     }
 
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
+    fun onStart() {
         waveAnimator = ValueAnimator.ofFloat(waveGap, 0f).apply {
             addUpdateListener {
                 waveRadiusOffset = it.animatedValue as Float
@@ -101,9 +100,8 @@ class WaveView : View {
         }
     }
 
-    override fun onDetachedFromWindow() {
+    fun onStop() {
         waveAnimator?.cancel()
-        super.onDetachedFromWindow()
     }
 
     private fun modifyAlpha(color: Int, alpha: Float): Int {

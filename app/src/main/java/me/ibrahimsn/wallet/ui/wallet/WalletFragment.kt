@@ -49,4 +49,14 @@ class WalletFragment : BaseFragment<HomeActivity>() {
                         .append(" ETH").toString()
         })
     }
+
+    override fun onStart() {
+        super.onStart()
+        waveView.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        waveView.onStop()
+    }
 }

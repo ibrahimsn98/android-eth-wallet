@@ -66,6 +66,10 @@ class EthereumNetworkRepository @Inject constructor(private val preferencesRepos
         }
     }
 
+    fun calculateFee() {
+
+    }
+
     fun createTransaction(from: Wallet, toAddress: String, subUnitAmount: BigInteger,
                           gasPrice: BigInteger, gasLimit: Long,
                           data: ByteArray, password: String): Single<String> {

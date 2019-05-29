@@ -101,4 +101,63 @@
 		android:layout_height="1dp"
 		android:background="@color/colorBorder"/>
 
+	<LinearLayout
+		android:id="@+id/lySendFeedback"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="center_vertical"
+		android:padding="12dp"
+		android:background="?android:attr/selectableItemBackground"
+		android:clickable="true"
+		android:focusable="true">
+
+		<TextView
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="Send Feedback"
+			android:textSize="14sp"
+			android:textColor="@color/colorTextPrimary"
+			android:textStyle="bold" />
+
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/ic_chevron_right_white_24dp"/>
+
+	</LinearLayout>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="@color/colorBorder"/>
+
+	<LinearLayout
+		android:id="@+id/lyPrivacyPolicy"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="center_vertical"
+		android:padding="12dp"
+		android:background="?android:attr/selectableItemBackground"
+		android:clickable="true"
+		android:focusable="true">
+
+		<TextView
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="Privacy Policy"
+			android:textSize="14sp"
+			android:textColor="@color/colorTextPrimary"
+			android:textStyle="bold" />
+
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/ic_chevron_right_white_24dp"/>
+
+	</LinearLayout>
+
 </LinearLayout>

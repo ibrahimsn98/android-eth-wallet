@@ -22,6 +22,9 @@ class ReceiveViewModel @Inject constructor(walletRepository: WalletRepository) :
     val currentWallet: MutableLiveData<Wallet?> = MutableLiveData()
     val walletQR: MutableLiveData<Bitmap?> = MutableLiveData()
 
+    /**
+     * Asynchronously get current wallet on initialization.
+     */
     init {
         disposable.add(walletRepository.getCurrentWallet()
                 .subscribeOn(Schedulers.io())
@@ -32,6 +35,9 @@ class ReceiveViewModel @Inject constructor(walletRepository: WalletRepository) :
                 .subscribe())
     }
 
+    /**
+     * Asynchronously create QR code for wallet address
+     */
     private fun createWalletQR(wallet: Wallet?) {
         if (wallet != null)
             disposable.add(createQRImage(wallet.address)
@@ -54,19 +60,22 @@ class ReceiveViewModel @Inject constructor(walletRepository: WalletRepository) :
         Log.d(Constants.TAG, "RxError:", e)
     }
 
+    /**
+     * QR code generator
+     */
     private fun createQRImage(address: String): Maybe<Bitmap?> {
         return Maybe.fromCallable {
             try {
-                val bitMatrix = MultiFormatWriter().encode(
-                        address,
-                        BarcodeFormat.QR_CODE,
-                        720,
-                        720, null)
-                val barcodeEncoder = BarcodeEncoder()
-                barcodeEncoder.createBitmap(bitMatrix)
+                BarcodeEncoder().createBitmap(MultiFormatWriter()
+                        .encode(address, BarcodeFormat.QR_CODE, 720, 720, null))
             } catch (e: Exception) {
                 null
             }
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        disposable.dispose()
     }
 }

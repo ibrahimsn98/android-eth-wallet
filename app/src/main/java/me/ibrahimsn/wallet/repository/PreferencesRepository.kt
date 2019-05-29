@@ -37,8 +37,7 @@ class PreferencesRepository @Inject constructor(context: Context) {
         var gasLimit = BigInteger(prefs.getString(GAS_LIMIT_KEY, Constants.DEFAULT_GAS_LIMIT))
 
         if (forTokenTransfer)
-            gasLimit = BigInteger(prefs.getString(GAS_LIMIT_FOR_TOKENS_KEY,
-                    Constants.DEFAULT_GAS_LIMIT_FOR_TOKENS))
+            gasLimit = BigInteger(prefs.getString(GAS_LIMIT_FOR_TOKENS_KEY, Constants.DEFAULT_GAS_LIMIT_FOR_TOKENS))
 
         return GasSettings(gasPrice, gasLimit)
     }
