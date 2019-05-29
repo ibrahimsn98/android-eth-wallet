@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:orientation="vertical"
-	android:padding="16dp"
-	android:background="@color/colorBackground">
+	android:gravity="center_horizontal"
+	android:background="@color/colorBackground"
+	android:padding="16dp">
 
 	<android.support.design.widget.TextInputLayout
+		android:id="@+id/tiyReceiverAddress"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginBottom="15dp"
 		android:hint="Receiver Address"
-		android:textColorHint="@color/colorTextSecondary">
+		android:textColorHint="@color/colorTextSecondary"
+		app:layout_constraintTop_toTopOf="parent">
 
 		<android.support.design.widget.TextInputEditText
 			android:id="@+id/etReceiverAddress"
@@ -26,11 +28,13 @@
 	</android.support.design.widget.TextInputLayout>
 
 	<android.support.design.widget.TextInputLayout
+		android:id="@+id/tiyAmount"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginBottom="15dp"
+		android:layout_marginTop="14dp"
 		android:hint="Amount"
-		android:textColorHint="@color/colorTextSecondary">
+		android:textColorHint="@color/colorTextSecondary"
+		app:layout_constraintTop_toBottomOf="@id/tiyReceiverAddress">
 
 		<android.support.design.widget.TextInputEditText
 			android:id="@+id/etAmount"
@@ -44,18 +48,29 @@
 	</android.support.design.widget.TextInputLayout>
 
 	<LinearLayout
+		android:id="@+id/linearLayout"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginBottom="2dp"
+		android:layout_marginTop="14dp"
 		android:gravity="center_vertical"
-		android:orientation="horizontal">
+		android:orientation="horizontal"
+		app:layout_constraintTop_toBottomOf="@id/tiyAmount">
 
 		<TextView
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
-			android:text="Fee"
+			android:text="Transaction Speed"
 			android:textSize="13sp"
+			android:textColor="@color/white"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="0dp"
+			android:layout_marginEnd="4dp"
+			android:text="Fee:"
+			android:textSize="15sp"
 			android:textColor="@color/white"/>
 
 		<TextView
@@ -68,44 +83,23 @@
 
 	</LinearLayout>
 
-	<LinearLayout
+	<SeekBar
+		android:id="@+id/seekBar"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:orientation="horizontal"
-		android:gravity="center_vertical">
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="Low"
-			android:textSize="13sp"
-			android:textColor="@color/white"/>
-
-		<SeekBar
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:layout_marginStart="12dp"
-			android:layout_marginEnd="12dp"
-			android:progressBackgroundTint="@color/colorAccent"
-			android:thumb="@drawable/ic_seekbar_thumb"/>
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="Hight"
-			android:textSize="13sp"
-			android:textColor="@color/white"/>
-
-	</LinearLayout>
+		android:layout_marginTop="14dp"
+		android:progressBackgroundTint="@color/colorAccent"
+		android:thumb="@drawable/ic_seekbar_thumb"
+		app:layout_constraintTop_toBottomOf="@id/linearLayout"/>
 
 	<LinearLayout
+		android:id="@+id/linearLayout2"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginBottom="12dp"
 		android:padding="16dp"
 		android:orientation="horizontal"
-		android:gravity="center_horizontal">
+		android:gravity="center_horizontal"
+		app:layout_constraintTop_toBottomOf="@id/seekBar">
 
 		<TextView
 			android:layout_width="wrap_content"
@@ -128,15 +122,16 @@
 	</LinearLayout>
 
 	<Button
-		android:id="@+id/btSend"
+		android:id="@+id/btContinue"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginBottom="20dp"
+		android:layout_marginTop="14dp"
 		android:textColor="@color/colorTextPrimary"
 		android:textSize="15sp"
 		android:textStyle="bold"
-		android:text="Send"
+		android:text="Continue"
 		android:textAllCaps="false"
-		android:background="@drawable/ic_button_background"/>
+		android:background="@drawable/ic_button_background"
+		app:layout_constraintTop_toBottomOf="@id/linearLayout2"/>
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import me.ibrahimsn.wallet.ui.importWallet.ImportWalletActivity
 import me.ibrahimsn.wallet.ui.menu.MenuFragment
+import me.ibrahimsn.wallet.ui.receive.ReceiveFragment
 import me.ibrahimsn.wallet.ui.send.SendFragment
 import me.ibrahimsn.wallet.ui.wallet.WalletFragment
 import me.ibrahimsn.wallet.ui.wallets.WalletsFragment
@@ -40,4 +41,10 @@ abstract class HomeFragmentBuilder {
      */
     @ContributesAndroidInjector
     internal abstract fun buildSendFragment(): SendFragment
+
+    /**
+     * Build Receive Transaction Fragment
+     */
+    @ContributesAndroidInjector
+    internal abstract fun buildReceiveFragment(): ReceiveFragment
 }

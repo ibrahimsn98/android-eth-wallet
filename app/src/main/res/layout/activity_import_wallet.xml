@@ -3,14 +3,15 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:background="@color/colorBackground">
+	android:background="@color/colorBackground"
+	android:padding="16dp">
 
 	<FrameLayout
 		android:id="@+id/bar"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		app:layout_constraintTop_toTopOf="parent"
-		android:padding="14dp">
+		android:paddingBottom="16dp"
+		app:layout_constraintTop_toTopOf="parent">
 
 		<ImageButton
 			android:id="@+id/ibBack"
@@ -33,70 +34,65 @@
 
 	</FrameLayout>
 
-	<LinearLayout
+	<android.support.design.widget.TextInputLayout
+		android:id="@+id/tiyWalletName"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:orientation="vertical"
-		android:paddingTop="20dp"
-		android:paddingBottom="20dp"
-		android:paddingStart="16dp"
-		android:paddingEnd="16dp"
+		android:hint="Wallet Name"
+		android:textColorHint="@color/colorTextSecondary"
 		app:layout_constraintTop_toBottomOf="@id/bar">
 
-		<android.support.design.widget.TextInputLayout
+		<android.support.design.widget.TextInputEditText
+			android:id="@+id/etWalletName"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginBottom="15dp"
-			android:hint="Wallet Name"
-			android:textColorHint="@color/colorTextSecondary">
-
-			<android.support.design.widget.TextInputEditText
-				android:id="@+id/etWalletName"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:theme="@style/AppTheme.LighterEditText"
-				android:textColor="@color/colorTextPrimary"
-				android:textSize="15sp"/>
-
-		</android.support.design.widget.TextInputLayout>
-
-		<android.support.design.widget.TextInputLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginBottom="15dp"
-			android:hint="Ethereum Address"
-			android:textColorHint="@color/colorTextSecondary">
-
-			<android.support.design.widget.TextInputEditText
-				android:id="@+id/etWalletAddress"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:theme="@style/AppTheme.LighterEditText"
-				android:textColor="@color/colorTextPrimary"
-				android:textSize="15sp"/>
-
-		</android.support.design.widget.TextInputLayout>
-
-		<TextView
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginBottom="20dp"
-			android:textSize="14sp"
+			android:theme="@style/AppTheme.LighterEditText"
 			android:textColor="@color/colorTextPrimary"
-			android:text="Özel anahtarınızı açıklamadan herhangi bir genel adresi izleyebilirsiniz. Bu, bakiyeyi ve işlemleri görmenize izin verir ancak işlemler oluşturamaz."/>
+			android:textSize="15sp"/>
 
-		<Button
-			android:id="@+id/btImport"
+	</android.support.design.widget.TextInputLayout>
+
+	<android.support.design.widget.TextInputLayout
+		android:id="@+id/tiyWalletAddress"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="14dp"
+		android:hint="Ethereum Address"
+		android:textColorHint="@color/colorTextSecondary"
+		app:layout_constraintTop_toBottomOf="@id/tiyWalletName">
+
+		<android.support.design.widget.TextInputEditText
+			android:id="@+id/etWalletAddress"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginBottom="20dp"
+			android:theme="@style/AppTheme.LighterEditText"
 			android:textColor="@color/colorTextPrimary"
-			android:textSize="15sp"
-			android:textStyle="bold"
-			android:text="İçe Aktar"
-			android:textAllCaps="false"
-			android:background="@drawable/ic_button_background"/>
+			android:textSize="15sp"/>
 
-	</LinearLayout>
+	</android.support.design.widget.TextInputLayout>
+
+	<TextView
+		android:id="@+id/textView"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10dp"
+		android:textSize="14sp"
+		android:textColor="@color/colorTextPrimary"
+		android:text="Özel anahtarınızı açıklamadan herhangi bir genel adresi izleyebilirsiniz. Bu, bakiyeyi ve işlemleri görmenize izin verir ancak işlemler oluşturamaz."
+		app:layout_constraintTop_toBottomOf="@id/tiyWalletAddress"/>
+
+	<Button
+		android:id="@+id/btImport"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="16dp"
+		android:layout_marginBottom="20dp"
+		android:textColor="@color/colorTextPrimary"
+		android:textSize="15sp"
+		android:textStyle="bold"
+		android:text="İçe Aktar"
+		android:textAllCaps="false"
+		android:background="@drawable/ic_button_background"
+		app:layout_constraintTop_toBottomOf="@id/textView"/>
 
 </android.support.constraint.ConstraintLayout>

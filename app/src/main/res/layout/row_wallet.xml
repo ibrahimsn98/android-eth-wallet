@@ -12,7 +12,7 @@
 	<ImageView
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:src="@drawable/ic_wallet"
+		android:src="@drawable/ic_ethereum"
 		android:tint="@color/colorAccent"
 		android:layout_marginStart="0dp"
 		android:layout_marginEnd="12dp"

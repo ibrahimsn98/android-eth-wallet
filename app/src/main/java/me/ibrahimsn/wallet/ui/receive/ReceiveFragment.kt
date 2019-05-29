@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.journeyapps.barcodescanner.BarcodeEncoder
+import kotlinx.android.synthetic.main.fragment_receive.*
 import me.ibrahimsn.wallet.R
 import me.ibrahimsn.wallet.base.BaseFragment
 import me.ibrahimsn.wallet.ui.home.HomeActivity
@@ -20,6 +21,8 @@ class ReceiveFragment : BaseFragment<HomeActivity>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        ivBarcode.setImageBitmap(createQRImage("0x4353453"))
     }
 
     private fun createQRImage(address: String): Bitmap? {
