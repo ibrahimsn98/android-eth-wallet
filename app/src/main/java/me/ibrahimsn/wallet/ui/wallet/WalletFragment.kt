@@ -26,16 +26,11 @@ class WalletFragment : BaseFragment<HomeActivity>() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(activity, viewModelFactory).get(WalletViewModel::class.java)
 
-        val walletAdapter = WalletAdapter()
         val transactionAdapter = TransactionAdapter()
 
         rvTransactions.layoutManager = LinearLayoutManager(activity)
         rvTransactions.adapter = transactionAdapter
 
-        viewModel.wallets.observe(this, Observer {
-            if (it != null)
-                walletAdapter.setItems(it)
-        })
 
         viewModel.transactions.observe(this, Observer {
             if (it != null)

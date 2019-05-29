@@ -24,23 +24,10 @@ class WalletViewModel @Inject constructor(walletRepository: WalletRepository,
 
     private val disposable = CompositeDisposable()
 
-    val wallets: MutableLiveData<List<Wallet>> = MutableLiveData()
     val transactions: MutableLiveData<List<Transaction>> = MutableLiveData()
     val walletBalance: MutableLiveData<Pair<Wallet, Double>> = MutableLiveData()
 
     init {
-        disposable.add(walletRepository.fetchWallets().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object: DisposableSingleObserver<List<Wallet>>() {
-                    override fun onSuccess(data: List<Wallet>) {
-                        wallets.postValue(data)
-                    }
-
-                    override fun onError(e: Throwable) {
-                        Log.d(Constants.TAG, "Fetch wallets error:", e)
-                    }
-                }))
-
         fetchTransaction(Wallet(""))
     }
 

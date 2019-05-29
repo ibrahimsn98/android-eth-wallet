@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:background="@color/colorBackground">
-
-	<android.support.v7.widget.RecyclerView
-		android:id="@+id/rvWallets"
-		android:layout_width="match_parent"
-		android:layout_height="0dp"
-		android:paddingBottom="100dp"
-		android:clipToPadding="false"
-		app:layout_constraintTop_toTopOf="parent"
-		app:layout_constraintBottom_toBottomOf="parent"/>
+	android:background="@color/colorBackground"
+	android:id="@+id/nestedScrollView">
 
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:paddingStart="20dp"
-		android:paddingEnd="20dp"
-		android:paddingTop="40dp"
-		android:paddingBottom="20dp"
-		android:background="@drawable/ic_gradient_black"
-		app:layout_constraintBottom_toBottomOf="parent">
+		android:orientation="vertical">
+
+		<android.support.v7.widget.RecyclerView
+			android:id="@+id/rvWallets"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"/>
 
 		<Button
 			android:id="@+id/btAdd"
 			android:layout_width="match_parent"
-			android:layout_height="50dp"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="12dp"
+			android:layout_marginBottom="12dp"
+			android:layout_marginStart="16dp"
+			android:layout_marginEnd="16dp"
 			android:textColor="@color/colorTextPrimary"
-			android:textSize="15sp"
+			android:textSize="13sp"
 			android:textStyle="bold"
 			android:text="+ Add Wallet"
 			android:textAllCaps="false"
@@ -37,4 +33,4 @@
 
 	</LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

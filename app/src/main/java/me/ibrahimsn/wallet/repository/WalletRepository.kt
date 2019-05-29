@@ -1,5 +1,6 @@
 package me.ibrahimsn.wallet.repository
 
+import android.arch.lifecycle.LiveData
 import io.reactivex.Completable
 import io.reactivex.Single
 import me.ibrahimsn.wallet.manager.GethAccountManager
@@ -11,7 +12,7 @@ import javax.inject.Inject
 class WalletRepository @Inject constructor(private var gethAccountManager: GethAccountManager,
                                            private var walletDao: WalletDao) {
 
-    fun fetchWallets(): Single<List<Wallet>> {
+    fun fetchWallets(): LiveData<List<Wallet>> {
         return walletDao.getAll()
     }
 

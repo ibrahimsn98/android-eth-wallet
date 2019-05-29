@@ -19,6 +19,7 @@ class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setSupportActionBar(toolbar)
         navController = Navigation.findNavController(this, R.id.host)
 
         bottomBar.setBottomBarCallback(object: NiceBottomBar.BottomBarCallback {

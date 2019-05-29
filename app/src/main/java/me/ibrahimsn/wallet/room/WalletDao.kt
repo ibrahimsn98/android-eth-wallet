@@ -1,5 +1,6 @@
 package me.ibrahimsn.wallet.room
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
@@ -10,7 +11,7 @@ import me.ibrahimsn.wallet.entity.Wallet
 interface WalletDao {
 
     @Query("SELECT * from wallets ORDER BY id ASC")
-    fun getAll(): Single<List<Wallet>>
+    fun getAll(): LiveData<List<Wallet>>
 
     @Insert
     fun insert(wallet: Wallet): Long
