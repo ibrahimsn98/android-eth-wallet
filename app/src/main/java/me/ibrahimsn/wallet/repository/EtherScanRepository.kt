@@ -36,7 +36,7 @@ class EtherScanRepository @Inject constructor(okHttpClient: OkHttpClient, gson: 
     }
 
     fun fetchTransaction(address: String, page: Int, offset: Int): Single<EtherScanResponse> {
-        return etherScanApiClient.fetchTransactions(address, 1, 10, "ASC",
+        return etherScanApiClient.fetchTransactions(address, page, offset, "ASC",
                 "SGPX7HN5MJNWMMYDFUKUW7XTM21EDG2T1N")
     }
 }

@@ -1,6 +1,7 @@
 package me.ibrahimsn.wallet.ui.home
 
 import android.os.Bundle
+import android.view.Menu
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.activity_home.*
@@ -36,5 +37,10 @@ class HomeActivity : BaseActivity() {
 
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_home, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 }

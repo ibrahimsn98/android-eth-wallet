@@ -41,10 +41,6 @@ class WaveView : View {
         xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP)
     }
 
-    private val iconPaint = Paint(ANTI_ALIAS_FLAG).apply {
-
-    }
-
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.WaveView, 0, 0)

@@ -21,7 +21,7 @@ class TransactionAdapter(private val context: Context) : RecyclerView.Adapter<Re
             ViewHolderSent(LayoutInflater.from(parent.context).inflate(R.layout.row_transaction_sent,
                     parent, false))
         else
-            ViewHolderReceived(LayoutInflater.from(parent.context).inflate(R.layout.row_transaction_sent,
+            ViewHolderReceived(LayoutInflater.from(parent.context).inflate(R.layout.row_transaction_received,
                     parent, false))
     }
 

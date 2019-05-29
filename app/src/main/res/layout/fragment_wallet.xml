@@ -4,51 +4,81 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
-	<me.ibrahimsn.wallet.view.WaveView
+	<android.support.constraint.ConstraintLayout
+		android:id="@+id/constraint"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginStart="26dp"
-		android:layout_marginEnd="26dp"
-		app:icon="@drawable/ic_ethereum"
-		app:iconSize="40dp"
-		app:layout_constraintTop_toTopOf="parent"/>
+		android:layout_marginStart="22dp"
+		android:layout_marginEnd="22dp"
+		app:layout_constraintTop_toTopOf="parent">
 
-	<TextView
-		android:id="@+id/textView"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="190dp"
-		android:text="For collecting payments"
-		android:textSize="13sp"
-		android:textColor="@color/colorTextPrimary"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintTop_toTopOf="parent"/>
+		<me.ibrahimsn.wallet.view.WaveView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:icon="@drawable/ic_ethereum"
+			app:iconSize="40dp"
+			app:layout_constraintTop_toTopOf="parent"/>
 
-	<TextView
-		android:id="@+id/tvBalance"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="4dp"
-		android:text="34,23425235 ETH"
-		android:textColor="@color/colorTextPrimary"
-		android:textSize="24sp"
-		android:textStyle="bold"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintTop_toBottomOf="@id/textView"/>
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="130dp"
+			android:orientation="vertical"
+			android:gravity="center_horizontal"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintBottom_toBottomOf="parent">
 
-	<TextView
-		android:id="@+id/tvBalanceReal"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="4dp"
-		android:text="343,23 USD"
-		android:textColor="@color/colorTextSecondary"
-		android:textSize="15sp"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintTop_toBottomOf="@id/tvBalance"/>
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Ethereum Wallet 01"
+				android:textSize="18sp"
+				android:textStyle="bold"
+				android:textColor="@color/colorTextPrimary"/>
+
+			<TextView
+				android:id="@+id/textView"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="For collecting payments"
+				android:textSize="13sp"
+				android:textColor="@color/colorTextPrimary"/>
+
+		</LinearLayout>
+
+		<TextView
+			android:id="@+id/tvBalance"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="90dp"
+			android:gravity="center_horizontal"
+			android:text="34,23425235 ETH"
+			android:textColor="@color/colorTextPrimary"
+			android:textSize="26sp"
+			android:textStyle="bold"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintBottom_toBottomOf="parent"/>
+
+		<TextView
+			android:id="@+id/tvBalanceReal"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_horizontal"
+			android:text="343,23 USD"
+			android:textColor="@color/colorTextSecondary"
+			android:textSize="15sp"
+			app:layout_constraintTop_toBottomOf="@id/tvBalance"/>
+
+	</android.support.constraint.ConstraintLayout>
+
+	<android.support.v4.widget.Space
+		android:id="@+id/space"
+		android:layout_width="0dp"
+		android:layout_height="0dp"
+		android:layout_marginBottom="50dp"
+		app:layout_constraintBottom_toBottomOf="@id/constraint"
+		app:layout_constraintStart_toStartOf="@id/constraint"
+		app:layout_constraintEnd_toEndOf="@id/constraint" />
 
 	<TextView
 		android:id="@+id/textView4"
@@ -56,11 +86,10 @@
 		android:layout_height="wrap_content"
 		android:layout_marginStart="16dp"
 		android:layout_marginEnd="16dp"
-		android:layout_marginTop="28dp"
 		android:text="Recent Transactions"
 		android:textSize="13sp"
 		android:textColor="@color/colorTextPrimary"
-		app:layout_constraintTop_toBottomOf="@id/tvBalanceReal"/>
+		app:layout_constraintTop_toBottomOf="@id/space"/>
 
 	<android.support.v7.widget.RecyclerView
 		android:id="@+id/rvTransactions"

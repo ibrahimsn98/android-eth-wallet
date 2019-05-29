@@ -7,6 +7,6 @@
 	<string name="menu_send">Send</string>
 	<string name="menu_menu">Menu</string>
 
-	<string name="eth_sent_amount">-%1$s Ethereum</string>
-	<string name="eth_received_amount">+%1$s Ethereum</string>
+	<string name="eth_sent_amount">-%1$s ETH</string>
+	<string name="eth_received_amount">+%1$s ETH</string>
 </resources>
