@@ -1,10 +1,14 @@
 package me.ibrahimsn.wallet.ui.receive
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.graphics.Bitmap
 import android.graphics.Point
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.journeyapps.barcodescanner.BarcodeEncoder
@@ -12,8 +16,12 @@ import kotlinx.android.synthetic.main.fragment_receive.*
 import me.ibrahimsn.wallet.R
 import me.ibrahimsn.wallet.base.BaseFragment
 import me.ibrahimsn.wallet.ui.home.HomeActivity
+import javax.inject.Inject
 
 class ReceiveFragment : BaseFragment<HomeActivity>() {
+
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    private lateinit var viewModel: ReceiveViewModel
 
     override fun layoutRes(): Int {
         return R.layout.fragment_receive
@@ -21,26 +29,16 @@ class ReceiveFragment : BaseFragment<HomeActivity>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProviders.of(activity, viewModelFactory).get(ReceiveViewModel::class.java)
 
-        ivBarcode.setImageBitmap(createQRImage("0x4353453"))
-    }
+        viewModel.currentWallet.observe(this, Observer {
+            if (it != null)
+                etAddress.setText(it.address)
+        })
 
-    private fun createQRImage(address: String): Bitmap? {
-        val size = Point()
-        activity.windowManager.defaultDisplay.getSize(size)
-        val imageSize = (size.x * 0.9f).toInt()
-        try {
-            val bitMatrix = MultiFormatWriter().encode(
-                    address,
-                    BarcodeFormat.QR_CODE,
-                    imageSize,
-                    imageSize, null)
-            val barcodeEncoder = BarcodeEncoder()
-            return barcodeEncoder.createBitmap(bitMatrix)
-        } catch (e: Exception) {
-            Toast.makeText(activity, "Fail barcode generate!", Toast.LENGTH_SHORT).show()
-        }
-
-        return null
+        viewModel.walletQR.observe(this, Observer {
+            if (it != null)
+                Glide.with(this).load(it).into(ivBarcode)
+        })
     }
 }
