@@ -19,4 +19,8 @@
 		android:id="@+id/walletsFragment"
 		android:name="me.ibrahimsn.wallet.ui.wallets.WalletsFragment"
 		android:label="WalletsFragment" />
+	<fragment
+		android:id="@+id/sendFragment"
+		android:name="me.ibrahimsn.wallet.ui.send.SendFragment"
+		android:label="SendFragment" />
 </navigation>

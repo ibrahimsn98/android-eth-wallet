@@ -26,6 +26,7 @@ class HomeActivity : BaseActivity() {
             override fun onItemSelect(pos: Int) {
                 when (pos) {
                     0 -> navController.navigate(R.id.walletFragment)
+                    2 -> navController.navigate(R.id.sendFragment)
                     3 -> navController.navigate(R.id.menuFragment)
                 }
             }
