@@ -3,25 +3,25 @@ package me.ibrahimsn.wallet.ui.receive
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.graphics.Bitmap
-import android.graphics.Point
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.google.zxing.BarcodeFormat
-import com.google.zxing.MultiFormatWriter
-import com.journeyapps.barcodescanner.BarcodeEncoder
 import kotlinx.android.synthetic.main.fragment_receive.*
 import me.ibrahimsn.wallet.R
 import me.ibrahimsn.wallet.base.BaseFragment
 import me.ibrahimsn.wallet.ui.home.HomeActivity
 import javax.inject.Inject
+import android.content.ClipData
+import android.content.Context.CLIPBOARD_SERVICE
+import android.content.ClipboardManager
 
 class ReceiveFragment : BaseFragment<HomeActivity>() {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: ReceiveViewModel
+
+    private var address = ""
 
     override fun layoutRes(): Int {
         return R.layout.fragment_receive
@@ -31,14 +31,36 @@ class ReceiveFragment : BaseFragment<HomeActivity>() {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(activity, viewModelFactory).get(ReceiveViewModel::class.java)
 
+        ibCopyAddress.setOnClickListener {
+            if (address != "")
+                copyToClipboard(address)
+        }
+
+        btShareAddress.setOnClickListener {
+            if (address != "")
+                startActivity(Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, address)
+                    type = "text/plain"
+                })
+        }
+
         viewModel.currentWallet.observe(this, Observer {
-            if (it != null)
+            if (it != null) {
+                address = it.address
                 etAddress.setText(it.address)
+            }
         })
 
         viewModel.walletQR.observe(this, Observer {
             if (it != null)
                 Glide.with(this).load(it).into(ivBarcode)
         })
+    }
+
+    private fun copyToClipboard(data: String) {
+        val clipboard = activity.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
+        if (clipboard != null)
+            clipboard.primaryClip = ClipData.newPlainText("eth-address", data)
     }
 }

@@ -42,6 +42,10 @@
 		    android:name=".ui.importWallet.ImportWalletActivity"
 		    android:theme="@style/AppThemeNoActionBar"/>
 
+	    <activity
+		    android:name=".ui.send.SendActivity"
+		    android:theme="@style/AppThemeNoActionBar"/>
+
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@ import me.ibrahimsn.wallet.ui.addWallet.AddWalletActivity
 import me.ibrahimsn.wallet.ui.home.HomeActivity
 import me.ibrahimsn.wallet.ui.importWallet.ImportWalletActivity
 import me.ibrahimsn.wallet.ui.main.MainActivity
+import me.ibrahimsn.wallet.ui.send.SendActivity
 
 @Module
 abstract class ActivityBuilder {
@@ -33,4 +34,10 @@ abstract class ActivityBuilder {
      */
     @ContributesAndroidInjector
     internal abstract fun buildImportWalletActivity(): ImportWalletActivity
+
+    /**
+     * Build Send Transaction Activity
+     */
+    @ContributesAndroidInjector(modules = [SendFragmentBuilder::class])
+    internal abstract fun buildSendActivity(): SendActivity
 }

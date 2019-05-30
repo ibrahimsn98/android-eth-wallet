@@ -24,10 +24,6 @@
 		android:name="me.ibrahimsn.wallet.ui.wallets.WalletsFragment"
 		android:label="WalletsFragment" />
 	<fragment
-		android:id="@+id/sendFragment"
-		android:name="me.ibrahimsn.wallet.ui.send.SendFragment"
-		android:label="SendFragment" />
-	<fragment
 		android:id="@+id/receiveFragment"
 		android:name="me.ibrahimsn.wallet.ui.receive.ReceiveFragment"
 		android:label="ReceiveFragment" />

@@ -3,6 +3,7 @@ package me.ibrahimsn.wallet.ui.wallet
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
@@ -10,6 +11,7 @@ import kotlinx.android.synthetic.main.fragment_wallet.*
 import me.ibrahimsn.wallet.R
 import me.ibrahimsn.wallet.base.BaseFragment
 import me.ibrahimsn.wallet.ui.home.HomeActivity
+import me.ibrahimsn.wallet.ui.send.SendActivity
 import me.ibrahimsn.wallet.ui.transactions.TransactionAdapter
 import me.ibrahimsn.wallet.util.FormatUtil
 import java.lang.StringBuilder
@@ -32,6 +34,10 @@ class WalletFragment : BaseFragment<HomeActivity>() {
 
         rvTransactions.layoutManager = LinearLayoutManager(activity)
         rvTransactions.adapter = transactionAdapter
+
+        btSend.setOnClickListener {
+            startActivity(Intent(activity, SendActivity::class.java))
+        }
 
         btReceive.setOnClickListener {
             activity.navController.navigate(R.id.action_walletFragment_to_receiveFragment)

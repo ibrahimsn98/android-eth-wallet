@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/colorBackground">
+
+	<FrameLayout
+		android:id="@+id/bar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="16dp"
+		app:layout_constraintTop_toTopOf="parent">
+
+		<ImageButton
+			android:id="@+id/ibBack"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/ic_chevron_left_black_24dp"
+			android:tint="@color/white"
+			android:layout_gravity="center_vertical"
+			android:background="?android:attr/selectableItemBackgroundBorderless"/>
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_horizontal"
+			android:textSize="18sp"
+			android:textStyle="bold"
+			android:textColor="@color/colorTextPrimary"
+			android:text="Send Ethereum"
+			android:layout_gravity="center_vertical" />
+
+	</FrameLayout>
+
+	<fragment
+		android:id="@+id/host"
+		android:name="androidx.navigation.fragment.NavHostFragment"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		app:defaultNavHost="true"
+		app:navGraph="@navigation/send_graph"
+		app:layout_constraintTop_toBottomOf="@id/bar"
+		app:layout_constraintBottom_toBottomOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
