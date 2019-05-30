@@ -10,6 +10,7 @@ import me.ibrahimsn.wallet.di.util.ViewModelKey
 import me.ibrahimsn.wallet.ui.importWallet.ImportWalletViewModel
 import me.ibrahimsn.wallet.ui.receive.ReceiveViewModel
 import me.ibrahimsn.wallet.ui.send.SendViewModel
+import me.ibrahimsn.wallet.ui.transactions.TransactionsViewModel
 import me.ibrahimsn.wallet.ui.wallet.WalletViewModel
 import me.ibrahimsn.wallet.ui.wallets.WalletsViewModel
 
@@ -43,4 +44,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ReceiveViewModel::class)
     internal abstract fun bindReceiveViewModel(viewModel: ReceiveViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TransactionsViewModel::class)
+    internal abstract fun bindTransactionsViewModel(viewModel: TransactionsViewModel): ViewModel
 }

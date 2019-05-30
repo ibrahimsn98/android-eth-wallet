@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.fragment_wallet.*
 import me.ibrahimsn.wallet.R
 import me.ibrahimsn.wallet.base.BaseFragment
 import me.ibrahimsn.wallet.ui.home.HomeActivity
+import me.ibrahimsn.wallet.ui.transactions.TransactionAdapter
 import me.ibrahimsn.wallet.util.FormatUtil
 import java.lang.StringBuilder
 import javax.inject.Inject
@@ -32,14 +33,21 @@ class WalletFragment : BaseFragment<HomeActivity>() {
         rvTransactions.layoutManager = LinearLayoutManager(activity)
         rvTransactions.adapter = transactionAdapter
 
+        btReceive.setOnClickListener {
+            activity.navController.navigate(R.id.action_walletFragment_to_receiveFragment)
+        }
+
         viewModel.currentWallet.observe(this, Observer {
             if (it != null)
                 transactionAdapter.setWalletAddress(it.address)
         })
 
         viewModel.transactions.observe(this, Observer {
-            if (it != null)
+            if (it != null) {
                 transactionAdapter.setItems(it)
+                pbLoading.visibility = View.GONE
+                rvTransactions.visibility = View.VISIBLE
+            }
         })
 
         viewModel.walletBalance.observe(this, Observer {

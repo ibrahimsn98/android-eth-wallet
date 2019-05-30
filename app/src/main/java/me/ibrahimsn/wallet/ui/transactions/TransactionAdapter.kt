@@ -1,4 +1,4 @@
-package me.ibrahimsn.wallet.ui.wallet
+package me.ibrahimsn.wallet.ui.transactions
 
 import android.content.Context
 import android.support.v7.util.DiffUtil

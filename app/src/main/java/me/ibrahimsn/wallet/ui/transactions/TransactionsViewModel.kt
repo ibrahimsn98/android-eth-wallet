@@ -1,4 +1,4 @@
-package me.ibrahimsn.wallet.ui.wallet
+package me.ibrahimsn.wallet.ui.transactions
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
@@ -10,21 +10,15 @@ import me.ibrahimsn.wallet.entity.EtherScanResponse
 import me.ibrahimsn.wallet.entity.Transaction
 import me.ibrahimsn.wallet.entity.Wallet
 import me.ibrahimsn.wallet.repository.EtherScanRepository
-import me.ibrahimsn.wallet.repository.EthereumNetworkRepository
 import me.ibrahimsn.wallet.repository.WalletRepository
 import me.ibrahimsn.wallet.util.Constants
-import java.math.BigInteger
 import javax.inject.Inject
 
-class WalletViewModel @Inject constructor(walletRepository: WalletRepository,
-                                          private val networkRepository: EthereumNetworkRepository,
-                                          private val etherScanRepository: EtherScanRepository) : ViewModel() {
+class TransactionsViewModel @Inject constructor(walletRepository: WalletRepository,
+                                                private val etherScanRepository: EtherScanRepository) : ViewModel() {
 
     private val disposable = CompositeDisposable()
-
-    val currentWallet: MutableLiveData<Wallet?> = MutableLiveData()
     val transactions: MutableLiveData<List<Transaction>> = MutableLiveData()
-    val walletBalance: MutableLiveData<BigInteger> = MutableLiveData()
 
     /**
      * Asynchronously get current wallet on initialization.
@@ -33,8 +27,6 @@ class WalletViewModel @Inject constructor(walletRepository: WalletRepository,
         disposable.add(walletRepository.getCurrentWallet()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSuccess(this::onGetCurrentWallet)
-                .doOnSuccess(this::loadWalletBalance)
                 .doOnSuccess(this::fetchTransactions)
                 .doOnError(this::onRxError)
                 .subscribe())
@@ -45,29 +37,10 @@ class WalletViewModel @Inject constructor(walletRepository: WalletRepository,
      */
     private fun fetchTransactions(wallet: Wallet?) {
         if (wallet != null)
-            disposable.add(etherScanRepository.fetchTransaction(wallet.address, 1, 4)
+            disposable.add(etherScanRepository.fetchTransaction(wallet.address, 1, 50)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::onFetchTransactions, this::onRxError))
-    }
-
-    /**
-     * Asynchronously load current wallet balance from ETH network.
-     */
-    private fun loadWalletBalance(wallet: Wallet?) {
-        if (wallet != null)
-            disposable.add(networkRepository.getWalletBalance(wallet)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::onLoadWalletBalance, this::onRxError))
-    }
-
-    private fun onGetCurrentWallet(wallet: Wallet?) {
-        currentWallet.postValue(wallet)
-    }
-
-    private fun onLoadWalletBalance(balance: BigInteger) {
-        walletBalance.postValue(balance)
     }
 
     private fun onFetchTransactions(response: EtherScanResponse) {

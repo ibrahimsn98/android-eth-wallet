@@ -6,7 +6,11 @@
 	<fragment
 		android:id="@+id/walletFragment"
 		android:name="me.ibrahimsn.wallet.ui.wallet.WalletFragment"
-		android:label="WalletFragment" />
+		android:label="WalletFragment" >
+		<action
+			android:id="@+id/action_walletFragment_to_receiveFragment"
+			app:destination="@id/receiveFragment" />
+	</fragment>
 	<fragment
 		android:id="@+id/menuFragment"
 		android:name="me.ibrahimsn.wallet.ui.menu.MenuFragment"
@@ -27,4 +31,8 @@
 		android:id="@+id/receiveFragment"
 		android:name="me.ibrahimsn.wallet.ui.receive.ReceiveFragment"
 		android:label="ReceiveFragment" />
+	<fragment
+		android:id="@+id/transactionsFragment"
+		android:name="me.ibrahimsn.wallet.ui.transactions.TransactionsFragment"
+		android:label="TransactionsFragment" />
 </navigation>

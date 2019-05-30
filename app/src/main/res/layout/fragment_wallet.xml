@@ -76,24 +76,81 @@
 		android:id="@+id/space"
 		android:layout_width="0dp"
 		android:layout_height="0dp"
-		android:layout_marginBottom="50dp"
+		android:layout_marginBottom="60dp"
 		app:layout_constraintBottom_toBottomOf="@id/constraint"
 		app:layout_constraintStart_toStartOf="@id/constraint"
 		app:layout_constraintEnd_toEndOf="@id/constraint" />
+
+	<LinearLayout
+		android:id="@+id/linearLayout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingStart="16dp"
+		android:paddingEnd="16dp"
+		android:orientation="horizontal"
+		android:weightSum="2"
+		app:layout_constraintTop_toBottomOf="@id/space">
+
+		<Button
+			android:id="@+id/btSend"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:layout_marginBottom="4dp"
+			android:minHeight="0dp"
+			android:padding="12dp"
+			android:layout_marginStart="0dp"
+			android:layout_marginEnd="8dp"
+			android:text="Send"
+			android:textSize="14sp"
+			android:textStyle="bold"
+			android:textAllCaps="false"
+			android:textColor="@color/colorTextPrimary"
+			android:background="@drawable/ic_button_background_transparent"/>
+
+		<Button
+			android:id="@+id/btReceive"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:layout_marginBottom="4dp"
+			android:minHeight="0dp"
+			android:padding="12dp"
+			android:layout_marginStart="8dp"
+			android:layout_marginEnd="0dp"
+			android:text="Receive"
+			android:textSize="14sp"
+			android:textStyle="bold"
+			android:textAllCaps="false"
+			android:textColor="@color/colorTextPrimary"
+			android:background="@drawable/ic_button_background_transparent"/>
+
+	</LinearLayout>
 
 	<TextView
 		android:id="@+id/textView4"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_marginTop="12dp"
 		android:layout_marginStart="16dp"
 		android:layout_marginEnd="16dp"
 		android:text="Recent Transactions"
 		android:textSize="13sp"
 		android:textColor="@color/colorTextPrimary"
-		app:layout_constraintTop_toBottomOf="@id/space"/>
+		app:layout_constraintTop_toBottomOf="@id/linearLayout"/>
+
+	<ProgressBar
+		android:id="@+id/pbLoading"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/textView4"
+		app:layout_constraintBottom_toBottomOf="parent"/>
 
 	<android.support.v7.widget.RecyclerView
 		android:id="@+id/rvTransactions"
+		android:visibility="gone"
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
 		android:layout_marginTop="7dp"
