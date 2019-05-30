@@ -10,6 +10,7 @@ import me.ibrahimsn.wallet.util.Constants.ETHEREUM_NETWORK_NAME
 import me.ibrahimsn.wallet.util.Constants.ETH_SYMBOL
 import me.ibrahimsn.wallet.util.Constants.KOVAN_NETWORK_NAME
 import me.ibrahimsn.wallet.util.Constants.ROPSTEN_NETWORK_NAME
+import me.ibrahimsn.wallet.util.FormatUtil
 import org.web3j.protocol.Web3j
 import org.web3j.protocol.core.DefaultBlockParameterName
 import org.web3j.protocol.http.HttpService
@@ -36,7 +37,7 @@ class EthereumNetworkRepository @Inject constructor(private val preferencesRepos
                     "https://ropsten.etherscan.io/api/",
                     "https://ropsten.etherscan.io", 3, false))
 
-    private var defaultNetwork = getByName(preferencesRepository.getDefaultNetwork()) ?: NETWORKS[0]
+    private var defaultNetwork = getByName(preferencesRepository.getDefaultNetwork()) ?: NETWORKS[2]
     private var web3j = Web3j.build(HttpService(getDefaultNetwork().rpcServerUrl))
 
     fun getAvailableNetworkList(): Array<NetworkInfo> {
@@ -60,9 +61,9 @@ class EthereumNetworkRepository @Inject constructor(private val preferencesRepos
         return null
     }
 
-    fun getWalletBalance(wallet: Wallet): Single<BigInteger> {
+    fun getWalletBalance(wallet: Wallet): Single<Double> {
         return Single.fromCallable {
-            web3j.ethGetBalance(wallet.address, DefaultBlockParameterName.LATEST).send().balance
+            FormatUtil.valueToETH(web3j.ethGetBalance(wallet.address, DefaultBlockParameterName.LATEST).send().balance)
         }
     }
 

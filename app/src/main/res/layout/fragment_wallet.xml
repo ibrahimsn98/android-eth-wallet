@@ -53,7 +53,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="90dp"
 			android:gravity="center_horizontal"
-			android:text="34,23425235 ETH"
+			android:text="0.0 ETH"
 			android:textColor="@color/colorTextPrimary"
 			android:textSize="26sp"
 			android:textStyle="bold"
@@ -65,7 +65,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:gravity="center_horizontal"
-			android:text="343,23 USD"
+			android:text="0.0 USD"
 			android:textColor="@color/colorTextSecondary"
 			android:textSize="15sp"
 			app:layout_constraintTop_toBottomOf="@id/tvBalance"/>

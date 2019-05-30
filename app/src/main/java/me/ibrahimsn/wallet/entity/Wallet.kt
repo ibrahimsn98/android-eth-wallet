@@ -10,11 +10,13 @@ class Wallet {
     @PrimaryKey var id: Long?
     var name: String?
     var address: String
+    var isWallet: Boolean
 
-    constructor(id: Long, name: String, address: String) {
+    constructor(id: Long, name: String, address: String, isWallet: Boolean) {
         this.id = id
         this.name = name
         this.address = address
+        this.isWallet = isWallet
     }
 
     @Ignore
@@ -22,6 +24,7 @@ class Wallet {
         this.id = null
         this.name = null
         this.address = address
+        this.isWallet = false
     }
 
     @Ignore
@@ -29,5 +32,6 @@ class Wallet {
         this.id = null
         this.name = name
         this.address = address
+        this.isWallet = false
     }
 }

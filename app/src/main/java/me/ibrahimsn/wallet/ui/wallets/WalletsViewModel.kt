@@ -5,6 +5,7 @@ import io.reactivex.disposables.CompositeDisposable
 import me.ibrahimsn.wallet.entity.Wallet
 import me.ibrahimsn.wallet.repository.PreferencesRepository
 import me.ibrahimsn.wallet.repository.WalletRepository
+import me.ibrahimsn.wallet.util.RxBus
 import javax.inject.Inject
 
 class WalletsViewModel @Inject constructor(walletRepository: WalletRepository,
@@ -15,6 +16,7 @@ class WalletsViewModel @Inject constructor(walletRepository: WalletRepository,
 
     fun setCurrentWallet(wallet: Wallet) {
         preferencesRepository.setCurrentWalletAddress(wallet.address)
+        RxBus.publish(RxBus.RxEvent.OnChangeCurrentWallet(wallet))
     }
 
     override fun onCleared() {

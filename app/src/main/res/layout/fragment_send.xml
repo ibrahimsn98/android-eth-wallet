@@ -5,7 +5,6 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:orientation="vertical"
 	android:gravity="center_horizontal"
-	android:layout_marginTop="60dp"
 	android:padding="16dp">
 
 	<android.support.design.widget.TextInputLayout
@@ -129,9 +128,9 @@
 		android:textColor="@color/colorTextPrimary"
 		android:textSize="15sp"
 		android:textStyle="bold"
-		android:text="Continue"
+		android:text="Verify"
 		android:textAllCaps="false"
-		android:background="@drawable/ic_button_background"
+		android:background="@drawable/ic_button_background_transparent"
 		app:layout_constraintTop_toBottomOf="@id/linearLayout2"/>
 
 </android.support.constraint.ConstraintLayout>

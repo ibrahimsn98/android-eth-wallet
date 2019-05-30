@@ -29,7 +29,7 @@
 			android:textStyle="bold"
 			android:text="+ Add Wallet"
 			android:textAllCaps="false"
-			android:background="@drawable/ic_button_background" />
+			android:background="@drawable/ic_button_background_dashed" />
 
 	</LinearLayout>
 

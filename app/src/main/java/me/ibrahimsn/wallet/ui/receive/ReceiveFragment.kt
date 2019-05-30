@@ -29,7 +29,8 @@ class ReceiveFragment : BaseFragment<HomeActivity>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(activity, viewModelFactory).get(ReceiveViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(ReceiveViewModel::class.java)
+        activity.setTitle("Receive Ethereum")
 
         ibCopyAddress.setOnClickListener {
             if (address != "")

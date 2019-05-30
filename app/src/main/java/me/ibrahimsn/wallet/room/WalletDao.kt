@@ -11,10 +11,10 @@ import me.ibrahimsn.wallet.entity.Wallet
 @Dao
 interface WalletDao {
 
-    @Query("SELECT * from wallets ORDER BY id ASC")
+    @Query("SELECT * from wallets ORDER BY id ASC, isWallet DESC")
     fun getAll(): LiveData<List<Wallet>>
 
-    @Query("SELECT * from wallets ORDER BY id ASC")
+    @Query("SELECT * from wallets ORDER BY id ASC, isWallet DESC")
     fun getAllRx(): Single<List<Wallet>>
 
     @Insert

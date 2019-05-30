@@ -40,6 +40,10 @@ class HomeActivity : BaseActivity(), NavController.OnDestinationChangedListener 
         })
     }
 
+    fun setTitle(title: String) {
+        tvTitle.text = title
+    }
+
     override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
         when (destination.id) {
             R.id.walletFragment -> bottomBar.setActiveItem(0)

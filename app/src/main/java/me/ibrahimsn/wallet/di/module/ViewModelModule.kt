@@ -7,7 +7,7 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 import me.ibrahimsn.wallet.di.util.ViewModelFactory
 import me.ibrahimsn.wallet.di.util.ViewModelKey
-import me.ibrahimsn.wallet.ui.importWallet.ImportWalletViewModel
+import me.ibrahimsn.wallet.ui.addWallet.importWallet.ImportWalletViewModel
 import me.ibrahimsn.wallet.ui.receive.ReceiveViewModel
 import me.ibrahimsn.wallet.ui.send.SendViewModel
 import me.ibrahimsn.wallet.ui.transactions.TransactionsViewModel

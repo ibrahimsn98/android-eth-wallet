@@ -8,6 +8,8 @@ import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import me.ibrahimsn.wallet.R
 
@@ -92,10 +94,10 @@ class WaveView : View {
             addUpdateListener {
                 waveRadiusOffset = it.animatedValue as Float
             }
-            duration = 2000L
+            duration = 1800L
             repeatMode = ValueAnimator.RESTART
             repeatCount = ValueAnimator.INFINITE
-            interpolator = DecelerateInterpolator()
+            interpolator = AccelerateDecelerateInterpolator()
             start()
         }
     }

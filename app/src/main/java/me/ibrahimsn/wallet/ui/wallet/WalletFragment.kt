@@ -13,7 +13,6 @@ import me.ibrahimsn.wallet.base.BaseFragment
 import me.ibrahimsn.wallet.ui.home.HomeActivity
 import me.ibrahimsn.wallet.ui.send.SendActivity
 import me.ibrahimsn.wallet.ui.transactions.TransactionAdapter
-import me.ibrahimsn.wallet.util.FormatUtil
 import java.lang.StringBuilder
 import javax.inject.Inject
 
@@ -29,6 +28,7 @@ class WalletFragment : BaseFragment<HomeActivity>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(activity, viewModelFactory).get(WalletViewModel::class.java)
+        activity.setTitle("Ethereum Wallet")
 
         val transactionAdapter = TransactionAdapter(activity)
 
@@ -59,8 +59,13 @@ class WalletFragment : BaseFragment<HomeActivity>() {
         viewModel.walletBalance.observe(this, Observer {
             if (it != null)
                 tvBalance.text = StringBuilder()
-                        .append(FormatUtil.valueToETH(it))
-                        .append(" ETH").toString()
+                        .append(it).append(" ETH").toString()
+        })
+
+        viewModel.walletBalanceReal.observe(this, Observer {
+            if (it != null)
+                tvBalanceReal.text = StringBuilder()
+                        .append(it).append(" USD").toString()
         })
     }
 

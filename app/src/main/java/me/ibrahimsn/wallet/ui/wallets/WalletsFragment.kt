@@ -14,8 +14,8 @@ import kotlinx.android.synthetic.main.fragment_wallets.*
 import me.ibrahimsn.wallet.R
 import me.ibrahimsn.wallet.base.BaseFragment
 import me.ibrahimsn.wallet.entity.Wallet
+import me.ibrahimsn.wallet.ui.addWallet.AddWalletActivity
 import me.ibrahimsn.wallet.ui.home.HomeActivity
-import me.ibrahimsn.wallet.ui.importWallet.ImportWalletActivity
 import javax.inject.Inject
 
 class WalletsFragment : BaseFragment<HomeActivity>(), WalletAdapter.WalletCallback {
@@ -30,6 +30,7 @@ class WalletsFragment : BaseFragment<HomeActivity>(), WalletAdapter.WalletCallba
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(WalletsViewModel::class.java)
+        activity.setTitle("Wallets")
         setHasOptionsMenu(true)
 
         val walletAdapter = WalletAdapter(this)
@@ -40,7 +41,7 @@ class WalletsFragment : BaseFragment<HomeActivity>(), WalletAdapter.WalletCallba
         rvWallets.adapter = walletAdapter
 
         btAdd.setOnClickListener {
-            startActivity(Intent(activity, ImportWalletActivity::class.java))
+            startActivity(Intent(activity, AddWalletActivity::class.java))
         }
 
         viewModel.wallets.observe(this, Observer {
@@ -60,7 +61,7 @@ class WalletsFragment : BaseFragment<HomeActivity>(), WalletAdapter.WalletCallba
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item != null && item.itemId == R.id.action_add)
-            startActivity(Intent(activity, ImportWalletActivity::class.java))
+            startActivity(Intent(activity, AddWalletActivity::class.java))
 
         return super.onOptionsItemSelected(item)
     }

@@ -1,4 +1,4 @@
-package me.ibrahimsn.wallet.ui.importWallet
+package me.ibrahimsn.wallet.ui.addWallet.importWallet
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/add_wallet_graph.xml"
+	app:startDestination="@id/addWalletFragment">
+
+	<fragment
+		android:id="@+id/addWalletFragment"
+		android:name="me.ibrahimsn.wallet.ui.addWallet.AddWalletFragment"
+		android:label="AddWalletFragment" >
+		<action
+			android:id="@+id/action_addWalletFragment_to_createWalletFragment"
+			app:destination="@id/createWalletFragment" />
+		<action
+			android:id="@+id/action_addWalletFragment_to_importWalletFragment"
+			app:destination="@id/importWalletFragment" />
+	</fragment>
+	<fragment
+		android:id="@+id/createWalletFragment"
+		android:name="me.ibrahimsn.wallet.ui.addWallet.createWallet.CreateWalletFragment"
+		android:label="CreateWalletFragment" />
+	<fragment
+		android:id="@+id/importWalletFragment"
+		android:name="me.ibrahimsn.wallet.ui.addWallet.importWallet.ImportWalletFragment"
+		android:label="ImportWalletFragment" />
+</navigation>

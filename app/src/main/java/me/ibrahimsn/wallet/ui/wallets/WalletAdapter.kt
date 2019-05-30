@@ -4,21 +4,41 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.activity_home.view.*
 import kotlinx.android.synthetic.main.row_wallet.view.*
 import me.ibrahimsn.wallet.R
 import me.ibrahimsn.wallet.entity.Wallet
 
-class WalletAdapter(private val callback: WalletCallback) : RecyclerView.Adapter<WalletAdapter.ViewHolder>() {
+class WalletAdapter(private val callback: WalletCallback) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var wallets = listOf<Wallet>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        if (viewType == 0)
+        return ViewHolderTitle(LayoutInflater.from(parent.context).inflate(R.layout.row_wallet_title, parent,
+                false))
+
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_wallet, parent,
                 false), callback)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, pos: Int) {
-        holder.bind(wallets[pos])
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, pos: Int) {
+        if (holder is ViewHolderTitle)
+                holder.bind(pos)
+        else if (holder is ViewHolder) {
+            if (pos <= getWalletCount())
+                holder.bind(wallets[pos-1])
+            else
+                holder.bind(wallets[pos-2])
+        }
+    }
+
+    private fun getWalletCount(): Int {
+        var count = 0
+        wallets.forEach {
+            if (it.isWallet) count++
+        }
+        return count
     }
 
     fun setItems(wallets: List<Wallet>) {
@@ -26,8 +46,26 @@ class WalletAdapter(private val callback: WalletCallback) : RecyclerView.Adapter
         notifyDataSetChanged()
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return when (position) {
+            0 -> 0
+            getWalletCount() + 1 -> 0
+            else -> 1
+        }
+    }
+
     override fun getItemCount(): Int {
-        return wallets.size
+        return wallets.size + 2
+    }
+
+    class ViewHolderTitle(private val view: View) : RecyclerView.ViewHolder(view) {
+
+        fun bind(pos: Int) {
+            view.tvTitle.text = if (pos == 0)
+                 "Wallets"
+            else
+                "Public Addresses"
+        }
     }
 
     class ViewHolder(private val view: View,

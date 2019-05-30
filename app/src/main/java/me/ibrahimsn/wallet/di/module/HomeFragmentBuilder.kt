@@ -2,7 +2,6 @@ package me.ibrahimsn.wallet.di.module
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import me.ibrahimsn.wallet.ui.importWallet.ImportWalletActivity
 import me.ibrahimsn.wallet.ui.menu.MenuFragment
 import me.ibrahimsn.wallet.ui.receive.ReceiveFragment
 import me.ibrahimsn.wallet.ui.transactions.TransactionsFragment
@@ -17,12 +16,6 @@ abstract class HomeFragmentBuilder {
      */
     @ContributesAndroidInjector
     internal abstract fun buildWalletFragment(): WalletFragment
-
-    /**
-     * Build Import Wallet Fragment
-     */
-    @ContributesAndroidInjector
-    internal abstract fun buildImportWalletFragment(): ImportWalletActivity
 
     /**
      * Build Menu Fragment

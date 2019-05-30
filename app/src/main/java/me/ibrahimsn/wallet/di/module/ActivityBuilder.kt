@@ -4,7 +4,6 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import me.ibrahimsn.wallet.ui.addWallet.AddWalletActivity
 import me.ibrahimsn.wallet.ui.home.HomeActivity
-import me.ibrahimsn.wallet.ui.importWallet.ImportWalletActivity
 import me.ibrahimsn.wallet.ui.main.MainActivity
 import me.ibrahimsn.wallet.ui.send.SendActivity
 
@@ -26,14 +25,8 @@ abstract class ActivityBuilder {
     /**
      * Build Add Wallet Activity
      */
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [AddWalletFragmentBuilder::class])
     internal abstract fun buildAddWalletActivity(): AddWalletActivity
-
-    /**
-     * Build Import Wallet Activity
-     */
-    @ContributesAndroidInjector
-    internal abstract fun buildImportWalletActivity(): ImportWalletActivity
 
     /**
      * Build Send Transaction Activity

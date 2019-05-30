@@ -12,18 +12,30 @@ import me.ibrahimsn.wallet.entity.Wallet
 import me.ibrahimsn.wallet.repository.EtherScanRepository
 import me.ibrahimsn.wallet.repository.WalletRepository
 import me.ibrahimsn.wallet.util.Constants
+import me.ibrahimsn.wallet.util.RxBus
 import javax.inject.Inject
 
-class TransactionsViewModel @Inject constructor(walletRepository: WalletRepository,
+class TransactionsViewModel @Inject constructor(private val walletRepository: WalletRepository,
                                                 private val etherScanRepository: EtherScanRepository) : ViewModel() {
 
     private val disposable = CompositeDisposable()
     val transactions: MutableLiveData<List<Transaction>> = MutableLiveData()
 
-    /**
-     * Asynchronously get current wallet on initialization.
-     */
     init {
+        getCurrentWallet()
+
+        // Listen wallet changes
+        disposable.add(RxBus.listen(RxBus.RxEvent.OnChangeCurrentWallet::class.java)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnComplete(this::getCurrentWallet)
+                .subscribe())
+    }
+
+    /**
+     * Asynchronously get current wallet
+     */
+    private fun getCurrentWallet() {
         disposable.add(walletRepository.getCurrentWallet()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -15,6 +15,7 @@ class MenuFragment : BaseFragment<HomeActivity>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity.setTitle("Preferences")
 
         lyWallets.setOnClickListener {
             activity.navController.navigate(R.id.action_menuFragment_to_walletsFragment)

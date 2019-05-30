@@ -1,27 +1,29 @@
-package me.ibrahimsn.wallet.ui.importWallet
+package me.ibrahimsn.wallet.ui.addWallet.importWallet
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_import_wallet.*
+import kotlinx.android.synthetic.main.fragment_import_wallet.*
 import me.ibrahimsn.wallet.R
-import me.ibrahimsn.wallet.base.BaseActivity
+import me.ibrahimsn.wallet.base.BaseFragment
+import me.ibrahimsn.wallet.ui.addWallet.AddWalletActivity
 import java.util.regex.Pattern
 import javax.inject.Inject
 
-class ImportWalletActivity : BaseActivity() {
+class ImportWalletFragment : BaseFragment<AddWalletActivity>() {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: ImportWalletViewModel
 
     override fun layoutRes(): Int {
-        return R.layout.activity_import_wallet
+        return R.layout.fragment_import_wallet
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(ImportWalletViewModel::class.java)
 
         btImport.setOnClickListener {
@@ -34,15 +36,15 @@ class ImportWalletActivity : BaseActivity() {
 
         viewModel.status.observe(this, Observer { status ->
             status?.let {
-               if (it)
-                   finish()
+                if (it)
+                    activity.finish()
             }
         })
     }
 
     private fun validateForm(name: String, address: String): Boolean {
         if (!Pattern.matches("^0x[a-fA-F0-9]{40}\$", address)) {
-            Toast.makeText(this, "Please enter a valid ethereum address!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Please enter a valid ethereum address!", Toast.LENGTH_SHORT).show()
             return false
         }
 
