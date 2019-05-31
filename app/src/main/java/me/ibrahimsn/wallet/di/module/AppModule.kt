@@ -6,10 +6,7 @@ import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import me.ibrahimsn.wallet.manager.GethAccountManager
-import me.ibrahimsn.wallet.repository.EtherScanRepository
-import me.ibrahimsn.wallet.repository.EthereumNetworkRepository
-import me.ibrahimsn.wallet.repository.PreferencesRepository
-import me.ibrahimsn.wallet.repository.WalletRepository
+import me.ibrahimsn.wallet.repository.*
 import me.ibrahimsn.wallet.room.AppDatabase
 import me.ibrahimsn.wallet.room.WalletDao
 import me.ibrahimsn.wallet.util.LogInterceptor
@@ -55,6 +52,12 @@ class AppModule {
 
     @Singleton
     @Provides
+    internal fun providePasswordRepository(context: Context): PasswordRepository {
+        return PasswordRepository(context)
+    }
+
+    @Singleton
+    @Provides
     internal fun providePreferencesRepository(context: Context): PreferencesRepository {
         return PreferencesRepository(context)
     }
@@ -77,7 +80,8 @@ class AppModule {
     @Provides
     internal fun provideWalletRepository(gethAccountManager: GethAccountManager,
                                          walletDao: WalletDao,
+                                         passwordRepository: PasswordRepository,
                                          preferencesRepository: PreferencesRepository): WalletRepository {
-        return WalletRepository(gethAccountManager, walletDao, preferencesRepository)
+        return WalletRepository(gethAccountManager, walletDao, passwordRepository, preferencesRepository)
     }
 }

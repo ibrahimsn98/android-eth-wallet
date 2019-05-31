@@ -1,4 +1,4 @@
-package me.ibrahimsn.wallet.ui.addWallet.importWallet
+package me.ibrahimsn.wallet.ui.addWallet.importWallet.importAddress
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
@@ -11,7 +11,7 @@ import me.ibrahimsn.wallet.repository.WalletRepository
 import me.ibrahimsn.wallet.util.Constants
 import javax.inject.Inject
 
-class ImportWalletViewModel @Inject constructor(private val walletRepository: WalletRepository) : ViewModel() {
+class ImportAddressViewModel @Inject constructor(private val walletRepository: WalletRepository) : ViewModel() {
 
     private val disposable = CompositeDisposable()
 

@@ -7,7 +7,8 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 import me.ibrahimsn.wallet.di.util.ViewModelFactory
 import me.ibrahimsn.wallet.di.util.ViewModelKey
-import me.ibrahimsn.wallet.ui.addWallet.importWallet.ImportWalletViewModel
+import me.ibrahimsn.wallet.ui.addWallet.importWallet.importAddress.ImportAddressViewModel
+import me.ibrahimsn.wallet.ui.addWallet.importWallet.importKey.ImportKeyViewModel
 import me.ibrahimsn.wallet.ui.receive.ReceiveViewModel
 import me.ibrahimsn.wallet.ui.send.SendViewModel
 import me.ibrahimsn.wallet.ui.transactions.TransactionsViewModel
@@ -27,8 +28,13 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(ImportWalletViewModel::class)
-    internal abstract fun bindImportWalletViewModel(viewModel: ImportWalletViewModel): ViewModel
+    @ViewModelKey(ImportKeyViewModel::class)
+    internal abstract fun bindImportKeyViewModel(viewModel: ImportKeyViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ImportAddressViewModel::class)
+    internal abstract fun bindImportAddressViewModel(viewModel: ImportAddressViewModel): ViewModel
 
     @Binds
     @IntoMap

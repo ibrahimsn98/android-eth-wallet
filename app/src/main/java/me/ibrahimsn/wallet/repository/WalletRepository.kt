@@ -5,6 +5,7 @@ import android.util.Log
 import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.Single
+import io.reactivex.observers.DisposableCompletableObserver
 import me.ibrahimsn.wallet.manager.GethAccountManager
 import me.ibrahimsn.wallet.entity.Wallet
 import me.ibrahimsn.wallet.room.AppDatabase
@@ -13,6 +14,7 @@ import javax.inject.Inject
 
 class WalletRepository @Inject constructor(private var gethAccountManager: GethAccountManager,
                                            private var walletDao: WalletDao,
+                                           private var passwordRepository: PasswordRepository,
                                            private var preferencesRepository: PreferencesRepository) {
 
     fun fetchWallets(): LiveData<List<Wallet>> {
@@ -53,17 +55,69 @@ class WalletRepository @Inject constructor(private var gethAccountManager: GethA
 
     fun importPublicAddress(name: String, address: String): Single<Wallet> {
         return Single.fromCallable {
-            val wallet = Wallet(name, address)
-            wallet.id = walletDao.insert(wallet)
-            wallet
+            Wallet(name, address).apply {
+                this.id = walletDao.insert(this)
+            }
         }
     }
 
-    fun createWallet(name: String, password: String): Single<Wallet> {
-        return gethAccountManager.createAccount(password).doAfterSuccess {
-            it.name = name
-            walletDao.insert(it)
-        }
+    fun createWallet(name: String): Single<Wallet> {
+        return passwordRepository.generatePassword()
+                .flatMap { password ->
+                    gethAccountManager.createAccount(password)
+                            .compose { wallet ->
+                                passwordRepository.setPassword(wallet.blockingGet(), password)
+                                    .onErrorResumeNext { err ->
+                                        deleteWallet(wallet.blockingGet().address, password)
+                                                .lift { observer ->
+                                                    object : DisposableCompletableObserver() {
+                                                        override fun onComplete() {
+                                                            observer.onError(err)
+                                                        }
+
+                                                        override fun onError(e: Throwable) {
+                                                            observer.onError(e)
+                                                        }
+                                                    }
+                                                }
+                                    }
+                                    .to { wallet }
+                            }
+                }.doAfterSuccess {
+                    walletDao.insert(it.apply {
+                        this.name = name
+                    })
+                }
+    }
+
+    fun importPrivateKeyToWallet(name: String, privateKey: String): Single<Wallet> {
+        return passwordRepository.generatePassword()
+                .flatMap { password ->
+                    gethAccountManager.importPrivateKey(privateKey, password)
+                            .compose { wallet ->
+                                passwordRepository.setPassword(wallet.blockingGet(), password)
+                                        .onErrorResumeNext { err ->
+                                            deleteWallet(wallet.blockingGet().address, password)
+                                                    .lift { observer ->
+                                                        object : DisposableCompletableObserver() {
+                                                            override fun onComplete() {
+                                                                observer.onError(err)
+                                                            }
+
+                                                            override fun onError(e: Throwable) {
+                                                                observer.onError(e)
+                                                            }
+                                                        }
+                                                    }
+                                        }
+                                        .to { wallet }
+                            }
+                }.doAfterSuccess {
+                    walletDao.insert(it.apply {
+                        this.name = name
+                        this.isWallet = true
+                    })
+                }
     }
 
     fun importKeystoreToWallet(name: String, store: String, password: String, newPassword: String): Single<Wallet> {

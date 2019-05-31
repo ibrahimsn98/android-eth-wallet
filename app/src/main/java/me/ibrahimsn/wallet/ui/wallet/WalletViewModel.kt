@@ -3,6 +3,7 @@ package me.ibrahimsn.wallet.ui.wallet
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.util.Log
+import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -18,9 +19,9 @@ import me.ibrahimsn.wallet.util.Constants
 import me.ibrahimsn.wallet.util.RxBus
 import javax.inject.Inject
 
-class WalletViewModel @Inject constructor(private val walletRepository: WalletRepository,
-                                          private val networkRepository: EthereumNetworkRepository,
-                                          private val etherScanRepository: EtherScanRepository) : ViewModel() {
+class WalletViewModel @Inject constructor(private val networkRepository: EthereumNetworkRepository,
+                                          private val etherScanRepository: EtherScanRepository,
+                                          walletRepository: WalletRepository) : ViewModel() {
 
     private val disposable = CompositeDisposable()
 
@@ -29,27 +30,27 @@ class WalletViewModel @Inject constructor(private val walletRepository: WalletRe
     val walletBalance: MutableLiveData<Double> = MutableLiveData()
     val walletBalanceReal: MutableLiveData<Double> = MutableLiveData()
 
-    init {
-        getCurrentWallet()
-
-        // Listen wallet changes
-        disposable.add(RxBus.listen(RxBus.RxEvent.OnChangeCurrentWallet::class.java)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete(this::getCurrentWallet)
-                .subscribe())
-    }
-
     /**
-     * Asynchronously get current wallet
+     * Asynchronously get current wallet on initialization
      */
-    private fun getCurrentWallet() {
+    init {
         disposable.add(walletRepository.getCurrentWallet()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSuccess(this::onGetCurrentWallet)
                 .doOnSuccess(this::loadWalletBalance)
                 .doOnSuccess(this::fetchTransactions)
+                .doOnError(this::onRxError)
+                .subscribe())
+
+        // Listen wallet changes
+        disposable.add(RxBus.listen(RxBus.RxEvent.OnChangeCurrentWallet::class.java)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap { Observable.just(it.wallet) }
+                .doOnNext(this::onGetCurrentWallet)
+                .doOnNext(this::loadWalletBalance)
+                .doOnNext(this::fetchTransactions)
                 .doOnError(this::onRxError)
                 .subscribe())
     }

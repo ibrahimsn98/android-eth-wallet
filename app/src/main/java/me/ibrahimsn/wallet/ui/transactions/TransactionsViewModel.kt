@@ -3,6 +3,7 @@ package me.ibrahimsn.wallet.ui.transactions
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.util.Log
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -15,31 +16,29 @@ import me.ibrahimsn.wallet.util.Constants
 import me.ibrahimsn.wallet.util.RxBus
 import javax.inject.Inject
 
-class TransactionsViewModel @Inject constructor(private val walletRepository: WalletRepository,
-                                                private val etherScanRepository: EtherScanRepository) : ViewModel() {
+class TransactionsViewModel @Inject constructor(private val etherScanRepository: EtherScanRepository,
+                                                walletRepository: WalletRepository) : ViewModel() {
 
     private val disposable = CompositeDisposable()
     val transactions: MutableLiveData<List<Transaction>> = MutableLiveData()
 
+    /**
+     * Asynchronously get current wallet on initialization
+     */
     init {
-        getCurrentWallet()
+        disposable.add(walletRepository.getCurrentWallet()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSuccess(this::fetchTransactions)
+                .doOnError(this::onRxError)
+                .subscribe())
 
         // Listen wallet changes
         disposable.add(RxBus.listen(RxBus.RxEvent.OnChangeCurrentWallet::class.java)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnComplete(this::getCurrentWallet)
-                .subscribe())
-    }
-
-    /**
-     * Asynchronously get current wallet
-     */
-    private fun getCurrentWallet() {
-        disposable.add(walletRepository.getCurrentWallet()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSuccess(this::fetchTransactions)
+                .flatMap { Observable.just(it.wallet) }
+                .doOnNext(this::fetchTransactions)
                 .doOnError(this::onRxError)
                 .subscribe())
     }

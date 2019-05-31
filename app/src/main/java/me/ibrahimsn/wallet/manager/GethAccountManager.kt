@@ -1,10 +1,13 @@
 package me.ibrahimsn.wallet.manager
 
 import android.util.Log
+import com.fasterxml.jackson.databind.ObjectMapper
 import io.reactivex.Completable
 import io.reactivex.Single
 import me.ibrahimsn.wallet.entity.Wallet
 import org.ethereum.geth.*
+import org.web3j.crypto.ECKeyPair
+import org.web3j.crypto.Wallet.create
 import java.io.File
 import java.lang.Exception
 import java.math.BigInteger
@@ -19,6 +22,15 @@ class GethAccountManager @Inject constructor(keyStoreFile: File) {
         return Single.fromCallable<Wallet> {
             Wallet(keyStore.newAccount(password).address.hex.toLowerCase())
         }
+    }
+
+    fun importPrivateKey(privateKey: String, newPassword: String): Single<Wallet> {
+        return Single.fromCallable {
+            val key = BigInteger(privateKey, 16)
+            val keyPair = ECKeyPair.create(key)
+            val walletFile = create(newPassword, keyPair, 1 shl 9, 1)
+            ObjectMapper().writeValueAsString(walletFile)
+        }.compose { importKeyStore(it.blockingGet(), newPassword, newPassword) }
     }
 
     fun importKeyStore(store: String, password: String, newPassword: String): Single<Wallet> {

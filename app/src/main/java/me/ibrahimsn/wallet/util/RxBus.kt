@@ -15,6 +15,6 @@ object RxBus {
     fun <T> listen(eventType: Class<T>): Observable<T> = publisher.ofType(eventType)
 
     class RxEvent {
-        data class OnChangeCurrentWallet(val wallet: Wallet)
+        data class OnChangeCurrentWallet(val wallet: Wallet?)
     }
 }
