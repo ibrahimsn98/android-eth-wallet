@@ -16,6 +16,7 @@ import me.ibrahimsn.wallet.base.BaseFragment
 import me.ibrahimsn.wallet.entity.Wallet
 import me.ibrahimsn.wallet.ui.addWallet.AddWalletActivity
 import me.ibrahimsn.wallet.ui.home.HomeActivity
+import me.ibrahimsn.wallet.ui.walletDetail.WalletDetailViewModel
 import javax.inject.Inject
 
 class WalletsFragment : BaseFragment<HomeActivity>(), WalletAdapter.WalletCallback {
@@ -52,11 +53,13 @@ class WalletsFragment : BaseFragment<HomeActivity>(), WalletAdapter.WalletCallba
 
     override fun onWalletClicked(wallet: Wallet) {
         viewModel.setCurrentWallet(wallet)
-        activity.navController.navigateUp()
+        activity.navController.navigate(R.id.walletFragment)
     }
 
     override fun onMoreClicked(wallet: Wallet) {
-        WalletDialog().show(childFragmentManager, "Wallet-Dialog")
+        ViewModelProviders.of(activity, viewModelFactory)
+                .get(WalletDetailViewModel::class.java).wallet = wallet
+        activity.navController.navigate(R.id.action_walletsFragment_to_walletDetailFragment)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

@@ -16,6 +16,7 @@
 
 		<android.support.design.widget.TextInputEditText
 			android:id="@+id/etWalletName"
+			android:inputType="text"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:theme="@style/AppTheme.LighterEditText"
@@ -35,11 +36,14 @@
 
 		<android.support.design.widget.TextInputEditText
 			android:id="@+id/etWalletPrivateKey"
+			android:inputType="text"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:theme="@style/AppTheme.LighterEditText"
 			android:textColor="@color/colorTextPrimary"
-			android:textSize="15sp"/>
+			android:textSize="15sp"
+			android:minLines="2"
+			android:maxLines="2"/>
 
 	</android.support.design.widget.TextInputLayout>
 

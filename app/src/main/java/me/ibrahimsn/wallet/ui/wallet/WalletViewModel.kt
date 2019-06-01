@@ -31,15 +31,15 @@ class WalletViewModel @Inject constructor(private val networkRepository: Ethereu
     val walletBalanceReal: MutableLiveData<Double> = MutableLiveData()
 
     /**
-     * Asynchronously get current wallet on initialization
+     * Asynchronously fetch current wallet on initialization
      */
     init {
         disposable.add(walletRepository.getCurrentWallet()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSuccess(this::onGetCurrentWallet)
-                .doOnSuccess(this::loadWalletBalance)
-                .doOnSuccess(this::fetchTransactions)
+                .doOnSuccess(this::onFetchCurrentWallet)
+                .doOnSuccess(this::fetchWalletBalance)
+                .doOnSuccess(this::fetchTransaction)
                 .doOnError(this::onRxError)
                 .subscribe())
 
@@ -48,9 +48,9 @@ class WalletViewModel @Inject constructor(private val networkRepository: Ethereu
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .flatMap { Observable.just(it.wallet) }
-                .doOnNext(this::onGetCurrentWallet)
-                .doOnNext(this::loadWalletBalance)
-                .doOnNext(this::fetchTransactions)
+                .doOnNext(this::onFetchCurrentWallet)
+                .doOnNext(this::fetchWalletBalance)
+                .doOnNext(this::fetchTransaction)
                 .doOnError(this::onRxError)
                 .subscribe())
     }
@@ -58,7 +58,7 @@ class WalletViewModel @Inject constructor(private val networkRepository: Ethereu
     /**
      * Asynchronously fetch wallet transactions via EtherScan API.
      */
-    private fun fetchTransactions(wallet: Wallet?) {
+    private fun fetchTransaction(wallet: Wallet?) {
         if (wallet != null)
             disposable.add(etherScanRepository.fetchTransaction(wallet.address, 1, 4)
                     .subscribeOn(Schedulers.io())
@@ -67,36 +67,36 @@ class WalletViewModel @Inject constructor(private val networkRepository: Ethereu
     }
 
     /**
-     * Asynchronously load current wallet balance from ETH network.
+     * Asynchronously fetch current wallet balance from ETH network.
      */
-    private fun loadWalletBalance(wallet: Wallet?) {
+    private fun fetchWalletBalance(wallet: Wallet?) {
         if (wallet != null)
             disposable.add(networkRepository.getWalletBalance(wallet)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .doOnSuccess(this::loadEthPrice)
-                    .subscribe(this::onLoadWalletBalance, this::onRxError))
+                    .doOnSuccess(this::fetchEthPrice)
+                    .subscribe(this::onFetchWalletBalance, this::onRxError))
     }
 
     /**
-     * Asynchronously get ETH price in USD
+     * Asynchronously fetch ETH price in USD
      */
-    private fun loadEthPrice(balance: Double) {
+    private fun fetchEthPrice(balance: Double) {
         disposable.add(etherScanRepository.fetchEthPrice()
                 .flatMap<Pair<EtherPriceResponse, Double>> {
                     Single.just(Pair(it, balance))
                 }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSuccess(this::onLoadEthPrice)
+                .doOnSuccess(this::onFetchEthPrice)
                 .subscribe())
     }
 
-    private fun onGetCurrentWallet(wallet: Wallet?) {
+    private fun onFetchCurrentWallet(wallet: Wallet?) {
         currentWallet.postValue(wallet)
     }
 
-    private fun onLoadWalletBalance(balance: Double) {
+    private fun onFetchWalletBalance(balance: Double) {
         walletBalance.postValue(balance)
     }
 
@@ -104,7 +104,7 @@ class WalletViewModel @Inject constructor(private val networkRepository: Ethereu
         transactions.postValue(response.result)
     }
 
-    private fun onLoadEthPrice(response: Pair<EtherPriceResponse, Double>) {
+    private fun onFetchEthPrice(response: Pair<EtherPriceResponse, Double>) {
         val price = response.first.result.ethusd.toDouble()
         walletBalanceReal.postValue(price * response.second)
     }

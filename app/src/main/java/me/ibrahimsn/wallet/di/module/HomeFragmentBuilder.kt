@@ -6,6 +6,7 @@ import me.ibrahimsn.wallet.ui.menu.MenuFragment
 import me.ibrahimsn.wallet.ui.receive.ReceiveFragment
 import me.ibrahimsn.wallet.ui.transactions.TransactionsFragment
 import me.ibrahimsn.wallet.ui.wallet.WalletFragment
+import me.ibrahimsn.wallet.ui.walletDetail.WalletDetailFragment
 import me.ibrahimsn.wallet.ui.wallets.WalletsFragment
 
 @Module
@@ -28,6 +29,12 @@ abstract class HomeFragmentBuilder {
      */
     @ContributesAndroidInjector
     internal abstract fun buildWalletsFragment(): WalletsFragment
+
+    /**
+     * Build Wallet Detail Fragment
+     */
+    @ContributesAndroidInjector
+    internal abstract fun buildWalletDetailFragment(): WalletDetailFragment
 
     /**
      * Build Receive Transaction Fragment

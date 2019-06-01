@@ -85,6 +85,7 @@ class WalletRepository @Inject constructor(private var gethAccountManager: GethA
                             }
                 }.doAfterSuccess {
                     walletDao.insert(it.apply {
+                        this.isWallet = true
                         this.name = name
                     })
                 }
@@ -118,6 +119,16 @@ class WalletRepository @Inject constructor(private var gethAccountManager: GethA
                         this.isWallet = true
                     })
                 }
+    }
+
+    fun updateWalletName(wallet: Wallet, newName: String): Completable {
+        return walletDao.find(wallet.address).flatMap {
+            Single.just(it.apply {
+                this.name = newName
+            })
+        }.doAfterSuccess {
+            walletDao.update(wallet)
+        }
     }
 
     fun importKeystoreToWallet(name: String, store: String, password: String, newPassword: String): Single<Wallet> {

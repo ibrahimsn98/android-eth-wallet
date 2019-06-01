@@ -14,7 +14,7 @@
 		<item name="android:fontFamily">@font/quicksand</item>
 	</style>
 
-	<style name="AppTheme.LighterEditText" parent="Widget.AppCompat.EditText">
+	<style name="AppTheme.LighterEditText">
 		<item name="colorControlActivated">@color/colorAccent</item>
 		<item name="colorControlNormal">#90F5F5F5</item>
 	</style>

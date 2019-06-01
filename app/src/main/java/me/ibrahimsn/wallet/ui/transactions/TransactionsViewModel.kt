@@ -29,7 +29,7 @@ class TransactionsViewModel @Inject constructor(private val etherScanRepository:
         disposable.add(walletRepository.getCurrentWallet()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSuccess(this::fetchTransactions)
+                .doOnSuccess(this::fetchTransaction)
                 .doOnError(this::onRxError)
                 .subscribe())
 
@@ -38,7 +38,7 @@ class TransactionsViewModel @Inject constructor(private val etherScanRepository:
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .flatMap { Observable.just(it.wallet) }
-                .doOnNext(this::fetchTransactions)
+                .doOnNext(this::fetchTransaction)
                 .doOnError(this::onRxError)
                 .subscribe())
     }
@@ -46,15 +46,15 @@ class TransactionsViewModel @Inject constructor(private val etherScanRepository:
     /**
      * Asynchronously fetch wallet transactions via EtherScan API.
      */
-    private fun fetchTransactions(wallet: Wallet?) {
+    private fun fetchTransaction(wallet: Wallet?) {
         if (wallet != null)
             disposable.add(etherScanRepository.fetchTransaction(wallet.address, 1, 50)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::onFetchTransactions, this::onRxError))
+                    .subscribe(this::onFetchTransaction, this::onRxError))
     }
 
-    private fun onFetchTransactions(response: EtherScanResponse) {
+    private fun onFetchTransaction(response: EtherScanResponse) {
         transactions.postValue(response.result)
     }
 

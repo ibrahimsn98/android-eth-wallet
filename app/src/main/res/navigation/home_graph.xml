@@ -22,7 +22,11 @@
 	<fragment
 		android:id="@+id/walletsFragment"
 		android:name="me.ibrahimsn.wallet.ui.wallets.WalletsFragment"
-		android:label="WalletsFragment" />
+		android:label="WalletsFragment" >
+		<action
+			android:id="@+id/action_walletsFragment_to_walletDetailFragment"
+			app:destination="@id/walletDetailFragment" />
+	</fragment>
 	<fragment
 		android:id="@+id/receiveFragment"
 		android:name="me.ibrahimsn.wallet.ui.receive.ReceiveFragment"
@@ -31,4 +35,8 @@
 		android:id="@+id/transactionsFragment"
 		android:name="me.ibrahimsn.wallet.ui.transactions.TransactionsFragment"
 		android:label="TransactionsFragment" />
+	<fragment
+		android:id="@+id/walletDetailFragment"
+		android:name="me.ibrahimsn.wallet.ui.walletDetail.WalletDetailFragment"
+		android:label="WalletDetailFragment" />
 </navigation>

@@ -29,7 +29,7 @@ class ReceiveViewModel @Inject constructor(walletRepository: WalletRepository) :
         disposable.add(walletRepository.getCurrentWallet()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSuccess(this::onGetCurrentWallet)
+                .doOnSuccess(this::onFetchCurrentWallet)
                 .doOnSuccess(this::createWalletQR)
                 .doOnError(this::onRxError)
                 .subscribe())
@@ -40,7 +40,7 @@ class ReceiveViewModel @Inject constructor(walletRepository: WalletRepository) :
      */
     private fun createWalletQR(wallet: Wallet?) {
         if (wallet != null)
-            disposable.add(createQRImage(wallet.address)
+            disposable.add(qrImageGenerator(wallet.address)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnSuccess(this::onQRCreated)
@@ -48,7 +48,7 @@ class ReceiveViewModel @Inject constructor(walletRepository: WalletRepository) :
                     .subscribe())
     }
 
-    private fun onGetCurrentWallet(wallet: Wallet?) {
+    private fun onFetchCurrentWallet(wallet: Wallet?) {
         currentWallet.postValue(wallet)
     }
 
@@ -63,7 +63,7 @@ class ReceiveViewModel @Inject constructor(walletRepository: WalletRepository) :
     /**
      * QR code generator
      */
-    private fun createQRImage(address: String): Maybe<Bitmap?> {
+    private fun qrImageGenerator(address: String): Maybe<Bitmap?> {
         return Maybe.fromCallable {
             try {
                 BarcodeEncoder().createBitmap(MultiFormatWriter()
