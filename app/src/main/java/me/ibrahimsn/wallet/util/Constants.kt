@@ -5,8 +5,6 @@ object Constants {
     val TAG = "###"
 
     val ETHEREUM_NETWORK_NAME = "Ethereum"
-    val CLASSIC_NETWORK_NAME = "Ethereum Classic"
-    val POA_NETWORK_NAME = "POA Network"
     val KOVAN_NETWORK_NAME = "Kovan (Test)"
     val ROPSTEN_NETWORK_NAME = "Ropsten (Test)"
 

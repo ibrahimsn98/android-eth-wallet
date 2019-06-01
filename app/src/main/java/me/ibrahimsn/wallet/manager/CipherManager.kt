@@ -4,18 +4,10 @@ import android.annotation.TargetApi
 import android.content.Context
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
-import android.security.keystore.UserNotAuthenticatedException
 import me.ibrahimsn.wallet.util.FileUtil
 import me.ibrahimsn.wallet.util.FileUtil.getFilePath
-import me.ibrahimsn.wallet.util.ServiceErrorException
-import me.ibrahimsn.wallet.util.ServiceErrorException.Companion.INVALID_KEY
-import me.ibrahimsn.wallet.util.ServiceErrorException.Companion.IV_OR_ALIAS_NO_ON_DISK
-import me.ibrahimsn.wallet.util.ServiceErrorException.Companion.KEY_IS_GONE
-import me.ibrahimsn.wallet.util.ServiceErrorException.Companion.KEY_STORE_ERROR
-import me.ibrahimsn.wallet.util.ServiceErrorException.Companion.USER_NOT_AUTHENTICATED
 import java.io.*
 import java.lang.Exception
-import java.security.InvalidKeyException
 import java.security.KeyStore
 import javax.crypto.Cipher
 import javax.crypto.CipherInputStream
@@ -27,7 +19,6 @@ import javax.crypto.spec.IvParameterSpec
 class CipherManager(private val context: Context) {
 
     private val ANDROID_KEY_STORE = "AndroidKeyStore"
-    private val BLOCK_MODE = KeyProperties.BLOCK_MODE_CBC
     private val PADDING = KeyProperties.ENCRYPTION_PADDING_PKCS7
     private val CIPHER_ALGORITHM = "AES/CBC/PKCS7Padding"
 
@@ -39,11 +30,10 @@ class CipherManager(private val context: Context) {
         return getData(address, address, address + "iv")
     }
 
-    @Throws(ServiceErrorException::class)
     private fun setData(data: ByteArray?, alias: String, aliasFile: String, aliasIV: String): Boolean {
 
         if (data == null)
-            throw ServiceErrorException(ServiceErrorException.INVALID_DATA, "Keystore insert data is null!")
+            throw Exception("Keystore insert data is null!")
 
         val keyStore: KeyStore
 
@@ -56,7 +46,7 @@ class CipherManager(private val context: Context) {
                 keyGenerator.init(KeyGenParameterSpec.Builder(
                         alias,
                         KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT)
-                        .setBlockModes(BLOCK_MODE)
+                        .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
                         .setKeySize(256)
                         .setUserAuthenticationRequired(false)
                         .setRandomizedEncryptionRequired(true)
@@ -67,7 +57,7 @@ class CipherManager(private val context: Context) {
 
             val encryptedDataFilePath = getFilePath(context, aliasFile)
             val secretKey = keyStore.getKey(alias, null) ?:
-                throw ServiceErrorException(ServiceErrorException.KEY_STORE_SECRET, "Secret is null on setData: $alias")
+                throw Exception("Secret is null on setData: $alias")
 
             val inCipher = Cipher.getInstance(CIPHER_ALGORITHM)
             inCipher.init(Cipher.ENCRYPT_MODE, secretKey)
@@ -77,29 +67,26 @@ class CipherManager(private val context: Context) {
 
             if (!FileUtil.writeBytesToFile(path, iv)) {
                 keyStore.deleteEntry(alias)
-                throw ServiceErrorException(ServiceErrorException.FAIL_TO_SAVE_IV_FILE, "Failed to save the iv file for: $alias")
+                throw Exception("Failed to save the iv file for: $alias")
             }
 
             var cipherOutputStream: CipherOutputStream? = null
+
             try {
                 cipherOutputStream = CipherOutputStream(FileOutputStream(encryptedDataFilePath), inCipher)
                 cipherOutputStream.write(data)
             } catch (e: Exception) {
-                throw ServiceErrorException(KEY_STORE_ERROR, "Failed to save the file for: $alias")
+                throw Exception("Failed to save the file for: $alias", e)
             } finally {
                 cipherOutputStream?.close()
             }
 
             return true
-        } catch (e: UserNotAuthenticatedException) {
-            throw ServiceErrorException(USER_NOT_AUTHENTICATED)
         } catch (e: Exception) {
-            e.printStackTrace()
-            throw ServiceErrorException(KEY_STORE_ERROR)
+            throw Exception("KeyStore error!", e)
         }
     }
 
-    @Throws(ServiceErrorException::class)
     private fun getData(alias: String, aliasFile: String, aliasIV: String): ByteArray {
 
         val keyStore: KeyStore
@@ -110,7 +97,7 @@ class CipherManager(private val context: Context) {
             keyStore.load(null)
 
             val secretKey = keyStore.getKey(alias, null) ?:
-                throw ServiceErrorException(KEY_IS_GONE, "Secret is gone!")
+                throw Exception("SecretKey is gone!")
 
             val ivExists = File(getFilePath(context, aliasIV)).exists()
             val aliasExists = File(getFilePath(context, aliasFile)).exists()
@@ -119,9 +106,9 @@ class CipherManager(private val context: Context) {
                 removeAliasAndFiles(context, alias, aliasFile, aliasIV)
 
                 if (ivExists != aliasExists)
-                    throw ServiceErrorException(IV_OR_ALIAS_NO_ON_DISK, "file is present but the key is gone: $alias")
+                    throw Exception("File is present but the key is gone: $alias")
                 else
-                    throw ServiceErrorException(IV_OR_ALIAS_NO_ON_DISK, "!ivExists && !aliasExists: $alias")
+                    throw Exception("File and key is gone: $alias")
             }
 
             val iv = FileUtil.readBytesFromFile(getFilePath(context, aliasIV)) ?: throw NullPointerException("iv is missing for $alias")
@@ -130,15 +117,8 @@ class CipherManager(private val context: Context) {
             outCipher.init(Cipher.DECRYPT_MODE, secretKey, IvParameterSpec(iv))
             val cipherInputStream = CipherInputStream(FileInputStream(encryptedDataFilePath), outCipher)
             return FileUtil.readBytesFromStream(cipherInputStream)
-        } catch (e: InvalidKeyException) {
-            if (e is UserNotAuthenticatedException) {
-                throw ServiceErrorException(USER_NOT_AUTHENTICATED)
-            } else {
-                throw ServiceErrorException(INVALID_KEY)
-            }
         } catch (e: Exception) {
-            e.printStackTrace()
-            throw ServiceErrorException(KEY_STORE_ERROR)
+            throw Exception("KeyStore error!", e)
         }
     }
 

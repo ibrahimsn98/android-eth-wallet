@@ -14,7 +14,8 @@ import javax.inject.Inject
 class WalletDetailViewModel @Inject constructor(private val walletRepository: WalletRepository) : ViewModel() {
 
     private val disposable = CompositeDisposable()
-    val status: MutableLiveData<Boolean> = MutableLiveData()
+    val updateStatus: MutableLiveData<Boolean> = MutableLiveData()
+    val deleteStatus: MutableLiveData<Boolean> = MutableLiveData()
 
     var wallet: Wallet? = null
 
@@ -26,7 +27,7 @@ class WalletDetailViewModel @Inject constructor(private val walletRepository: Wa
             disposable.add(walletRepository.updateWalletName(wallet!!, name)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::onUpdateWalletName, this::onRxError))
+                    .subscribe(this::onUpdateWalletName, this::onUpdateWalletError))
     }
 
     /**
@@ -37,20 +38,25 @@ class WalletDetailViewModel @Inject constructor(private val walletRepository: Wa
             disposable.add(walletRepository.deleteWallet(wallet!!)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(this::onDeleteWallet, this::onRxError))
+                    .subscribe(this::onDeleteWallet, this::onDeleteWalletError))
     }
 
     private fun onUpdateWalletName() {
-        status.postValue(true)
+        updateStatus.postValue(true)
     }
 
     private fun onDeleteWallet() {
-        status.postValue(true)
+        updateStatus.postValue(true)
     }
 
-    private fun onRxError(e: Throwable) {
+    private fun onUpdateWalletError(e: Throwable) {
         Log.d(Constants.TAG, "Error:", e)
-        status.postValue(false)
+        updateStatus.postValue(false)
+    }
+
+    private fun onDeleteWalletError(e: Throwable) {
+        Log.d(Constants.TAG, "Error:", e)
+        deleteStatus.postValue(false)
     }
 
     override fun onCleared() {

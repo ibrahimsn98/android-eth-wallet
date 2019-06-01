@@ -31,7 +31,6 @@ class WalletFragment : BaseFragment<HomeActivity>() {
         activity.setTitle("Ethereum Wallet")
 
         val transactionAdapter = TransactionAdapter(activity)
-
         rvTransactions.layoutManager = LinearLayoutManager(activity)
         rvTransactions.adapter = transactionAdapter
 
@@ -44,29 +43,34 @@ class WalletFragment : BaseFragment<HomeActivity>() {
         }
 
         viewModel.currentWallet.observe(this, Observer {
-            if (it != null)
+            if (it != null) {
                 transactionAdapter.setWalletAddress(it.address)
+                tvName.text = it.name
+            }
         })
 
         viewModel.transactions.observe(this, Observer {
             if (it != null) {
                 transactionAdapter.setItems(it)
-                pbLoading.visibility = View.GONE
-                rvTransactions.visibility = View.VISIBLE
+                renderScreen(it.size)
             }
         })
 
         viewModel.walletBalance.observe(this, Observer {
             if (it != null)
-                tvBalance.text = StringBuilder()
-                        .append(it).append(" ETH").toString()
+                tvBalance.text = StringBuilder().append(it).append(" ETH").toString()
         })
 
         viewModel.walletBalanceReal.observe(this, Observer {
             if (it != null)
-                tvBalanceReal.text = StringBuilder()
-                        .append(it).append(" USD").toString()
+                tvBalanceReal.text = StringBuilder().append("%.2f".format(it)).append(" USD").toString()
         })
+    }
+
+    private fun renderScreen(itemCount: Int) {
+        pbLoading.visibility = View.GONE
+        rvTransactions.visibility = if (itemCount > 0) View.VISIBLE else View.GONE
+        lyEmpty.visibility = if (itemCount <= 0) View.VISIBLE else View.GONE
     }
 
     override fun onStart() {

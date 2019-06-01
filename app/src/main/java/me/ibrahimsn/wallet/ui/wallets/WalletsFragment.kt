@@ -53,7 +53,7 @@ class WalletsFragment : BaseFragment<HomeActivity>(), WalletAdapter.WalletCallba
 
     override fun onWalletClicked(wallet: Wallet) {
         viewModel.setCurrentWallet(wallet)
-        activity.navController.navigate(R.id.walletFragment)
+        activity.navController.navigateUp()
     }
 
     override fun onMoreClicked(wallet: Wallet) {

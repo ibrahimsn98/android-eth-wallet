@@ -19,9 +19,11 @@ class AddWalletActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         navController = Navigation.findNavController(this, R.id.host)
 
-        ibBack.setOnClickListener {
-            onBackPressed()
-        }
+        ibBack.setOnClickListener { onBackPressed() }
+    }
+
+    fun setTitle(title: String) {
+        tvTitle.text = title
     }
 
     override fun onBackPressed() {

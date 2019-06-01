@@ -28,7 +28,6 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:theme="@style/AppTheme.LighterEditText"
-				android:text="0xsfsodfw3r23rkwkr23"
 				android:textColor="@color/colorTextPrimary"
 				android:textSize="15sp"
 				android:clickable="false"

@@ -2,6 +2,7 @@ package me.ibrahimsn.wallet.util
 
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
+import me.ibrahimsn.wallet.entity.NetworkInfo
 import me.ibrahimsn.wallet.entity.Wallet
 
 object RxBus {
@@ -16,5 +17,6 @@ object RxBus {
 
     class RxEvent {
         data class OnChangeCurrentWallet(val wallet: Wallet?)
+        data class OnChangeDefaultNetwork(val network: NetworkInfo)
     }
 }

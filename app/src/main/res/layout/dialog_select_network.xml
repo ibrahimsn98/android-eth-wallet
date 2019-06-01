@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:background="@color/colorBackground">
+
+	<LinearLayout
+		android:id="@+id/lyEthereum"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:padding="14dp"
+		android:clickable="true"
+		android:focusable="true"
+		android:background="?android:attr/selectableItemBackground">
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="1dp"
+			android:textSize="14sp"
+			android:textStyle="bold"
+			android:textColor="@color/colorTextPrimary"
+			android:text="Ethereum"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="14sp"
+			android:textColor="@color/colorTextSecondary"
+			android:text="Main Ethereum network"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/lyRopsten"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:padding="14dp"
+		android:clickable="true"
+		android:focusable="true"
+		android:background="?android:attr/selectableItemBackground">
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="1dp"
+			android:textSize="14sp"
+			android:textStyle="bold"
+			android:textColor="@color/colorTextPrimary"
+			android:text="Ropsten"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="14sp"
+			android:textColor="@color/colorTextSecondary"
+			android:text="Ropsten test network"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/lyKovan"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:padding="14dp"
+		android:clickable="true"
+		android:focusable="true"
+		android:background="?android:attr/selectableItemBackground">
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="1dp"
+			android:textSize="14sp"
+			android:textStyle="bold"
+			android:textColor="@color/colorTextPrimary"
+			android:text="Kovan"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="14sp"
+			android:textColor="@color/colorTextSecondary"
+			android:text="Kovan test network"/>
+
+	</LinearLayout>
+
+</LinearLayout>

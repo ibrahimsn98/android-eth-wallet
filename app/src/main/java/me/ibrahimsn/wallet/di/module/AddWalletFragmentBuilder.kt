@@ -31,7 +31,7 @@ abstract class AddWalletFragmentBuilder {
     internal abstract fun buildImportWalletFragment(): ImportWalletFragment
 
     /**
-     * Build Import Wallet Key Fragment
+     * Build Import Wallet Private Key Fragment
      */
     @ContributesAndroidInjector
     internal abstract fun buildImportKeyFragment(): ImportKeyFragment

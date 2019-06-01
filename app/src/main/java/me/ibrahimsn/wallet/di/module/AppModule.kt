@@ -9,7 +9,6 @@ import me.ibrahimsn.wallet.manager.GethAccountManager
 import me.ibrahimsn.wallet.repository.*
 import me.ibrahimsn.wallet.room.AppDatabase
 import me.ibrahimsn.wallet.room.WalletDao
-import me.ibrahimsn.wallet.util.LogInterceptor
 import okhttp3.OkHttpClient
 import java.io.File
 import javax.inject.Singleton
@@ -26,9 +25,7 @@ class AppModule {
     @Singleton
     @Provides
     internal fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder()
-                .addInterceptor(LogInterceptor())
-                .build()
+        return OkHttpClient.Builder().build()
     }
 
     @Singleton
@@ -52,36 +49,7 @@ class AppModule {
 
     @Singleton
     @Provides
-    internal fun providePasswordRepository(context: Context): PasswordRepository {
-        return PasswordRepository(context)
-    }
-
-    @Singleton
-    @Provides
-    internal fun providePreferencesRepository(context: Context): PreferencesRepository {
-        return PreferencesRepository(context)
-    }
-
-    @Singleton
-    @Provides
-    internal fun provideEthereumNetworkRepository(preferencesRepository: PreferencesRepository,
-                                                  accountManager: GethAccountManager): EthereumNetworkRepository {
-        return EthereumNetworkRepository(preferencesRepository, accountManager)
-    }
-
-    @Singleton
-    @Provides
-    internal fun provideEtherScanRepository(okHttpClient: OkHttpClient,
-                                            networkRepository: EthereumNetworkRepository): EtherScanRepository {
-        return EtherScanRepository(okHttpClient, Gson(), networkRepository)
-    }
-
-    @Singleton
-    @Provides
-    internal fun provideWalletRepository(gethAccountManager: GethAccountManager,
-                                         walletDao: WalletDao,
-                                         passwordRepository: PasswordRepository,
-                                         preferencesRepository: PreferencesRepository): WalletRepository {
-        return WalletRepository(gethAccountManager, walletDao, passwordRepository, preferencesRepository)
+    internal fun provideGson(): Gson {
+        return Gson()
     }
 }

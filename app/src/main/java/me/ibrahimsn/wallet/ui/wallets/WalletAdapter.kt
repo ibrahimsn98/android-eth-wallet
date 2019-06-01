@@ -36,9 +36,8 @@ class WalletAdapter(private val callback: WalletCallback) : RecyclerView.Adapter
 
     private fun getWalletCount(): Int {
         var count = 0
-        wallets.forEach {
-            if (it.isWallet) count++
-        }
+        for (wallet in wallets)
+            if (wallet.isWallet) count++
         return count
     }
 

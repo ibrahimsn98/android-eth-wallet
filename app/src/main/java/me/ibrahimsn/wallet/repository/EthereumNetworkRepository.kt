@@ -11,12 +11,12 @@ import me.ibrahimsn.wallet.util.Constants.ETH_SYMBOL
 import me.ibrahimsn.wallet.util.Constants.KOVAN_NETWORK_NAME
 import me.ibrahimsn.wallet.util.Constants.ROPSTEN_NETWORK_NAME
 import me.ibrahimsn.wallet.util.FormatUtil
+import me.ibrahimsn.wallet.util.RxBus
 import org.web3j.protocol.Web3j
 import org.web3j.protocol.core.DefaultBlockParameterName
 import org.web3j.protocol.http.HttpService
 import java.lang.Exception
 import java.math.BigInteger
-import java.util.HashSet
 import javax.inject.Inject
 
 class EthereumNetworkRepository @Inject constructor(private val preferencesRepository: PreferencesRepository,
@@ -27,26 +27,23 @@ class EthereumNetworkRepository @Inject constructor(private val preferencesRepos
             "https://api.etherscan.io/api/",
             "https://etherscan.io/", 1, true),
 
-            NetworkInfo(KOVAN_NETWORK_NAME, ETH_SYMBOL,
-                    "https://kovan.infura.io/llyrtzQ3YhkdESt2Fzrk",
-                    "https://kovan.etherscan.io/api/",
-                    "https://kovan.etherscan.io", 42, false),
-
             NetworkInfo(ROPSTEN_NETWORK_NAME, ETH_SYMBOL,
                     "https://ropsten.infura.io/llyrtzQ3YhkdESt2Fzrk",
                     "https://ropsten.etherscan.io/api/",
-                    "https://ropsten.etherscan.io", 3, false))
+                    "https://ropsten.etherscan.io", 3, false),
+
+            NetworkInfo(KOVAN_NETWORK_NAME, ETH_SYMBOL,
+                    "https://kovan.infura.io/llyrtzQ3YhkdESt2Fzrk",
+                    "https://kovan.etherscan.io/api/",
+                    "https://kovan.etherscan.io", 42, false))
 
     private var defaultNetwork = getByName(preferencesRepository.getDefaultNetwork()) ?: NETWORKS[2]
     private var web3j = Web3j.build(HttpService(getDefaultNetwork().rpcServerUrl))
 
-    fun getAvailableNetworkList(): Array<NetworkInfo> {
-        return NETWORKS
-    }
-
-    fun setDefaultNetworkInfo(networkInfo: NetworkInfo) {
-        defaultNetwork = networkInfo
+    fun setDefaultNetworkInfo(pos: Int) {
+        defaultNetwork = NETWORKS[pos]
         preferencesRepository.setDefaultNetwork(defaultNetwork.name)
+        RxBus.publish(RxBus.RxEvent.OnChangeDefaultNetwork(defaultNetwork))
     }
 
     fun getDefaultNetwork(): NetworkInfo {

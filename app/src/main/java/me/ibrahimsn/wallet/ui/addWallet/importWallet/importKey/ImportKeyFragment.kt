@@ -35,14 +35,18 @@ class ImportKeyFragment : BaseFragment<AddWalletActivity>() {
         }
 
         viewModel.status.observe(this, Observer {
-            if (it != null && it)
-                activity.finish()
+            if (it != null)
+                if (it) {
+                    Toast.makeText(activity, "Wallet has been imported.", Toast.LENGTH_SHORT).show()
+                    activity.finish()
+                } else
+                    Toast.makeText(activity, "Something went wrong.", Toast.LENGTH_SHORT).show()
         })
     }
 
     private fun validateForm(name: String, privateKey: String): Boolean {
         if (name.length < 3 || name.length > 30) {
-            Toast.makeText(activity, "Please enter a name!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Wallet name must have at least 3 characters.", Toast.LENGTH_SHORT).show()
             return false
         }
 

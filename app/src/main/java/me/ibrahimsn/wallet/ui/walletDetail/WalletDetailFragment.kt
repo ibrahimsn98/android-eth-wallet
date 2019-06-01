@@ -44,21 +44,32 @@ class WalletDetailFragment : BaseFragment<HomeActivity>() {
             viewModel.deleteWallet()
         }
 
-        viewModel.status.observe(this, Observer {
+        viewModel.updateStatus.observe(this, Observer {
             if (it != null) {
-                viewModel.status.value = null
+                viewModel.updateStatus.value = null
                 if (it) {
-                    Toast.makeText(activity, "Wallet has been updated!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "Wallet has been updated.", Toast.LENGTH_SHORT).show()
                     activity.navController.navigateUp()
                 } else
-                    Toast.makeText(activity, "En error occurred while updating wallet!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "Something went wrong.", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        viewModel.deleteStatus.observe(this, Observer {
+            if (it != null) {
+                viewModel.updateStatus.value = null
+                if (it) {
+                    Toast.makeText(activity, "Wallet has been deleted.", Toast.LENGTH_SHORT).show()
+                    activity.navController.navigateUp()
+                } else
+                    Toast.makeText(activity, "Something went wrong.", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
     private fun validateForm(name: String): Boolean {
         if (name.length < 3 || name.length > 30) {
-            Toast.makeText(activity, "Please enter a name!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Wallet name must have at least 3 characters.", Toast.LENGTH_SHORT).show()
             return false
         }
 

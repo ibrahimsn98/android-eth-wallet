@@ -27,7 +27,6 @@ class TransactionsFragment : BaseFragment<HomeActivity>() {
         activity.setTitle("Last Transactions")
 
         val transactionAdapter = TransactionAdapter(activity)
-
         rvTransactions.layoutManager = LinearLayoutManager(activity)
         rvTransactions.adapter = transactionAdapter
 
@@ -38,9 +37,14 @@ class TransactionsFragment : BaseFragment<HomeActivity>() {
         viewModel.transactions.observe(this, Observer {
             if (it != null) {
                 transactionAdapter.setItems(it)
-                pbLoading.visibility = View.GONE
-                rvTransactions.visibility = View.VISIBLE
+                renderScreen(it.size)
             }
         })
+    }
+
+    private fun renderScreen(itemCount: Int) {
+        pbLoading.visibility = View.GONE
+        rvTransactions.visibility = if (itemCount > 0) View.VISIBLE else View.GONE
+        lyEmpty.visibility = if (itemCount <= 0) View.VISIBLE else View.GONE
     }
 }

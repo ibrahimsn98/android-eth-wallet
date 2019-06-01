@@ -6,6 +6,20 @@
 	android:layout_marginTop="60dp"
 	android:orientation="vertical">
 
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:padding="12dp"
+		android:text="Wallets"
+		android:textSize="14sp"
+		android:textColor="@color/colorTextPrimary"
+		android:textStyle="bold" />
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="@color/colorBorder"/>
+
 	<LinearLayout
 		android:id="@+id/lyWallets"
 		android:layout_width="match_parent"
@@ -34,16 +48,16 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="2dp"
-				android:text="Wallets"
+				android:text="Current Wallet"
 				android:textSize="14sp"
 				android:textColor="@color/colorTextPrimary"
 				android:textStyle="bold" />
 
 			<TextView
+				android:id="@+id/tvCurrentWallet"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="2dp"
-				android:text="Ethereum Wallet 1"
 				android:textSize="14sp"
 				android:textColor="@color/colorTextSecondary" />
 
@@ -69,30 +83,44 @@
 		android:id="@+id/lyNetworks"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:orientation="vertical"
+		android:orientation="horizontal"
 		android:gravity="center_vertical"
 		android:padding="12dp"
 		android:background="?android:attr/selectableItemBackground"
 		android:clickable="true"
 		android:focusable="true">
 
+		<ImageView
+			android:layout_width="32dp"
+			android:layout_height="32dp"
+			android:layout_marginStart="0dp"
+			android:layout_marginEnd="12dp"
+			android:src="@drawable/ic_public_white_24dp"
+			android:tint="@color/white" />
 
-		<TextView
+		<LinearLayout
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginBottom="2dp"
-			android:text="Ethereum Network"
-			android:textSize="14sp"
-			android:textColor="@color/colorTextPrimary"
-			android:textStyle="bold" />
+			android:orientation="vertical">
 
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginBottom="2dp"
-			android:text="Ropsten"
-			android:textSize="14sp"
-			android:textColor="@color/colorTextSecondary" />
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="2dp"
+				android:text="Ethereum Network"
+				android:textSize="14sp"
+				android:textColor="@color/colorTextPrimary"
+				android:textStyle="bold" />
+
+			<TextView
+				android:id="@+id/tvDefaultNetwork"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="2dp"
+				android:textSize="14sp"
+				android:textColor="@color/colorTextSecondary" />
+
+		</LinearLayout>
 
 	</LinearLayout>
 
@@ -149,6 +177,38 @@
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:text="Privacy Policy"
+			android:textSize="14sp"
+			android:textColor="@color/colorTextPrimary"
+			android:textStyle="bold" />
+
+		<ImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/ic_chevron_right_white_24dp"/>
+
+	</LinearLayout>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="@color/colorBorder"/>
+
+	<LinearLayout
+		android:id="@+id/lySourceCode"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="center_vertical"
+		android:padding="12dp"
+		android:background="?android:attr/selectableItemBackground"
+		android:clickable="true"
+		android:focusable="true">
+
+		<TextView
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="Source Code"
 			android:textSize="14sp"
 			android:textColor="@color/colorTextPrimary"
 			android:textStyle="bold" />
