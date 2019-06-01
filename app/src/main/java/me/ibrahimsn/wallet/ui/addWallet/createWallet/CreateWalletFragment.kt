@@ -37,10 +37,6 @@ class CreateWalletFragment : BaseFragment<AddWalletActivity>() {
                 if (it)
                     activity.navController.navigateUp()
         })
-
-        viewModel.stateLoading.observe(this, Observer {
-
-        })
     }
 
     private fun validateForm(name: String): Boolean {

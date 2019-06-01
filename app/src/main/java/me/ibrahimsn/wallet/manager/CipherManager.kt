@@ -31,12 +31,10 @@ class CipherManager(private val context: Context) {
     private val PADDING = KeyProperties.ENCRYPTION_PADDING_PKCS7
     private val CIPHER_ALGORITHM = "AES/CBC/PKCS7Padding"
 
-    @Throws(ServiceErrorException::class)
     fun put(address: String, password: String) {
         setData(password.toByteArray(), address, address, address + "iv")
     }
 
-    @Throws(ServiceErrorException::class)
     fun get(address: String): ByteArray {
         return getData(address, address, address + "iv")
     }
@@ -96,6 +94,7 @@ class CipherManager(private val context: Context) {
         } catch (e: UserNotAuthenticatedException) {
             throw ServiceErrorException(USER_NOT_AUTHENTICATED)
         } catch (e: Exception) {
+            e.printStackTrace()
             throw ServiceErrorException(KEY_STORE_ERROR)
         }
     }
@@ -138,6 +137,7 @@ class CipherManager(private val context: Context) {
                 throw ServiceErrorException(INVALID_KEY)
             }
         } catch (e: Exception) {
+            e.printStackTrace()
             throw ServiceErrorException(KEY_STORE_ERROR)
         }
     }

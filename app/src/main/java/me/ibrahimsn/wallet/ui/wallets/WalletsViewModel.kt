@@ -12,6 +12,10 @@ class WalletsViewModel @Inject constructor(walletRepository: WalletRepository,
 
     val wallets = walletRepository.fetchWallets()
 
+    /**
+     * Update current wallet address stored in sharedPreferences
+     * Publish update event information to Rx subscribers
+     */
     fun setCurrentWallet(wallet: Wallet) {
         preferencesRepository.setCurrentWalletAddress(wallet.address)
         RxBus.publish(RxBus.RxEvent.OnChangeCurrentWallet(wallet))

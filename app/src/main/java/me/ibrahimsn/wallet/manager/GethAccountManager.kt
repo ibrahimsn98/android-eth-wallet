@@ -1,6 +1,5 @@
 package me.ibrahimsn.wallet.manager
 
-import android.util.Log
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -18,26 +17,28 @@ class GethAccountManager @Inject constructor(keyStoreFile: File) {
 
     private val keyStore = KeyStore(keyStoreFile.absolutePath, Geth.LightScryptN, Geth.LightScryptP)
 
-    fun createAccount(password: String): Single<Wallet> {
-        return Single.fromCallable<Wallet> {
-            Wallet(keyStore.newAccount(password).address.hex.toLowerCase())
+    fun createAccount(password: String): Single<Pair<Wallet, String>> {
+        return Single.fromCallable {
+            Pair(Wallet(keyStore.newAccount(password).address.hex.toLowerCase()), password)
         }
     }
 
-    fun importPrivateKey(privateKey: String, newPassword: String): Single<Wallet> {
+    fun importPrivateKey(privateKey: String, newPassword: String): Single<Pair<Wallet, String>> {
         return Single.fromCallable {
             val key = BigInteger(privateKey, 16)
             val keyPair = ECKeyPair.create(key)
             val walletFile = create(newPassword, keyPair, 1 shl 9, 1)
             ObjectMapper().writeValueAsString(walletFile)
-        }.compose { importKeyStore(it.blockingGet(), newPassword, newPassword) }
+        }.compose {
+            importKeyStore(it.blockingGet(), newPassword, newPassword)
+        }
     }
 
-    fun importKeyStore(store: String, password: String, newPassword: String): Single<Wallet> {
-        return Single.fromCallable<Wallet> {
+    private fun importKeyStore(store: String, password: String, newPassword: String): Single<Pair<Wallet, String>> {
+        return Single.fromCallable {
             val account = keyStore.importKey(store.toByteArray(Charset.forName("UTF-8")),
                     password, newPassword)
-            Wallet(account.address.hex.toLowerCase())
+            Pair(Wallet(account.address.hex.toLowerCase()), newPassword)
         }
     }
 
@@ -105,7 +106,6 @@ class GethAccountManager @Inject constructor(keyStoreFile: File) {
         val accounts = keyStore.accounts
         for (i in 0 until accounts.size()) {
             try {
-                Log.d("###", "Account find: ${accounts.get(i).address.hex}")
                 if (accounts.get(i).address.hex.toString().equals(address, true))
                     return accounts.get(i)
             } catch (e: Exception) {

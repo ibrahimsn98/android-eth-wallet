@@ -1,5 +1,6 @@
 package me.ibrahimsn.wallet.ui.wallets
 
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -42,8 +43,9 @@ class WalletAdapter(private val callback: WalletCallback) : RecyclerView.Adapter
     }
 
     fun setItems(wallets: List<Wallet>) {
+        val diffCallback = DiffUtil.calculateDiff(MyDiffCallback(this.wallets, wallets))
         this.wallets = wallets
-        notifyDataSetChanged()
+        diffCallback.dispatchUpdatesTo(this)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -102,5 +104,25 @@ class WalletAdapter(private val callback: WalletCallback) : RecyclerView.Adapter
     interface WalletCallback {
         fun onWalletClicked(wallet: Wallet)
         fun onMoreClicked(wallet: Wallet)
+    }
+
+    inner class MyDiffCallback(private val oldItems: List<Wallet>,
+                               private val newItems: List<Wallet>) : DiffUtil.Callback() {
+
+        override fun getOldListSize(): Int {
+            return oldItems.size
+        }
+
+        override fun getNewListSize(): Int {
+            return newItems.size
+        }
+
+        override fun areItemsTheSame(oldPos: Int, newPos: Int): Boolean {
+            return oldItems[oldPos].id == newItems[newPos].id
+        }
+
+        override fun areContentsTheSame(oldPos: Int, newPos: Int): Boolean {
+            return oldItems[oldPos] == newItems[newPos]
+        }
     }
 }

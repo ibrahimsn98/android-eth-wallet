@@ -23,7 +23,7 @@ class ReceiveViewModel @Inject constructor(walletRepository: WalletRepository) :
     val walletQR: MutableLiveData<Bitmap?> = MutableLiveData()
 
     /**
-     * Asynchronously get current wallet on initialization.
+     * Asynchronously fetch current wallet from sharedPreferences on initialization.
      */
     init {
         disposable.add(walletRepository.getCurrentWallet()

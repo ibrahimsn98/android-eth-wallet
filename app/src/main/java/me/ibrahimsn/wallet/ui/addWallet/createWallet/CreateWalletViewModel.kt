@@ -15,11 +15,11 @@ class CreateWalletViewModel @Inject constructor(private val walletRepository: Wa
 
     private val disposable = CompositeDisposable()
     val status: MutableLiveData<Boolean> = MutableLiveData()
-    val stateLoading: MutableLiveData<Boolean> = MutableLiveData()
 
+    /**
+     * Asynchronously put new wallet into Room and GethAccountManager
+     */
     fun createWallet(name: String) {
-        stateLoading.value = true
-
         disposable.add(walletRepository.createWallet(name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -28,12 +28,10 @@ class CreateWalletViewModel @Inject constructor(private val walletRepository: Wa
 
     private fun onCreateWallet(wallet: Wallet) {
         status.postValue(true)
-        stateLoading.postValue(false)
     }
 
     private fun onRxError(e: Throwable) {
         Log.d(Constants.TAG, "Error:", e)
         status.postValue(false)
-        stateLoading.postValue(false)
     }
 }

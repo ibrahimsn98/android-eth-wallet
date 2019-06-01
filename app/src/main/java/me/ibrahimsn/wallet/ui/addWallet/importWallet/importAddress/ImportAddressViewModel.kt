@@ -6,7 +6,6 @@ import android.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import me.ibrahimsn.wallet.entity.Wallet
 import me.ibrahimsn.wallet.repository.WalletRepository
 import me.ibrahimsn.wallet.util.Constants
 import javax.inject.Inject
@@ -16,6 +15,9 @@ class ImportAddressViewModel @Inject constructor(private val walletRepository: W
     private val disposable = CompositeDisposable()
     val status: MutableLiveData<Boolean> = MutableLiveData()
 
+    /**
+     * Asynchronously put new wallet into only Room
+     */
     fun importPublicAddress(name: String, address: String) {
         disposable.add(walletRepository.importPublicAddress(name, address)
                 .subscribeOn(Schedulers.io())
@@ -23,7 +25,7 @@ class ImportAddressViewModel @Inject constructor(private val walletRepository: W
                 .subscribe(this::onImportPublicAddress, this::onRxError))
     }
 
-    private fun onImportPublicAddress(wallet: Wallet) {
+    private fun onImportPublicAddress() {
         status.postValue(true)
     }
 

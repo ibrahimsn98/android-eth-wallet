@@ -23,7 +23,7 @@ class TransactionsViewModel @Inject constructor(private val etherScanRepository:
     val transactions: MutableLiveData<List<Transaction>> = MutableLiveData()
 
     /**
-     * Asynchronously get current wallet on initialization
+     * Asynchronously fetch current wallet from sharedPreferences on initialization
      */
     init {
         disposable.add(walletRepository.getCurrentWallet()

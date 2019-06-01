@@ -1,10 +1,7 @@
 package me.ibrahimsn.wallet.room
 
 import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.Query
-import android.arch.persistence.room.Update
+import android.arch.persistence.room.*
 import io.reactivex.Flowable
 import io.reactivex.Single
 import me.ibrahimsn.wallet.entity.Wallet
@@ -20,6 +17,9 @@ interface WalletDao {
 
     @Insert
     fun insert(wallet: Wallet): Long
+
+    @Delete
+    fun delete(wallet: Wallet)
 
     @Query("DELETE from wallets WHERE address = :address")
     fun delete(address: String)

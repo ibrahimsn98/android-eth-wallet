@@ -1,6 +1,7 @@
 package me.ibrahimsn.wallet.repository
 
 import android.content.Context
+import android.util.Log
 import io.reactivex.Completable
 import io.reactivex.Single
 import me.ibrahimsn.wallet.entity.Wallet
