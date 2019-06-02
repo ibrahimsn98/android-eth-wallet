@@ -6,5 +6,13 @@
 	<fragment
 		android:id="@+id/sendFragment"
 		android:name="me.ibrahimsn.wallet.ui.send.send.SendFragment"
-		android:label="SendFragment" />
+		android:label="SendFragment" >
+		<action
+			android:id="@+id/action_sendFragment_to_confirmFragment"
+			app:destination="@id/confirmFragment" />
+	</fragment>
+	<fragment
+		android:id="@+id/confirmFragment"
+		android:name="me.ibrahimsn.wallet.ui.send.confirm.ConfirmFragment"
+		android:label="ConfirmFragment" />
 </navigation>

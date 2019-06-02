@@ -7,130 +7,92 @@
 	android:gravity="center_horizontal"
 	android:padding="16dp">
 
-	<android.support.design.widget.TextInputLayout
-		android:id="@+id/tiyReceiverAddress"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:hint="Receiver Address"
-		android:textColorHint="@color/colorTextSecondary"
-		app:layout_constraintTop_toTopOf="parent">
-
-		<android.support.design.widget.TextInputEditText
-			android:id="@+id/etReceiverAddress"
-			android:inputType="text"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:theme="@style/AppTheme.LighterEditText"
-			android:textColor="@color/colorTextPrimary"
-			android:textSize="15sp"/>
-
-	</android.support.design.widget.TextInputLayout>
-
-	<android.support.design.widget.TextInputLayout
-		android:id="@+id/tiyAmount"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="14dp"
-		android:hint="Amount"
-		android:textColorHint="@color/colorTextSecondary"
-		app:layout_constraintTop_toBottomOf="@id/tiyReceiverAddress">
-
-		<android.support.design.widget.TextInputEditText
-			android:id="@+id/etAmount"
-			android:inputType="number"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:theme="@style/AppTheme.LighterEditText"
-			android:textColor="@color/colorTextPrimary"
-			android:textSize="15sp"/>
-
-	</android.support.design.widget.TextInputLayout>
-
 	<LinearLayout
 		android:id="@+id/linearLayout"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="14dp"
-		android:gravity="center_vertical"
-		android:orientation="horizontal"
-		app:layout_constraintTop_toBottomOf="@id/tiyAmount">
-
-		<TextView
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:text="Transaction Speed"
-			android:textSize="13sp"
-			android:textColor="@color/white"/>
+		android:orientation="vertical"
+		app:layout_constraintTop_toTopOf="parent">
 
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="0dp"
-			android:layout_marginEnd="4dp"
-			android:text="Fee:"
-			android:textSize="15sp"
-			android:textColor="@color/white"/>
+			android:textColor="@color/colorTextPrimary"
+			android:text="From"/>
+
+		<TextView
+			android:id="@+id/tvFromName"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="@color/colorTextPrimary"/>
+
+		<TextView
+			android:id="@+id/tvFromAddress"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="@color/colorTextPrimary"/>
 
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="12 ETH"
-			android:textSize="15sp"
-			android:textStyle="bold"
-			android:textColor="@color/white"/>
+			android:text="To"
+			android:textColor="@color/colorTextPrimary"/>
 
-	</LinearLayout>
-
-	<SeekBar
-		android:id="@+id/seekBar"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="14dp"
-		android:progressBackgroundTint="@color/colorAccent"
-		android:thumb="@drawable/ic_seekbar_thumb"
-		app:layout_constraintTop_toBottomOf="@id/linearLayout"/>
-
-	<LinearLayout
-		android:id="@+id/linearLayout2"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:padding="16dp"
-		android:orientation="horizontal"
-		android:gravity="center_horizontal"
-		app:layout_constraintTop_toBottomOf="@id/seekBar">
+		<TextView
+			android:id="@+id/tvTo"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="@color/colorTextPrimary"/>
 
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="0dp"
-			android:layout_marginEnd="4dp"
-			android:text="Estimated wait time"
-			android:textSize="15sp"
-			android:textColor="@color/colorTextSecondary"/>
+			android:text="Amount"
+			android:textColor="@color/colorTextPrimary"/>
 
 		<TextView
-			android:id="@+id/tvTime"
+			android:id="@+id/tvAmount"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="30 secs"
-			android:textSize="15sp"
-			android:textStyle="bold"
+			android:textColor="@color/colorTextPrimary"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Network Fee"
+			android:textColor="@color/colorTextPrimary"/>
+
+		<TextView
+			android:id="@+id/tvNetworkFee"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textColor="@color/colorTextPrimary"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Total"
+			android:textColor="@color/colorTextPrimary"/>
+
+		<TextView
+			android:id="@+id/tvTotal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 			android:textColor="@color/colorTextPrimary"/>
 
 	</LinearLayout>
 
 	<Button
-		android:id="@+id/btContinue"
+		android:id="@+id/btConfirm"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="14dp"
 		android:textColor="@color/colorTextPrimary"
 		android:textSize="15sp"
 		android:textStyle="bold"
-		android:text="Verify"
+		android:text="Confirm"
 		android:textAllCaps="false"
 		android:background="@drawable/ic_button_background_transparent"
-		app:layout_constraintTop_toBottomOf="@id/linearLayout2"/>
+		app:layout_constraintTop_toBottomOf="@id/linearLayout"/>
 
 </android.support.constraint.ConstraintLayout>

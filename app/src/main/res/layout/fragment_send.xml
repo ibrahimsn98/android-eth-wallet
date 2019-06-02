@@ -51,6 +51,8 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="14dp"
+		android:paddingStart="0dp"
+		android:paddingEnd="5dp"
 		android:gravity="center_vertical"
 		android:orientation="horizontal"
 		app:layout_constraintTop_toBottomOf="@id/tiyAmount">
@@ -59,23 +61,14 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
-			android:text="Transaction Speed"
+			android:text="Gas Price"
 			android:textSize="13sp"
 			android:textColor="@color/white"/>
 
 		<TextView
+			android:id="@+id/tvGasPrice"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="0dp"
-			android:layout_marginEnd="4dp"
-			android:text="Fee:"
-			android:textSize="15sp"
-			android:textColor="@color/white"/>
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="12 ETH"
 			android:textSize="15sp"
 			android:textStyle="bold"
 			android:textColor="@color/white"/>
@@ -83,7 +76,7 @@
 	</LinearLayout>
 
 	<SeekBar
-		android:id="@+id/seekBar"
+		android:id="@+id/sbGasPrice"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="14dp"
@@ -95,42 +88,51 @@
 		android:id="@+id/linearLayout2"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:padding="16dp"
+		android:layout_marginTop="14dp"
+		android:paddingStart="0dp"
+		android:paddingEnd="5dp"
+		android:gravity="center_vertical"
 		android:orientation="horizontal"
-		android:gravity="center_horizontal"
-		app:layout_constraintTop_toBottomOf="@id/seekBar">
+		app:layout_constraintTop_toBottomOf="@id/sbGasPrice">
 
 		<TextView
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="0dp"
-			android:layout_marginEnd="4dp"
-			android:text="Estimated wait time"
-			android:textSize="15sp"
-			android:textColor="@color/colorTextSecondary"/>
+			android:layout_weight="1"
+			android:text="Gas Limit"
+			android:textSize="13sp"
+			android:textColor="@color/white"/>
 
 		<TextView
-			android:id="@+id/tvTime"
+			android:id="@+id/tvGasLimit"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="30 secs"
 			android:textSize="15sp"
 			android:textStyle="bold"
-			android:textColor="@color/colorTextPrimary"/>
+			android:textColor="@color/white"/>
 
 	</LinearLayout>
+
+	<SeekBar
+		android:id="@+id/sbGasLimit"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="14dp"
+		android:progressBackgroundTint="@color/colorAccent"
+		android:thumb="@drawable/ic_seekbar_thumb"
+		app:layout_constraintTop_toBottomOf="@id/linearLayout2"/>
 
 	<Button
 		android:id="@+id/btSend"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="14dp"
+		android:layout_marginTop="30dp"
 		android:textColor="@color/colorTextPrimary"
 		android:textSize="15sp"
 		android:textStyle="bold"
-		android:text="Verify"
+		android:text="Send"
 		android:textAllCaps="false"
 		android:background="@drawable/ic_button_background_transparent"
-		app:layout_constraintTop_toBottomOf="@id/linearLayout2"/>
+		app:layout_constraintTop_toBottomOf="@id/sbGasLimit"/>
 
 </android.support.constraint.ConstraintLayout>
