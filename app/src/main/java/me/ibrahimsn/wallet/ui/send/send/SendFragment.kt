@@ -12,6 +12,8 @@ import me.ibrahimsn.wallet.entity.Wallet
 import me.ibrahimsn.wallet.ui.home.HomeActivity
 import me.ibrahimsn.wallet.ui.send.SendActivity
 import me.ibrahimsn.wallet.ui.send.SendViewModel
+import me.ibrahimsn.wallet.util.BalanceUtil
+import me.ibrahimsn.wallet.util.Constants
 import javax.inject.Inject
 
 class SendFragment : BaseFragment<SendActivity>() {
@@ -33,11 +35,11 @@ class SendFragment : BaseFragment<SendActivity>() {
         btSend.setOnClickListener {
             if (currentWallet != null) {
                 val receiver = etReceiverAddress.text.toString().trim()
-                val amount = etAmount.text.toString().trim()
+                val amount = BalanceUtil.baseToSubunit(etAmount.text.toString().trim())
 
                 val gasSettings = viewModel.gasSettings
 
-                viewModel.createTransaction(currentWallet!!, receiver, amount.toBigInteger(),
+                viewModel.createTransaction(currentWallet!!, receiver, amount,
                         gasSettings.gasPrice, gasSettings.gasLimit)
             }
         }

@@ -1,6 +1,5 @@
 package me.ibrahimsn.wallet.manager
 
-import android.util.Log
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -70,8 +69,7 @@ class GethAccountManager @Inject constructor(keyStoreFile: File) {
     fun signTransaction(signer: Wallet, signerPassword: String,
                         toAddress: String, amount: BigInteger,
                         gasPrice: BigInteger, gasLimit: Long,
-                        nonce: Long, data: ByteArray?,
-                        chainId: Long): Single<ByteArray> {
+                        nonce: Long, chainId: Long): Single<ByteArray> {
 
         return Single.fromCallable {
             val value = BigInt(0)
@@ -80,7 +78,7 @@ class GethAccountManager @Inject constructor(keyStoreFile: File) {
             val gasPriceBI = BigInt(0)
             gasPriceBI.setString(gasPrice.toString(), 10)
 
-            val tx = Transaction(nonce, Address(toAddress), value, gasLimit, gasPriceBI, data)
+            val tx = Transaction(nonce, Address(toAddress), value, gasLimit, gasPriceBI, null)
 
             val gethAccount = findAccount(signer.address)
             keyStore.unlock(gethAccount, signerPassword)

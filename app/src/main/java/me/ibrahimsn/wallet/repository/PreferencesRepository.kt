@@ -31,6 +31,14 @@ class PreferencesRepository @Inject constructor(context: Context) {
         prefs.edit().putString(DEFAULT_NETWORK_NAME_KEY, netName).apply()
     }
 
+    fun setLastEthPriceUsd(price: String) {
+        prefs.edit().putString("eth_price_in_usd", price).apply()
+    }
+
+    fun getLastEthPriceUsd(): String {
+        return prefs.getString("eth_price_in_usd", "0")!!
+    }
+
     fun getGasSettings(): GasSettings {
         val gasPrice = BigInteger(prefs.getString(GAS_PRICE_KEY, Constants.DEFAULT_GAS_PRICE))
         val gasLimit = prefs.getString(GAS_LIMIT_KEY, Constants.DEFAULT_GAS_LIMIT)!!.toLong()

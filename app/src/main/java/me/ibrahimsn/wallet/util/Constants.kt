@@ -32,7 +32,6 @@ object Constants {
     val GAS_LIMIT_MAX = 300000L
     val GAS_PRICE_MIN = 1000000000L
     val NETWORK_FEE_MAX = 20000000000000000L
-    val ETHER_DECIMALS = 18
 
     interface ErrorCode {
         companion object {

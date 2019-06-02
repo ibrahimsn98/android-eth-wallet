@@ -63,7 +63,12 @@ class WalletFragment : BaseFragment<HomeActivity>() {
 
         viewModel.walletBalanceReal.observe(this, Observer {
             if (it != null)
-                tvBalanceReal.text = StringBuilder().append("%.2f".format(it)).append(" USD").toString()
+                tvBalanceReal.text = StringBuilder().append(it).append(" USD").toString()
+        })
+
+        viewModel.ethPriceUsd.observe(this, Observer {
+            if (it != null)
+                transactionAdapter.setEthPriceUsd(it)
         })
     }
 

@@ -30,7 +30,7 @@ class SendViewModel @Inject constructor(private val passwordRepository: Password
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onFetchCurrentWallet, this::onRxError))
     }
-// 0x1c45933cddf282b57a6c94a6fb65ac5594bfc7c0
+
     fun createTransaction(from: Wallet, to: String, subUnitAmount: BigInteger, gasPrice: BigInteger, gasLimit: Long) {
         if (from.isWallet) {
             disposable.add(passwordRepository.getPassword(from)

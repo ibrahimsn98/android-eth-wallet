@@ -29,10 +29,8 @@ class ReceiveViewModel @Inject constructor(walletRepository: WalletRepository) :
         disposable.add(walletRepository.getCurrentWallet()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSuccess(this::onFetchCurrentWallet)
                 .doOnSuccess(this::createWalletQR)
-                .doOnError(this::onRxError)
-                .subscribe())
+                .subscribe(this::onFetchCurrentWallet, this::onRxError))
     }
 
     /**
@@ -43,9 +41,7 @@ class ReceiveViewModel @Inject constructor(walletRepository: WalletRepository) :
             disposable.add(qrImageGenerator(wallet.address)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .doOnSuccess(this::onQRCreated)
-                    .doOnError(this::onRxError)
-                    .subscribe())
+                    .subscribe(this::onQRCreated, this::onRxError))
     }
 
     private fun onFetchCurrentWallet(wallet: Wallet?) {

@@ -7,6 +7,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import me.ibrahimsn.wallet.entity.EtherPriceResponse
 import me.ibrahimsn.wallet.entity.EtherScanResponse
 import me.ibrahimsn.wallet.entity.Transaction
 import me.ibrahimsn.wallet.entity.Wallet
@@ -21,6 +22,7 @@ class TransactionsViewModel @Inject constructor(private val etherScanRepository:
 
     private val disposable = CompositeDisposable()
     val transactions: MutableLiveData<List<Transaction>> = MutableLiveData()
+    val ethPriceUsd: MutableLiveData<String> = MutableLiveData()
 
     /**
      * Asynchronously fetch current wallet from sharedPreferences on initialization
@@ -29,9 +31,7 @@ class TransactionsViewModel @Inject constructor(private val etherScanRepository:
         disposable.add(walletRepository.getCurrentWallet()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSuccess(this::fetchTransaction)
-                .doOnError(this::onRxError)
-                .subscribe())
+                .subscribe(this::fetchTransaction, this::onRxError))
 
         // Listen wallet changes
         disposable.add(RxBus.listen(RxBus.RxEvent.OnChangeCurrentWallet::class.java)
@@ -41,6 +41,11 @@ class TransactionsViewModel @Inject constructor(private val etherScanRepository:
                 .doOnNext(this::fetchTransaction)
                 .doOnError(this::onRxError)
                 .subscribe())
+
+        disposable.add(etherScanRepository.fetchEthPrice()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onFetchEthPrice, this::onRxError))
     }
 
     /**
@@ -56,6 +61,10 @@ class TransactionsViewModel @Inject constructor(private val etherScanRepository:
 
     private fun onFetchTransaction(response: EtherScanResponse) {
         transactions.postValue(response.result)
+    }
+
+    private fun onFetchEthPrice(response: EtherPriceResponse) {
+        ethPriceUsd.postValue(response.result.ethusd)
     }
 
     private fun onRxError(e: Throwable) {

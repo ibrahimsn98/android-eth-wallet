@@ -9,11 +9,14 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.row_transaction_sent.view.*
 import me.ibrahimsn.wallet.R
 import me.ibrahimsn.wallet.entity.Transaction
+import me.ibrahimsn.wallet.util.BalanceUtil
 import me.ibrahimsn.wallet.util.FormatUtil
+import java.math.BigInteger
 
 class TransactionAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var address: String? = null
+    private var ethPriceUsd = "0"
     private var transactions = listOf<Transaction>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -34,6 +37,11 @@ class TransactionAdapter(private val context: Context) : RecyclerView.Adapter<Re
 
     fun setWalletAddress(address: String) {
         this.address = address
+        notifyDataSetChanged()
+    }
+
+    fun setEthPriceUsd(ethPriceUsd: String) {
+        this.ethPriceUsd = ethPriceUsd
         notifyDataSetChanged()
     }
 
@@ -61,8 +69,11 @@ class TransactionAdapter(private val context: Context) : RecyclerView.Adapter<Re
         fun bind(transaction: Transaction) {
             this.transaction = transaction
 
-            view.tvAmount.text = String.format(context.getText(R.string.eth_sent_amount).toString(),
-                    FormatUtil.valueToETH(transaction.value).toString())
+            val amount = BalanceUtil.subunitToBase(BigInteger(transaction.value))
+            val amountReal = BalanceUtil.ethToUsd(ethPriceUsd, BigInteger(transaction.value))
+
+            view.tvAmount.text = String.format(context.getText(R.string.eth_sent_amount).toString(), amount)
+            view.tvAmountReal.text = String.format(context.getText(R.string.eth_sent_amount_real).toString(), amountReal)
             view.tvDate.text = FormatUtil.timeStampToDate(transaction.timeStamp)
         }
     }
@@ -74,8 +85,11 @@ class TransactionAdapter(private val context: Context) : RecyclerView.Adapter<Re
         fun bind(transaction: Transaction) {
             this.transaction = transaction
 
-            view.tvAmount.text = String.format(context.getText(R.string.eth_received_amount).toString(),
-                    FormatUtil.valueToETH(transaction.value).toString())
+            val amount = BalanceUtil.subunitToBase(BigInteger(transaction.value))
+            val amountReal = BalanceUtil.ethToUsd(ethPriceUsd, BigInteger(transaction.value))
+
+            view.tvAmount.text = String.format(context.getText(R.string.eth_received_amount).toString(), amount)
+            view.tvAmountReal.text = String.format(context.getText(R.string.eth_received_amount_real).toString(), amountReal)
             view.tvDate.text = FormatUtil.timeStampToDate(transaction.timeStamp)
         }
     }

@@ -32,9 +32,7 @@ class MenuViewModel @Inject constructor(walletRepository: WalletRepository,
         disposable.add(walletRepository.getCurrentWallet()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSuccess(this::onFetchCurrentWallet)
-                .doOnError(this::onRxError)
-                .subscribe())
+                .subscribe(this::onFetchCurrentWallet, this::onRxError))
 
         disposable.add(RxBus.listen(RxBus.RxEvent.OnChangeCurrentWallet::class.java)
                 .subscribeOn(Schedulers.io())

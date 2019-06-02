@@ -40,6 +40,11 @@ class TransactionsFragment : BaseFragment<HomeActivity>() {
                 renderScreen(it.size)
             }
         })
+
+        viewModel.ethPriceUsd.observe(this, Observer {
+            if (it != null)
+                transactionAdapter.setEthPriceUsd(it)
+        })
     }
 
     private fun renderScreen(itemCount: Int) {

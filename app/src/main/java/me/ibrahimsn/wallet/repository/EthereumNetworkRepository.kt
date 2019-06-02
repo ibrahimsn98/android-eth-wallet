@@ -1,7 +1,6 @@
 package me.ibrahimsn.wallet.repository
 
 import android.text.TextUtils
-import android.util.Log
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import me.ibrahimsn.wallet.entity.NetworkInfo
@@ -11,11 +10,11 @@ import me.ibrahimsn.wallet.util.Constants.ETHEREUM_NETWORK_NAME
 import me.ibrahimsn.wallet.util.Constants.ETH_SYMBOL
 import me.ibrahimsn.wallet.util.Constants.KOVAN_NETWORK_NAME
 import me.ibrahimsn.wallet.util.Constants.ROPSTEN_NETWORK_NAME
-import me.ibrahimsn.wallet.util.FormatUtil
 import me.ibrahimsn.wallet.util.RxBus
 import org.web3j.protocol.Web3j
 import org.web3j.protocol.core.DefaultBlockParameterName
 import org.web3j.protocol.http.HttpService
+import org.web3j.utils.Numeric
 import java.lang.Exception
 import java.math.BigInteger
 import javax.inject.Inject
@@ -61,14 +60,10 @@ class EthereumNetworkRepository @Inject constructor(private val preferencesRepos
         return null
     }
 
-    fun getWalletBalance(wallet: Wallet): Single<Double> {
+    fun getWalletBalance(wallet: Wallet): Single<BigInteger> {
         return Single.fromCallable {
-            FormatUtil.valueToETH(web3j.ethGetBalance(wallet.address, DefaultBlockParameterName.LATEST).send().balance)
+            web3j.ethGetBalance(wallet.address, DefaultBlockParameterName.LATEST).send().balance
         }
-    }
-
-    fun calculateFee() {
-
     }
 
     fun createTransaction(from: Wallet, toAddress: String, subUnitAmount: BigInteger,
@@ -78,10 +73,10 @@ class EthereumNetworkRepository @Inject constructor(private val preferencesRepos
             web3j.ethGetTransactionCount(from.address, DefaultBlockParameterName.LATEST).send().transactionCount.toLong()
         }.flatMap<ByteArray> {
             accountManager.signTransaction(from, password, toAddress, subUnitAmount, gasPrice, gasLimit,
-                    it, null, getDefaultNetwork().chainId.toLong())
+                    it, getDefaultNetwork().chainId.toLong())
         }.flatMap {
             Single.fromCallable {
-                val raw = web3j.ethSendRawTransaction(String.format("%02X", it)).send()
+                val raw = web3j.ethSendRawTransaction(Numeric.toHexString(it)).send()
 
                 if (raw.hasError())
                     throw Exception(raw.error.message)

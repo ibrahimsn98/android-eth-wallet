@@ -7,13 +7,13 @@ import java.util.*
 
 object FormatUtil {
 
-    fun valueToETH(value: String): Double {
+    /*fun valueToETH(value: String): Double {
         return (value.toBigInteger() / 10.toBigInteger().pow(18)).toDouble()
     }
 
     fun valueToETH(value: BigInteger): Double {
         return (value / 10.toBigInteger().pow(18)).toDouble()
-    }
+    }*/
 
     @SuppressLint("SimpleDateFormat")
     fun timeStampToDate(timeStamp: String): String {

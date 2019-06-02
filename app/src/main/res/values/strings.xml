@@ -9,4 +9,7 @@
 
 	<string name="eth_sent_amount">-%1$s ETH</string>
 	<string name="eth_received_amount">+%1$s ETH</string>
+
+	<string name="eth_sent_amount_real">-$%1$s</string>
+	<string name="eth_received_amount_real">+$%1$s</string>
 </resources>
