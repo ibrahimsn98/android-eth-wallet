@@ -97,11 +97,14 @@ class WalletRepository @Inject constructor(private var gethAccountManager: GethA
         return gethAccountManager.importKeyStore(store, password, newPassword).doAfterSuccess {
             walletDao.insert(it)
         }
-    }
-
-    fun exportWallet(wallet: Wallet, password: String, newPassword: String): Single<String> {
-        return gethAccountManager.exportAccount(wallet, password, newPassword)
     }*/
+
+    fun exportWallet(wallet: Wallet, backupPassword: String): Single<String> {
+        return passwordRepository.getPassword(wallet)
+                .flatMap { password ->
+                    gethAccountManager.exportAccount(wallet, password, backupPassword)
+                }
+    }
 
     private fun deleteWallet(wallet: Wallet, password: String): Completable {
         return Completable.fromAction { gethAccountManager.deleteAccount(wallet.address, password) }

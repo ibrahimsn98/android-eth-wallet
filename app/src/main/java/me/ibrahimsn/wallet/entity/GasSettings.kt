@@ -7,16 +7,16 @@ import java.math.BigInteger
 class GasSettings : Parcelable {
 
     var gasPrice: BigInteger
-    var gasLimit: BigInteger
+    var gasLimit: Long
 
-    constructor(gasPrice: BigInteger, gasLimit: BigInteger) {
+    constructor(gasPrice: BigInteger, gasLimit: Long) {
         this.gasPrice = gasPrice
         this.gasLimit = gasLimit
     }
 
     constructor(source: Parcel) {
         gasPrice = BigInteger(source.readString())
-        gasLimit = BigInteger(source.readString())
+        gasLimit = source.readString()!!.toLong()
     }
 
     override fun writeToParcel(dest: Parcel, flags: Int) {

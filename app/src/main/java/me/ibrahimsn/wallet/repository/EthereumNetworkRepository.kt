@@ -1,6 +1,7 @@
 package me.ibrahimsn.wallet.repository
 
 import android.text.TextUtils
+import android.util.Log
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import me.ibrahimsn.wallet.entity.NetworkInfo
@@ -47,6 +48,8 @@ class EthereumNetworkRepository @Inject constructor(private val preferencesRepos
     }
 
     fun getDefaultNetwork(): NetworkInfo {
+
+
         return defaultNetwork
     }
 
@@ -69,15 +72,13 @@ class EthereumNetworkRepository @Inject constructor(private val preferencesRepos
     }
 
     fun createTransaction(from: Wallet, toAddress: String, subUnitAmount: BigInteger,
-                          gasPrice: BigInteger, gasLimit: Long,
-                          data: ByteArray, password: String): Single<String> {
+                          gasPrice: BigInteger, gasLimit: Long, password: String): Single<String> {
 
         return Single.fromCallable<Long> {
-            web3j.ethGetTransactionCount(from.address, DefaultBlockParameterName.LATEST)
-                    .send().transactionCount.toLong()
+            web3j.ethGetTransactionCount(from.address, DefaultBlockParameterName.LATEST).send().transactionCount.toLong()
         }.flatMap<ByteArray> {
             accountManager.signTransaction(from, password, toAddress, subUnitAmount, gasPrice, gasLimit,
-                    it, data, getDefaultNetwork().chainId.toLong())
+                    it, null, getDefaultNetwork().chainId.toLong())
         }.flatMap {
             Single.fromCallable {
                 val raw = web3j.ethSendRawTransaction(String.format("%02X", it)).send()

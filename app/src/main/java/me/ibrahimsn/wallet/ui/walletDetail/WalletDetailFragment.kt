@@ -3,6 +3,7 @@ package me.ibrahimsn.wallet.ui.walletDetail
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -44,6 +45,10 @@ class WalletDetailFragment : BaseFragment<HomeActivity>() {
             viewModel.deleteWallet()
         }
 
+        btExport.setOnClickListener {
+            viewModel.exportWallet("123456")
+        }
+
         viewModel.updateStatus.observe(this, Observer {
             if (it != null) {
                 viewModel.updateStatus.value = null
@@ -65,6 +70,11 @@ class WalletDetailFragment : BaseFragment<HomeActivity>() {
                     Toast.makeText(activity, "Something went wrong.", Toast.LENGTH_SHORT).show()
             }
         })
+
+        viewModel.exportString.observe(this, Observer {
+            if (it != null)
+                openShareDialog(it)
+        })
     }
 
     private fun validateForm(name: String): Boolean {
@@ -74,5 +84,13 @@ class WalletDetailFragment : BaseFragment<HomeActivity>() {
         }
 
         return true
+    }
+
+    private fun openShareDialog(jsonData: String) {
+        val sharingIntent = Intent(Intent.ACTION_SEND)
+        sharingIntent.type = "text/plain"
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Keystore")
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, jsonData)
+        startActivityForResult(Intent.createChooser(sharingIntent, "Share via"), 13)
     }
 }

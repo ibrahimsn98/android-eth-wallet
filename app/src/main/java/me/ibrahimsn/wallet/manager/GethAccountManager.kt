@@ -1,5 +1,6 @@
 package me.ibrahimsn.wallet.manager
 
+import android.util.Log
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -69,7 +70,7 @@ class GethAccountManager @Inject constructor(keyStoreFile: File) {
     fun signTransaction(signer: Wallet, signerPassword: String,
                         toAddress: String, amount: BigInteger,
                         gasPrice: BigInteger, gasLimit: Long,
-                        nonce: Long, data: ByteArray,
+                        nonce: Long, data: ByteArray?,
                         chainId: Long): Single<ByteArray> {
 
         return Single.fromCallable {

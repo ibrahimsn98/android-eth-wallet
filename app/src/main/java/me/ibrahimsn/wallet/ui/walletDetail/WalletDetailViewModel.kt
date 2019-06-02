@@ -16,6 +16,7 @@ class WalletDetailViewModel @Inject constructor(private val walletRepository: Wa
     private val disposable = CompositeDisposable()
     val updateStatus: MutableLiveData<Boolean> = MutableLiveData()
     val deleteStatus: MutableLiveData<Boolean> = MutableLiveData()
+    val exportString: MutableLiveData<String> = MutableLiveData()
 
     var wallet: Wallet? = null
 
@@ -41,6 +42,14 @@ class WalletDetailViewModel @Inject constructor(private val walletRepository: Wa
                     .subscribe(this::onDeleteWallet, this::onDeleteWalletError))
     }
 
+    fun exportWallet(backupPassword: String) {
+        if (wallet != null)
+            disposable.add(walletRepository.exportWallet(wallet!!, backupPassword)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(exportString::postValue, this::onExportWalletError))
+    }
+
     private fun onUpdateWalletName() {
         updateStatus.postValue(true)
     }
@@ -57,6 +66,10 @@ class WalletDetailViewModel @Inject constructor(private val walletRepository: Wa
     private fun onDeleteWalletError(e: Throwable) {
         Log.d(Constants.TAG, "Error:", e)
         deleteStatus.postValue(false)
+    }
+
+    private fun onExportWalletError(e: Throwable) {
+        Log.d(Constants.TAG, "Error:", e)
     }
 
     override fun onCleared() {

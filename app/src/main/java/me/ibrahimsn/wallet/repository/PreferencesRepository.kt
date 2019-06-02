@@ -12,7 +12,6 @@ class PreferencesRepository @Inject constructor(context: Context) {
     private val DEFAULT_NETWORK_NAME_KEY = "default_network_name"
     private val GAS_PRICE_KEY = "gas_price"
     private val GAS_LIMIT_KEY = "gas_limit"
-    private val GAS_LIMIT_FOR_TOKENS_KEY = "gas_limit_for_tokens"
 
     private var prefs = PreferenceManager.getDefaultSharedPreferences(context)
 
@@ -32,12 +31,9 @@ class PreferencesRepository @Inject constructor(context: Context) {
         prefs.edit().putString(DEFAULT_NETWORK_NAME_KEY, netName).apply()
     }
 
-    fun getGasSettings(forTokenTransfer: Boolean): GasSettings {
+    fun getGasSettings(): GasSettings {
         val gasPrice = BigInteger(prefs.getString(GAS_PRICE_KEY, Constants.DEFAULT_GAS_PRICE))
-        var gasLimit = BigInteger(prefs.getString(GAS_LIMIT_KEY, Constants.DEFAULT_GAS_LIMIT))
-
-        if (forTokenTransfer)
-            gasLimit = BigInteger(prefs.getString(GAS_LIMIT_FOR_TOKENS_KEY, Constants.DEFAULT_GAS_LIMIT_FOR_TOKENS))
+        val gasLimit = prefs.getString(GAS_LIMIT_KEY, Constants.DEFAULT_GAS_LIMIT)!!.toLong()
 
         return GasSettings(gasPrice, gasLimit)
     }
