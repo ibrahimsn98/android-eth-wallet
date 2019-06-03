@@ -14,10 +14,10 @@ class WalletRepository @Inject constructor(private var gethAccountManager: GethA
                                            private var passwordRepository: PasswordRepository,
                                            private var preferencesRepository: PreferencesRepository) {
 
-    fun fetchWallets(): LiveData<List<Wallet>> {
-        return walletDao.getAll()
-    }
-
+    /**
+     * Fetch all wallets from database and compare each with
+     * current wallet address stored in sharedPreferences.
+     */
     fun getCurrentWallet(): Maybe<Wallet?> {
         return walletDao.getAllRx().flatMapMaybe {
             val currentAddress = preferencesRepository.getCurrentWalletAddress()
@@ -35,14 +35,25 @@ class WalletRepository @Inject constructor(private var gethAccountManager: GethA
         }
     }
 
-    fun importPublicAddress(name: String, address: String): Completable {
-        return Completable.fromCallable {
-            Wallet(name, address).apply {
-                this.id = walletDao.insert(this)
-            }
+    /**
+     * If doesn't exists, insert wallet with "public address" into database
+     */
+    fun importPublicAddress(name: String, address: String): Single<Wallet> {
+        return Single.fromCallable {
+            if (walletDao.count(address) > 0)
+                throw Exception("This address is already imported!")
+            else
+                Wallet(name, address).apply {
+                    walletDao.insert(this)
+                }
         }
     }
 
+    /**
+     * Generate password for new wallet
+     * Save password into keystore
+     * If succeed, insert wallet into database
+     */
     fun createWallet(name: String): Single<Wallet> {
         return passwordRepository.generatePassword().flatMap { password ->
             gethAccountManager.createAccount(password)
@@ -56,17 +67,72 @@ class WalletRepository @Inject constructor(private var gethAccountManager: GethA
         }
     }
 
-    fun importPrivateKeyToWallet(name: String, privateKey: String): Completable {
-        return Completable.fromSingle(passwordRepository.generatePassword().flatMap { password ->
+    /**
+     * Generate password for new wallet
+     * Import private key into GethAccountManager
+     * If imported wallet's public address exists in keystore, delete it back from GethAccountManager
+     * Save generated password into keystore
+     * If succeed, insert wallet into database
+     */
+    fun importPrivateKeyToWallet(name: String, privateKey: String): Single<Wallet> {
+        return passwordRepository.generatePassword().flatMap { password ->
             gethAccountManager.importPrivateKey(privateKey, password)
-        }.flatMap {
-            passwordRepository.setPassword(it.first, it.second).toSingle { it.first }
+        }.flatMap { pair ->
+            if (passwordRepository.isExists(pair.first.address)) {
+                gethAccountManager.deleteAccount(pair.first.address, pair.second)
+                throw Exception("This address has already exists in keystore.")
+            }
+
+            passwordRepository.setPassword(pair.first, pair.second).toSingle { pair.first }
         }.doAfterSuccess {
             walletDao.insert(it.apply {
                 this.name = name
                 this.isWallet = true
             })
-        })
+        }
+    }
+
+    /**
+     * Generate password for new wallet
+     * Import keystore into GethAccountManager
+     * If imported wallet's public address exists in Android keystore, delete it back from GethAccountManager
+     * Save generated password into keystore
+     * If succeed, insert wallet into database
+     *
+     * @param backupPassword - password that identified while exporting keystore
+     */
+    fun importKeystore(name: String, store: String, backupPassword: String): Single<Wallet> {
+        return passwordRepository.generatePassword()
+                .flatMap { newPassword ->
+                    gethAccountManager.importKeystore(store, backupPassword, newPassword)
+                }.flatMap { pair ->
+                    if (passwordRepository.isExists(pair.first.address)) {
+                        gethAccountManager.deleteAccount(pair.first.address, pair.second)
+                        throw Exception("This address has already exists in keystore.")
+                    }
+
+                    passwordRepository.setPassword(pair.first, pair.second).toSingle { pair.first }
+                }.doOnSuccess {
+                    walletDao.insert(it.apply {
+                        this.name = name
+                        this.isWallet = true
+                    })
+                }
+    }
+
+    /**
+     * Export wallet keystore string
+     * @param backupPassword - password that used to import keystore back
+     */
+    fun exportWallet(wallet: Wallet, backupPassword: String): Single<String> {
+        return passwordRepository.getPassword(wallet)
+                .flatMap { password ->
+                    gethAccountManager.exportAccount(wallet, password, backupPassword)
+                }
+    }
+
+    fun fetchWallets(): LiveData<List<Wallet>> {
+        return walletDao.getAll()
     }
 
     fun updateWalletName(wallet: Wallet, newName: String): Completable {
@@ -77,26 +143,6 @@ class WalletRepository @Inject constructor(private var gethAccountManager: GethA
                 })
             })
         })
-    }
-
-    fun importKeystore(name: String, store: String, backupPassword: String): Completable {
-        return Completable.fromSingle(passwordRepository.generatePassword()
-                .flatMap { newPassword ->
-                    gethAccountManager.importKeyStore(store, backupPassword, newPassword)
-                }.flatMap {
-                    passwordRepository.setPassword(it.first, it.second).toSingle { it.first }
-                }.doOnSuccess {
-                    walletDao.insert(it.apply {
-                        this.name = name
-                    })
-                })
-    }
-
-    fun exportWallet(wallet: Wallet, backupPassword: String): Single<String> {
-        return passwordRepository.getPassword(wallet)
-                .flatMap { password ->
-                    gethAccountManager.exportAccount(wallet, password, backupPassword)
-                }
     }
 
     fun deleteWallet(wallet: Wallet): Completable {

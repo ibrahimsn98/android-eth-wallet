@@ -39,7 +39,7 @@
 	<me.ibrahimsn.lib.NiceBottomBar
 		android:id="@+id/bottomBar"
 		android:layout_width="match_parent"
-		android:layout_height="60dp"
+		android:layout_height="62dp"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:backgroundColor="@color/colorBackground"
 		app:textColor="@color/colorTextSecondary"
@@ -48,7 +48,8 @@
 		app:badgeColor="@color/colorAccent"
 		app:indicatorEnabled="false"
 		app:textSize="13sp"
-		app:iconMargin="4dp"
+		app:iconSize="24dp"
+		app:iconMargin="0dp"
 		app:itemFontFamily="@font/quicksand"
 		app:menu="@menu/bottom_menu" />
 

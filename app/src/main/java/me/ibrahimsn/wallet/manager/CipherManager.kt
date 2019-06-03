@@ -30,6 +30,17 @@ class CipherManager(private val context: Context) {
         return getData(address, address, address + "iv")
     }
 
+    fun isExists(alias: String): Boolean {
+        try {
+            val keyStore = KeyStore.getInstance(ANDROID_KEY_STORE)
+            keyStore.load(null)
+
+            return keyStore.containsAlias(alias)
+        } catch (e: Exception) {
+            throw Exception(e)
+        }
+    }
+
     private fun setData(data: ByteArray?, alias: String, aliasFile: String, aliasIV: String): Boolean {
 
         if (data == null)

@@ -35,12 +35,14 @@ class ImportKeystoreFragment : BaseFragment<AddWalletActivity>() {
         }
 
         viewModel.status.observe(this, Observer {
-            if (it != null)
+            if (it != null) {
+                viewModel.status.value = null
                 if (it) {
                     Toast.makeText(activity, "Wallet has been imported.", Toast.LENGTH_SHORT).show()
                     activity.finish()
                 } else
                     Toast.makeText(activity, "Something went wrong.", Toast.LENGTH_SHORT).show()
+            }
         })
     }
 

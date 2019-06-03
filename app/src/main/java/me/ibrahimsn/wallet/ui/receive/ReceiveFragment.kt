@@ -15,6 +15,7 @@ import javax.inject.Inject
 import android.content.ClipData
 import android.content.Context.CLIPBOARD_SERVICE
 import android.content.ClipboardManager
+import android.widget.Toast
 
 class ReceiveFragment : BaseFragment<HomeActivity>() {
 
@@ -33,8 +34,10 @@ class ReceiveFragment : BaseFragment<HomeActivity>() {
         activity.setTitle("Receive Ethereum")
 
         ibCopyAddress.setOnClickListener {
-            if (address != "")
+            if (address != "") {
                 copyToClipboard(address)
+                Toast.makeText(activity, "Wallet address has been copied.", Toast.LENGTH_SHORT).show()
+            }
         }
 
         btShareAddress.setOnClickListener {

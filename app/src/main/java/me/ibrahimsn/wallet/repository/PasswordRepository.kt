@@ -1,7 +1,6 @@
 package me.ibrahimsn.wallet.repository
 
 import android.content.Context
-import android.util.Log
 import io.reactivex.Completable
 import io.reactivex.Single
 import me.ibrahimsn.wallet.entity.Wallet
@@ -19,6 +18,10 @@ class PasswordRepository @Inject constructor(context: Context) {
 
     fun setPassword(wallet: Wallet, password: String): Completable {
         return Completable.fromAction { cipher.put(wallet.address, password) }
+    }
+
+    fun isExists(address: String): Boolean {
+        return cipher.isExists(address)
     }
 
     fun generatePassword(): Single<String> {

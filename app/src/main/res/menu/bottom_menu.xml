@@ -4,16 +4,16 @@
 	<item
 		android:id="@+id/nav_wallet"
 		android:title="@string/menu_wallet"
-		android:icon="@drawable/ic_wallet" />
+		android:icon="@drawable/ic_account_balance_white_24dp" />
 
 	<item
 		android:id="@+id/nav_transactions"
 		android:title="@string/menu_transactions"
-		android:icon="@drawable/ic_wallet" />
+		android:icon="@drawable/ic_swap_vert_white_24dp" />
 
 	<item
 		android:id="@+id/nav_menu"
 		android:title="@string/menu_menu"
-		android:icon="@drawable/ic_wallet" />
+		android:icon="@drawable/ic_menu_white_24dp" />
 
 </menu>

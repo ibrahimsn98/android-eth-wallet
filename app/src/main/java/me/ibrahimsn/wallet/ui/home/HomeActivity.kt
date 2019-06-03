@@ -54,6 +54,8 @@ class HomeActivity : BaseActivity(), NavController.OnDestinationChangedListener 
 
     override fun onBackPressed() {
         when (navController.currentDestination!!.id) {
+            R.id.transactionsFragment -> navController.navigate(R.id.walletFragment)
+            R.id.menuFragment -> navController.navigate(R.id.walletFragment)
             R.id.walletFragment -> finish()
             else ->  super.onBackPressed()
         }

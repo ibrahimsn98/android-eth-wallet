@@ -7,11 +7,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import me.ibrahimsn.wallet.entity.Wallet
+import me.ibrahimsn.wallet.repository.PreferencesRepository
 import me.ibrahimsn.wallet.repository.WalletRepository
 import me.ibrahimsn.wallet.util.Constants
 import javax.inject.Inject
 
-class CreateWalletViewModel @Inject constructor(private val walletRepository: WalletRepository) : ViewModel() {
+class CreateWalletViewModel @Inject constructor(private val walletRepository: WalletRepository,
+                                                private val preferencesRepository: PreferencesRepository) : ViewModel() {
 
     private val disposable = CompositeDisposable()
     val status: MutableLiveData<Boolean> = MutableLiveData()
@@ -27,6 +29,7 @@ class CreateWalletViewModel @Inject constructor(private val walletRepository: Wa
     }
 
     private fun onCreateWallet(wallet: Wallet) {
+        preferencesRepository.setCurrentWalletAddress(wallet.address)
         status.postValue(true)
     }
 

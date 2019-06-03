@@ -2,7 +2,6 @@ package me.ibrahimsn.wallet.room
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
-import io.reactivex.Flowable
 import io.reactivex.Single
 import me.ibrahimsn.wallet.entity.Wallet
 
@@ -17,6 +16,9 @@ interface WalletDao {
 
     @Insert
     fun insert(wallet: Wallet): Long
+
+    @Query("SELECT COUNT(address) FROM wallets WHERE address = :address")
+    fun count(address: String): Int
 
     @Delete
     fun delete(wallet: Wallet)

@@ -6,11 +6,14 @@ import android.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import me.ibrahimsn.wallet.entity.Wallet
+import me.ibrahimsn.wallet.repository.PreferencesRepository
 import me.ibrahimsn.wallet.repository.WalletRepository
 import me.ibrahimsn.wallet.util.Constants
 import javax.inject.Inject
 
-class ImportAddressViewModel @Inject constructor(private val walletRepository: WalletRepository) : ViewModel() {
+class ImportAddressViewModel @Inject constructor(private val walletRepository: WalletRepository,
+                                                 private val preferencesRepository: PreferencesRepository) : ViewModel() {
 
     private val disposable = CompositeDisposable()
     val status: MutableLiveData<Boolean> = MutableLiveData()
@@ -25,7 +28,8 @@ class ImportAddressViewModel @Inject constructor(private val walletRepository: W
                 .subscribe(this::onImportPublicAddress, this::onRxError))
     }
 
-    private fun onImportPublicAddress() {
+    private fun onImportPublicAddress(wallet: Wallet) {
+        preferencesRepository.setCurrentWalletAddress(wallet.address)
         status.postValue(true)
     }
 
