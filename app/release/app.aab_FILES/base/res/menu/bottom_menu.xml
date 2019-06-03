@@ -1,0 +1,34 @@
+
+å	
+9
+android*http://schemas.android.com/apk/res/androidmenu*
+
+	A*ş
+õitem"–
+*http://schemas.android.com/apk/res/androidicon'@drawable/ic_account_balance_white_24dp"(‚€„20
+.â€œø&drawable/ic_account_balance_white_24dp"c
+*http://schemas.android.com/apk/res/androidid@+id/nav_wallet"(Ğ„2
+°¤øid/nav_wallet"o
+*http://schemas.android.com/apk/res/androidtitle@string/menu_wallet"(áƒ„2
+Ú€Äøstring/menu_wallet*
+
+	;*Š
+item"Š
+*http://schemas.android.com/apk/res/androidicon!@drawable/ic_swap_vert_white_24dp"	(‚€„2*
+(ö€œø drawable/ic_swap_vert_white_24dp"o
+*http://schemas.android.com/apk/res/androidid@+id/nav_transactions"	(Ğ„2
+¯¤øid/nav_transactions"{
+*http://schemas.android.com/apk/res/androidtitle@string/menu_transactions"	(áƒ„2"
+ Ù€Äøstring/menu_transactions	*
+
+	5*à
+×item"€
+*http://schemas.android.com/apk/res/androidicon@drawable/ic_menu_white_24dp"(‚€„2%
+#ì€œødrawable/ic_menu_white_24dp"_
+*http://schemas.android.com/apk/res/androidid@+id/nav_menu"(Ğ„2
+®¤øid/nav_menu"k
+*http://schemas.android.com/apk/res/androidtitle@string/menu_menu"(áƒ„2
+Ø€Äøstring/menu_menu*
+
+
+0

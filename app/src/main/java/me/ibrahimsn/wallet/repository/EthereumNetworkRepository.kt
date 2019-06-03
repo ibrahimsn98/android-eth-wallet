@@ -46,8 +46,6 @@ class EthereumNetworkRepository @Inject constructor(private val preferencesRepos
     }
 
     fun getDefaultNetwork(): NetworkInfo {
-
-
         return defaultNetwork
     }
 

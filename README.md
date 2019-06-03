@@ -1,12 +1,18 @@
 ## Android Ethereum Wallet
 
 ### Features
-- [x] Networks main, rinkeby, ropsten, kovan
+- [x] Test networks rinkeby, ropsten, kovan
 - [x] Keys are stored only on device
 - [x] Watch only accounts
-- [ ] Offline signing
+- [x] Export wallet keystore
+- [x] Dynamic network fee option
+- [ ] Main ETH network
 - [ ] Transaction status
-- [ ] Dynamic network fee option
+- [ ] Wallet QR code scanner
+- [ ] Real time transaction notifications
+
+### Screenshots
+<img src="https://github.com/ibrahimsn98/android-eth-wallet/tree/master/art/screenshot.png" height="520">
 
 ### Tech Stack
 - [Web3j](https://web3j.io/)
@@ -15,3 +21,10 @@
 - [RxJava](https://github.com/ReactiveX/RxJava)
 - [MVVM with Android Architecture Components](https://developer.android.com/topic/libraries/architecture)
 - [Retrofit](https://github.com/square/retrofit)
+
+### References
+- [TrustWallet/trust-wallet-android-source](https://github.com/TrustWallet/trust-wallet-android-source)
+- [walleth/walleth](https://github.com/walleth/walleth)
+
+### License
+MIT

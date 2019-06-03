@@ -15,10 +15,23 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        splits {
+            abi {
+                enable true
+                reset()
+                include 'x86_64', 'x86', 'armeabi-v7a', 'arm64-v8a'
+                universalApk false
+            }
+        }
     }
     buildTypes {
+        debug {
+            buildConfigField 'String', "EtherscanApi", Etherscan_API
+        }
         release {
-            minifyEnabled false
+            buildConfigField 'String', "EtherscanApi", Etherscan_API
+
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -69,8 +82,6 @@ dependencies {
 
     implementation "io.reactivex.rxjava2:rxkotlin:$rxVersion"
     implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
-
-    implementation 'android.arch.paging:runtime:1.0.1'
 
     implementation "android.arch.lifecycle:extensions:$lifeCycleVersion"
     kapt "android.arch.lifecycle:compiler:$lifeCycleVersion"

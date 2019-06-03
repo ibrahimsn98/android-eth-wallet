@@ -41,7 +41,7 @@
 				android:id="@+id/textView"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="For collecting payments"
+				android:text="@string/except_pending_transactions"
 				android:textSize="13sp"
 				android:textColor="@color/colorTextPrimary"/>
 

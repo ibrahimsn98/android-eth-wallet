@@ -10,6 +10,7 @@ import me.ibrahimsn.wallet.entity.Wallet
 import me.ibrahimsn.wallet.repository.PreferencesRepository
 import me.ibrahimsn.wallet.repository.WalletRepository
 import me.ibrahimsn.wallet.util.Constants
+import me.ibrahimsn.wallet.util.RxBus
 import javax.inject.Inject
 
 class ImportAddressViewModel @Inject constructor(private val walletRepository: WalletRepository,
@@ -30,6 +31,7 @@ class ImportAddressViewModel @Inject constructor(private val walletRepository: W
 
     private fun onImportPublicAddress(wallet: Wallet) {
         preferencesRepository.setCurrentWalletAddress(wallet.address)
+        RxBus.publish(RxBus.RxEvent.OnChangeCurrentWallet(wallet))
         status.postValue(true)
     }
 

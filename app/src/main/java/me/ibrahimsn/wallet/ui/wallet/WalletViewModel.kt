@@ -61,7 +61,7 @@ class WalletViewModel @Inject constructor(private val networkRepository: Ethereu
      */
     private fun fetchTransaction(wallet: Wallet?) {
         if (wallet != null)
-            disposable.add(etherScanRepository.fetchTransaction(wallet.address, 1, 4)
+            disposable.add(etherScanRepository.fetchTransaction(wallet.address, 1, 3)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::onFetchTransactions, this::onRxError))

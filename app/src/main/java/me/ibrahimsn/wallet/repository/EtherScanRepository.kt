@@ -2,6 +2,7 @@ package me.ibrahimsn.wallet.repository
 
 import com.google.gson.Gson
 import io.reactivex.Single
+import me.ibrahimsn.wallet.BuildConfig
 import me.ibrahimsn.wallet.entity.EtherPriceResponse
 import me.ibrahimsn.wallet.entity.EtherScanResponse
 import okhttp3.OkHttpClient
@@ -40,11 +41,10 @@ class EtherScanRepository @Inject constructor(okHttpClient: OkHttpClient, gson: 
     }
 
     fun fetchTransaction(address: String, page: Int, offset: Int): Single<EtherScanResponse> {
-        return etherScanApiClient.fetchTransaction(address, page, offset, "DESC",
-                "SGPX7HN5MJNWMMYDFUKUW7XTM21EDG2T1N")
+        return etherScanApiClient.fetchTransaction(address, page, offset, "DESC", BuildConfig.EtherscanApi)
     }
 
     fun fetchEthPrice(): Single<EtherPriceResponse> {
-        return etherScanApiClient.fetchEthPrice("SGPX7HN5MJNWMMYDFUKUW7XTM21EDG2T1N")
+        return etherScanApiClient.fetchEthPrice(BuildConfig.EtherscanApi)
     }
 }

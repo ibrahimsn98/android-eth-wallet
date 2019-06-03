@@ -1,0 +1,91 @@
+
+÷'
+9
+android*http://schemas.android.com/apk/res/androidRelativeLayout"|style2@style/RtlOverlay.Widget.AppCompat.Search.DropDown"2;
+9ßÈø1style/RtlOverlay.Widget.AppCompat.Search.DropDown"R
+*http://schemas.android.com/apk/res/androidlayout_height58dip"(õ„2:ht"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ*
+
+    K*
+    -*Ô
+Ë	ImageView"ˆstyle8@style/RtlOverlay.Widget.AppCompat.Search.DropDown.Icon1"2A
+?àÈø7style/RtlOverlay.Widget.AppCompat.Search.DropDown.Icon1"g
+*http://schemas.android.com/apk/res/androidid@android:id/icon1"(Ğ„2
+‡€ˆandroid:id/icon1"[
+*http://schemas.android.com/apk/res/androidlayout_alignParentBottomtrue"(ƒ„2:@"X
+*http://schemas.android.com/apk/res/androidlayout_alignParentToptrue"(Œƒ„2:@"R
+*http://schemas.android.com/apk/res/androidlayout_height48dip"(õ„2:h`"”
+*http://schemas.android.com/apk/res/androidlayout_width"@dimen/abc_dropdownitem_icon_width"(ô„2+
+)©€˜ø!dimen/abc_dropdownitem_icon_width"T
+*http://schemas.android.com/apk/res/android	scaleTypecenterInside"(‚„2:0"R
+*http://schemas.android.com/apk/res/android
+visibility	invisible"(Ü„2:0*
+
+    #R*–
+	ImageView"ˆstyle8@style/RtlOverlay.Widget.AppCompat.Search.DropDown.Query"%2A
+?âÈø7style/RtlOverlay.Widget.AppCompat.Search.DropDown.Query"Œ
+*http://schemas.android.com/apk/res/android
+background?attr/selectableItemBackground"%(Ô„2)
+'¨ƒŒøattr/selectableItemBackground"c
+*http://schemas.android.com/apk/res/androidid@+id/edit_query"%(Ğ„2
+à€¤øid/edit_query"[
+*http://schemas.android.com/apk/res/androidlayout_alignParentBottomtrue"%(ƒ„2:@"X
+*http://schemas.android.com/apk/res/androidlayout_alignParentToptrue"%(Œƒ„2:@"R
+*http://schemas.android.com/apk/res/androidlayout_height48dip"%(õ„2:h`"Q
+*http://schemas.android.com/apk/res/androidlayout_width48dip"%(ô„2:h`"T
+*http://schemas.android.com/apk/res/android	scaleTypecenterInside"%(‚„2:0"M
+*http://schemas.android.com/apk/res/android
+visibilitygone"%(Ü„2:0%*
+
+    .R*ï
+æ	ImageView"ˆstyle8@style/RtlOverlay.Widget.AppCompat.Search.DropDown.Icon2"02A
+?áÈø7style/RtlOverlay.Widget.AppCompat.Search.DropDown.Icon2"g
+*http://schemas.android.com/apk/res/androidid@id/android:icon2"0(Ğ„2
+ˆ€ˆandroid:id/icon2"[
+*http://schemas.android.com/apk/res/androidlayout_alignParentBottomtrue"0(ƒ„2:@"X
+*http://schemas.android.com/apk/res/androidlayout_alignParentToptrue"0(Œƒ„2:@"b
+*http://schemas.android.com/apk/res/androidlayout_alignWithParentIfMissingtrue"0(’ƒ„2:@"R
+*http://schemas.android.com/apk/res/androidlayout_height48dip"0(õ„2:h`"Q
+*http://schemas.android.com/apk/res/androidlayout_width48dip"0(ô„2:h`"T
+*http://schemas.android.com/apk/res/android	scaleTypecenterInside"0(‚„2:0"M
+*http://schemas.android.com/apk/res/android
+visibilitygone"0(Ü„2:00*
+
+
+    9R*
+    =)*¯
+¦TextView"Wstyle?android:attr/dropDownItemStyle">2)
+'†„android:attr/dropDownItemStyle"I
+*http://schemas.android.com/apk/res/androidgravitytop">(¯„2:80"g
+*http://schemas.android.com/apk/res/androidid@android:id/text2">(Ğ„2
+•€ˆandroid:id/text2"[
+*http://schemas.android.com/apk/res/androidlayout_alignParentBottomtrue">(ƒ„2:@"b
+*http://schemas.android.com/apk/res/androidlayout_alignWithParentIfMissingtrue">(’ƒ„2:@"R
+*http://schemas.android.com/apk/res/androidlayout_height29dip">(õ„2:h:"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent">(ô„2:0ÿÿÿÿÿÿÿÿÿ"Q
+*http://schemas.android.com/apk/res/androidpaddingBottom4dip">(Ù„2:h"M
+*http://schemas.android.com/apk/res/android
+singleLinetrue">(İ‚„2:@"¤
+*http://schemas.android.com/apk/res/androidtextAppearance(?attr/textAppearanceSearchResultSubtitle">(´€„23
+1ûƒŒø'attr/textAppearanceSearchResultSubtitle"M
+*http://schemas.android.com/apk/res/android
+visibilitygone">(Ü„2:0>*
+
+    H**
+    K+*×
+ÎTextView"Wstyle?android:attr/dropDownItemStyle"L2)
+'†„android:attr/dropDownItemStyle"g
+*http://schemas.android.com/apk/res/androidid@android:id/text1"L(Ğ„2
+”€ˆandroid:id/text1"q
+*http://schemas.android.com/apk/res/androidlayout_above@android:id/text2"L(„ƒ„2
+•€ˆandroid:id/text2"X
+*http://schemas.android.com/apk/res/androidlayout_centerVerticaltrue"L(‘ƒ„2:@"a
+*http://schemas.android.com/apk/res/androidlayout_heightwrap_content"L(õ„2:0şÿÿÿÿÿÿÿÿ"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"L(ô„2:0ÿÿÿÿÿÿÿÿÿ"M
+*http://schemas.android.com/apk/res/android
+singleLinetrue"L(İ‚„2:@"
+*http://schemas.android.com/apk/res/androidtextAppearance%?attr/textAppearanceSearchResultTitle"L(´€„20
+.üƒŒø$attr/textAppearanceSearchResultTitleL*
+
+
+S9

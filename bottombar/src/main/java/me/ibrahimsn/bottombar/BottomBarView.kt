@@ -1,2 +1,0 @@
-package me.ibrahimsn.bottombar
-

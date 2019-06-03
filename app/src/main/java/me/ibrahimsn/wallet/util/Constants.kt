@@ -3,6 +3,8 @@ package me.ibrahimsn.wallet.util
 object Constants {
 
     const val TAG = "###"
+    const val GITHUB_REPO = "https://github.com/ibrahimsn98/android-eth-wallet"
+    const val GITHUB_REPO_ISSUES = "https://github.com/ibrahimsn98/android-eth-wallet/issues"
 
     const val ETHEREUM_NETWORK_NAME = "Ethereum"
     const val KOVAN_NETWORK_NAME = "Kovan (Test)"

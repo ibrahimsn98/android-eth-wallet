@@ -1,0 +1,21 @@
+
+“
+
+9
+android*http://schemas.android.com/apk/res/androidTextView"O
+*http://schemas.android.com/apk/res/android	ellipsizemarquee"(«„2:0"U
+*http://schemas.android.com/apk/res/androidgravitycenter_vertical"(¯„2:8"g
+*http://schemas.android.com/apk/res/androidid@android:id/text1"(Ğ„2
+”€ˆandroid:id/text1"a
+*http://schemas.android.com/apk/res/androidlayout_heightwrap_content"(õ„2:0şÿÿÿÿÿÿÿÿ"`
+*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ"“
+*http://schemas.android.com/apk/res/android	minHeight"?attr/listPreferredItemHeightSmall"(À‚„2-
++í‚Œø!attr/listPreferredItemHeightSmall"•
+*http://schemas.android.com/apk/res/androidpaddingLeft"?attr/listPreferredItemPaddingLeft"(Ö„2-
++î‚Œø!attr/listPreferredItemPaddingLeft"˜
+*http://schemas.android.com/apk/res/androidpaddingRight#?attr/listPreferredItemPaddingRight"(Ø„2.
+,ï‚Œø"attr/listPreferredItemPaddingRight"–
+*http://schemas.android.com/apk/res/androidtextAppearance!?attr/textAppearanceListItemSmall"(´€„2,
+*øƒŒø attr/textAppearanceListItemSmall"“
+*http://schemas.android.com/apk/res/android	textColor"?attr/textColorAlertDialogListItem"(˜„2-
++‚„Œø!attr/textColorAlertDialogListItem

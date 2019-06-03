@@ -1,0 +1,81 @@
+
+†
+9
+android*http://schemas.android.com/apk/res/android
+2
+app'http://schemas.android.com/apk/res-auto
+navigation"v
+'http://schemas.android.com/apk/res-autostartDestination@id/walletFragment"(»ƒŒø2
+½‚¤øid/walletFragment"k
+*http://schemas.android.com/apk/res/androidid@+id/home_graph.xml"(Ğ„2
+ÿ€¤øid/home_graph.xml*
+
+	+*õ
+ìfragment"k
+*http://schemas.android.com/apk/res/androidid@+id/walletFragment"(Ğ„2
+½‚¤øid/walletFragment"H
+*http://schemas.android.com/apk/res/androidlabelWalletFragment(€„"e
+*http://schemas.android.com/apk/res/androidname,me.ibrahimsn.wallet.ui.wallet.WalletFragment(ƒ€„*
+			"*¨
+Ÿaction"s
+'http://schemas.android.com/apk/res-autodestination@id/receiveFragment"
+(´Œø2
+Å¤øid/receiveFragment"Ÿ
+*http://schemas.android.com/apk/res/androidid-@+id/action_walletFragment_to_receiveFragment"
+(Ğ„25
+3 €¤ø+id/action_walletFragment_to_receiveFragment
+*
+
+	+*
+
+	*ç
+Şfragment"g
+*http://schemas.android.com/apk/res/androidid@+id/menuFragment"(Ğ„2
+¦¤øid/menuFragment"F
+*http://schemas.android.com/apk/res/androidlabelMenuFragment(€„"a
+*http://schemas.android.com/apk/res/androidname(me.ibrahimsn.wallet.ui.menu.MenuFragment(ƒ€„*
+		 *¤
+›action"s
+'http://schemas.android.com/apk/res-autodestination@id/walletsFragment"(´Œø2
+¾‚¤øid/walletsFragment"›
+*http://schemas.android.com/apk/res/androidid+@+id/action_menuFragment_to_walletsFragment"(Ğ„23
+1—€¤ø)id/action_menuFragment_to_walletsFragment*
+
+	+*
+
+	*
+‡fragment"m
+*http://schemas.android.com/apk/res/androidid@+id/walletsFragment"(Ğ„2
+¾‚¤øid/walletsFragment"I
+*http://schemas.android.com/apk/res/androidlabelWalletsFragment(€„"g
+*http://schemas.android.com/apk/res/androidname.me.ibrahimsn.wallet.ui.wallets.WalletsFragment(ƒ€„*
+		#*¾
+µaction"}
+'http://schemas.android.com/apk/res-autodestination@id/walletDetailFragment"(´Œø2!
+¼‚¤øid/walletDetailFragment"«
+*http://schemas.android.com/apk/res/androidid3@+id/action_walletsFragment_to_walletDetailFragment"(Ğ„2;
+9¡€¤ø1id/action_walletsFragment_to_walletDetailFragment*
+
+	0*
+
+	*¶
+­fragment"m
+*http://schemas.android.com/apk/res/androidid@+id/receiveFragment"(Ğ„2
+Å¤øid/receiveFragment"I
+*http://schemas.android.com/apk/res/androidlabelReceiveFragment(€„"g
+*http://schemas.android.com/apk/res/androidname.me.ibrahimsn.wallet.ui.receive.ReceiveFragment(ƒ€„*
+
+	!$*Ï
+Æfragment"w
+*http://schemas.android.com/apk/res/androidid@+id/transactionsFragment""(Ğ„2!
+‚¤øid/transactionsFragment"N
+*http://schemas.android.com/apk/res/androidlabelTransactionsFragment(€„"q
+*http://schemas.android.com/apk/res/androidname8me.ibrahimsn.wallet.ui.transactions.TransactionsFragment(ƒ€„"*
+
+	%)*Ï
+Æfragment"w
+*http://schemas.android.com/apk/res/androidid@+id/walletDetailFragment"&(Ğ„2!
+¼‚¤øid/walletDetailFragment"N
+*http://schemas.android.com/apk/res/androidlabelWalletDetailFragment(€„"q
+*http://schemas.android.com/apk/res/androidname8me.ibrahimsn.wallet.ui.walletDetail.WalletDetailFragment(ƒ€„&*	
+))

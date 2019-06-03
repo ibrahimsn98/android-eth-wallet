@@ -52,7 +52,7 @@
 	<string name="current_wallet">Current Wallet</string>
 	<string name="other">Other</string>
 	<string name="ethereum_network">Ethereum Network</string>
-	<string name="send_feedback">Send Feedback</string>
+	<string name="report_bug">Report Bug</string>
 	<string name="privacy_policy">Privacy Policy</string>
 	<string name="source_code">Source Code</string>
 
@@ -103,9 +103,7 @@
 	<string name="last_transactions">Last Transactions</string>
 	<string name="wallet_detail">Wallet Detail</string>
 	<string name="share_via">Share via</string>
-	<string name=""></string>
-	<string name=""></string>
-	<string name=""></string>
-	<string name=""></string>
+
+	<string name="except_pending_transactions">Except pending transactions</string>
 
 </resources>

@@ -1,0 +1,19 @@
+
+
+9
+android*http://schemas.android.com/apk/res/android
+2
+app'http://schemas.android.com/apk/res-automenu*
+
+	5*ÿ
+öitem"O
+'http://schemas.android.com/apk/res-autoshowAsActionifRoom"(ªƒŒø2:8"r
+*http://schemas.android.com/apk/res/androidicon@drawable/ic_add_24dp"(‚€„2
+ã€œødrawable/ic_add_24dp"c
+*http://schemas.android.com/apk/res/androidid@+id/action_add"(Ğ„2
+‰€¤øid/action_add"D
+*http://schemas.android.com/apk/res/androidtitle
+New Wallet(áƒ„*
+
+
+	

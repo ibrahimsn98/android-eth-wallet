@@ -12,7 +12,6 @@
 	    android:name=".base.BaseApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
 	    tools:ignore="AllowBackup,GoogleAppIndexingWarning">
@@ -31,10 +30,6 @@
 
 	    <activity
 		    android:name=".ui.home.HomeActivity"
-		    android:theme="@style/AppThemeNoActionBar"/>
-
-	    <activity
-		    android:name=".ui.start.StartActivity"
 		    android:theme="@style/AppThemeNoActionBar"/>
 
 	    <activity
