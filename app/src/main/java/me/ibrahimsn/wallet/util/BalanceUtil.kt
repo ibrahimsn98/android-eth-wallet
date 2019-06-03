@@ -58,6 +58,6 @@ object BalanceUtil {
         return BigDecimal(subunitAmount)
                 .divide(BigDecimal.valueOf(10)
                         .pow(ETHER_DECIMALS))
-                .setScale(5, RoundingMode.DOWN)
+                .setScale(3, RoundingMode.FLOOR)
     }
 }

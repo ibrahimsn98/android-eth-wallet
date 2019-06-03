@@ -34,7 +34,7 @@ class GethAccountManager @Inject constructor(keyStoreFile: File) {
         }
     }
 
-    private fun importKeyStore(store: String, password: String, newPassword: String): Single<Pair<Wallet, String>> {
+    fun importKeyStore(store: String, password: String, newPassword: String): Single<Pair<Wallet, String>> {
         return Single.fromCallable {
             val account = keyStore.importKey(store.toByteArray(Charset.forName("UTF-8")),
                     password, newPassword)

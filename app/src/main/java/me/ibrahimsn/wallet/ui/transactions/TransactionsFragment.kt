@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_transactions.*
+import kotlinx.android.synthetic.main.fragment_transactions.lyEmpty
+import kotlinx.android.synthetic.main.fragment_transactions.pbLoading
+import kotlinx.android.synthetic.main.fragment_transactions.rvTransactions
 import me.ibrahimsn.wallet.R
 import me.ibrahimsn.wallet.base.BaseFragment
 import me.ibrahimsn.wallet.ui.home.HomeActivity
@@ -33,6 +36,11 @@ class TransactionsFragment : BaseFragment<HomeActivity>() {
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
         }
+
+        viewModel.currentWallet.observe(this, Observer {
+            if (it != null)
+                transactionAdapter.setWalletAddress(it.address)
+        })
 
         viewModel.transactions.observe(this, Observer {
             if (it != null) {

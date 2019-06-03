@@ -1,11 +1,9 @@
 package me.ibrahimsn.wallet.repository
 
 import android.arch.lifecycle.LiveData
-import android.util.Log
 import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.Single
-import io.reactivex.observers.DisposableCompletableObserver
 import me.ibrahimsn.wallet.manager.GethAccountManager
 import me.ibrahimsn.wallet.entity.Wallet
 import me.ibrahimsn.wallet.room.WalletDao
@@ -34,18 +32,6 @@ class WalletRepository @Inject constructor(private var gethAccountManager: GethA
                 Maybe.just(w)
             else
                 Maybe.empty()
-        }
-    }
-
-    fun findGethWallet(address: String): Single<Boolean> {
-        return gethAccountManager.fetchAccounts().flatMap<Boolean> {
-            var exists = false
-
-            for (wallet in it)
-                if (wallet.address == address)
-                    exists = true
-
-            Single.just(exists)
         }
     }
 
@@ -93,11 +79,18 @@ class WalletRepository @Inject constructor(private var gethAccountManager: GethA
         })
     }
 
-    /*fun importKeystoreToWallet(name: String, store: String, password: String, newPassword: String): Single<Wallet> {
-        return gethAccountManager.importKeyStore(store, password, newPassword).doAfterSuccess {
-            walletDao.insert(it)
-        }
-    }*/
+    fun importKeystore(name: String, store: String, backupPassword: String): Completable {
+        return Completable.fromSingle(passwordRepository.generatePassword()
+                .flatMap { newPassword ->
+                    gethAccountManager.importKeyStore(store, backupPassword, newPassword)
+                }.flatMap {
+                    passwordRepository.setPassword(it.first, it.second).toSingle { it.first }
+                }.doOnSuccess {
+                    walletDao.insert(it.apply {
+                        this.name = name
+                    })
+                })
+    }
 
     fun exportWallet(wallet: Wallet, backupPassword: String): Single<String> {
         return passwordRepository.getPassword(wallet)
@@ -106,14 +99,14 @@ class WalletRepository @Inject constructor(private var gethAccountManager: GethA
                 }
     }
 
-    private fun deleteWallet(wallet: Wallet, password: String): Completable {
-        return Completable.fromAction { gethAccountManager.deleteAccount(wallet.address, password) }
-    }
-
     fun deleteWallet(wallet: Wallet): Completable {
-        return passwordRepository.getPassword(wallet).flatMapCompletable { password ->
-            gethAccountManager.deleteAccount(wallet.address, password)
-        }.doOnComplete {
+        return if (wallet.isWallet)
+            passwordRepository.getPassword(wallet).flatMapCompletable { password ->
+                gethAccountManager.deleteAccount(wallet.address, password)
+            }.doOnComplete {
+                walletDao.delete(wallet)
+            }
+        else Completable.fromAction {
             walletDao.delete(wallet)
         }
     }

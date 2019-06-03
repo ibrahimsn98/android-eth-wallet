@@ -18,6 +18,7 @@ import me.ibrahimsn.wallet.util.Constants
 import java.lang.StringBuilder
 import java.math.BigDecimal
 import java.math.BigInteger
+import java.math.RoundingMode
 import java.util.regex.Pattern
 import javax.inject.Inject
 
@@ -110,13 +111,20 @@ class SendFragment : BaseFragment<SendActivity>(), SeekBar.OnSeekBarChangeListen
     }
 
     private fun renderScreen() {
-        tvGasPrice.text = StringBuilder().append(BalanceUtil.weiToGwei(viewModel.gasSettings.gasPrice))
-                .append(" Gwei").toString()
+        tvGasPrice.text = StringBuilder()
+                .append(BalanceUtil.weiToGwei(viewModel.gasSettings.gasPrice))
+                .append(" Gwei")
+                .toString()
 
-        tvGasLimit.text = StringBuilder().append(viewModel.gasSettings.gasLimit).toString()
-        /*tvNetworkFee.text = StringBuilder().append(BalanceUtil
+        tvGasLimit.text = StringBuilder()
+                .append(viewModel.gasSettings.gasLimit)
+                .toString()
+
+        tvNetworkFee.text = StringBuilder()
+                .append(BalanceUtil
                 .weiToEth(viewModel.gasSettings.gasPrice
                         .multiply(viewModel.gasSettings.gasLimit.toBigInteger())))
-                .append(" ETH").toString()*/
+                .append(" ETH")
+                .toString()
     }
 }

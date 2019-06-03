@@ -36,14 +36,8 @@ class WalletsFragment : BaseFragment<HomeActivity>(), WalletAdapter.WalletCallba
 
         val walletAdapter = WalletAdapter(this)
 
-        nestedScrollView.isNestedScrollingEnabled = true
-        rvWallets.isNestedScrollingEnabled = false
         rvWallets.layoutManager = LinearLayoutManager(activity)
         rvWallets.adapter = walletAdapter
-
-        btAdd.setOnClickListener {
-            startActivity(Intent(activity, AddWalletActivity::class.java))
-        }
 
         viewModel.wallets.observe(this, Observer {
             if (it != null)

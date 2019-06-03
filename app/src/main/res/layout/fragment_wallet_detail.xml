@@ -65,7 +65,7 @@
 		android:text="Export Wallet"
 		android:textAllCaps="false"
 		android:background="@drawable/ic_button_background_dashed"
-		app:layout_constraintTop_toBottomOf="@id/btSave"/>
+		app:layout_constraintTop_toBottomOf="@id/btDelete"/>
 
 
 </android.support.constraint.ConstraintLayout>

@@ -21,6 +21,7 @@ class TransactionsViewModel @Inject constructor(private val etherScanRepository:
                                                 walletRepository: WalletRepository) : ViewModel() {
 
     private val disposable = CompositeDisposable()
+    val currentWallet: MutableLiveData<Wallet> = MutableLiveData()
     val transactions: MutableLiveData<List<Transaction>> = MutableLiveData()
     val ethPriceUsd: MutableLiveData<String> = MutableLiveData()
 
@@ -31,7 +32,8 @@ class TransactionsViewModel @Inject constructor(private val etherScanRepository:
         disposable.add(walletRepository.getCurrentWallet()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::fetchTransaction, this::onRxError))
+                .doOnSuccess(this::fetchTransaction)
+                .subscribe(this::onFetchCurrentWallet, this::onRxError))
 
         // Listen wallet changes
         disposable.add(RxBus.listen(RxBus.RxEvent.OnChangeCurrentWallet::class.java)
@@ -57,6 +59,10 @@ class TransactionsViewModel @Inject constructor(private val etherScanRepository:
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(this::onFetchTransaction, this::onRxError))
+    }
+
+    private fun onFetchCurrentWallet(wallet: Wallet?) {
+        currentWallet.postValue(wallet)
     }
 
     private fun onFetchTransaction(response: EtherScanResponse) {
