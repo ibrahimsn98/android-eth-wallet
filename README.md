@@ -12,7 +12,7 @@
 - [ ] Real time transaction notifications
 
 ### Screenshots
-<img src="https://github.com/ibrahimsn98/android-eth-wallet/tree/master/art/screenshot.png" height="520">
+<img src="https://github.com/ibrahimsn98/android-eth-wallet/blob/master/art/screenshot.png" height="400">
 
 ### Tech Stack
 - [Web3j](https://web3j.io/)

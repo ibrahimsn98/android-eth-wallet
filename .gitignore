@@ -9,11 +9,13 @@ local.properties
 
 # Gradle generated files
 .gradle/
+build/
 
 # Signing files
 .signing/
 
 # User-specific configurations
+./idea
 .idea/libraries/
 .idea/workspace.xml
 .idea/tasks.xml
