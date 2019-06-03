@@ -17,67 +17,118 @@
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:textColor="@color/colorTextPrimary"
-			android:text="From"/>
+			android:layout_marginBottom="5dp"
+			android:text="@string/from"
+			android:textSize="15sp"
+			android:textStyle="bold"
+			android:textColor="@color/colorTextPrimary"/>
 
 		<TextView
 			android:id="@+id/tvFromName"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_marginBottom="5dp"
+			android:textSize="15sp"
 			android:textColor="@color/colorTextPrimary"/>
 
 		<TextView
 			android:id="@+id/tvFromAddress"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_marginBottom="10dp"
+			android:textSize="15sp"
 			android:textColor="@color/colorTextPrimary"/>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginBottom="5dp"
+			android:background="@color/colorBorder" />
 
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="To"
+			android:layout_marginBottom="5dp"
+			android:text="@string/to"
+			android:textSize="15sp"
+			android:textStyle="bold"
 			android:textColor="@color/colorTextPrimary"/>
 
 		<TextView
 			android:id="@+id/tvTo"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_marginBottom="10dp"
+			android:textSize="15sp"
 			android:textColor="@color/colorTextPrimary"/>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginBottom="5dp"
+			android:background="@color/colorBorder" />
 
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Amount"
+			android:layout_marginBottom="5dp"
+			android:text="@string/amount"
+			android:textSize="15sp"
+			android:textStyle="bold"
 			android:textColor="@color/colorTextPrimary"/>
 
 		<TextView
 			android:id="@+id/tvAmount"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_marginBottom="10dp"
+			android:textSize="15sp"
 			android:textColor="@color/colorTextPrimary"/>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginBottom="5dp"
+			android:background="@color/colorBorder" />
 
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Network Fee"
+			android:layout_marginBottom="5dp"
+			android:text="@string/network_fee"
+			android:textSize="15sp"
+			android:textStyle="bold"
 			android:textColor="@color/colorTextPrimary"/>
 
 		<TextView
 			android:id="@+id/tvNetworkFee"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_marginBottom="10dp"
+			android:textSize="15sp"
 			android:textColor="@color/colorTextPrimary"/>
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:layout_marginBottom="5dp"
+			android:background="@color/colorBorder" />
 
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Total"
+			android:layout_marginBottom="5dp"
+			android:text="@string/total"
+			android:textSize="15sp"
+			android:textStyle="bold"
 			android:textColor="@color/colorTextPrimary"/>
 
 		<TextView
 			android:id="@+id/tvTotal"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_marginBottom="10dp"
+			android:textSize="15sp"
 			android:textColor="@color/colorTextPrimary"/>
 
 	</LinearLayout>
@@ -90,7 +141,7 @@
 		android:textColor="@color/colorTextPrimary"
 		android:textSize="15sp"
 		android:textStyle="bold"
-		android:text="Confirm"
+		android:text="@string/confirm"
 		android:textAllCaps="false"
 		android:background="@drawable/ic_button_background_transparent"
 		app:layout_constraintTop_toBottomOf="@id/linearLayout"/>

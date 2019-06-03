@@ -38,17 +38,17 @@ class ImportKeystoreFragment : BaseFragment<AddWalletActivity>() {
             if (it != null) {
                 viewModel.status.value = null
                 if (it) {
-                    Toast.makeText(activity, "Wallet has been imported.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, R.string.toast_wallet_import, Toast.LENGTH_SHORT).show()
                     activity.finish()
                 } else
-                    Toast.makeText(activity, "Something went wrong.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, R.string.toast_something_wrong, Toast.LENGTH_SHORT).show()
             }
         })
     }
 
     private fun validateForm(name: String): Boolean {
         if (name.length < 3 || name.length > 30) {
-            Toast.makeText(activity, "Wallet name must have at least 3 characters.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, R.string.toast_wallet_name_error, Toast.LENGTH_SHORT).show()
             return false
         }
 

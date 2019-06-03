@@ -10,7 +10,7 @@
 		android:id="@+id/tiyWalletName"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:hint="Wallet Name"
+		android:hint="@string/wallet_name"
 		android:textColorHint="@color/colorTextSecondary"
 		app:layout_constraintTop_toTopOf="parent">
 
@@ -34,7 +34,7 @@
 		android:textColor="@color/colorTextPrimary"
 		android:textSize="15sp"
 		android:textStyle="bold"
-		android:text="Save"
+		android:text="@string/save"
 		android:textAllCaps="false"
 		android:background="@drawable/ic_button_background_transparent"
 		app:layout_constraintTop_toBottomOf="@id/tiyWalletName"/>
@@ -48,7 +48,7 @@
 		android:textColor="@color/colorTextPrimary"
 		android:textSize="15sp"
 		android:textStyle="bold"
-		android:text="Delete Wallet"
+		android:text="@string/delete_wallet"
 		android:textAllCaps="false"
 		android:background="@drawable/ic_button_background_dashed"
 		app:layout_constraintTop_toBottomOf="@id/btSave"/>
@@ -62,7 +62,7 @@
 		android:textColor="@color/colorTextPrimary"
 		android:textSize="15sp"
 		android:textStyle="bold"
-		android:text="Export Wallet"
+		android:text="@string/export_wallet"
 		android:textAllCaps="false"
 		android:background="@drawable/ic_button_background_dashed"
 		app:layout_constraintTop_toBottomOf="@id/btDelete"/>

@@ -9,7 +9,7 @@
 		android:id="@+id/tiyWalletName"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:hint="Wallet Name"
+		android:hint="@string/wallet_name"
 		android:textColorHint="@color/colorTextSecondary"
 		app:layout_constraintTop_toTopOf="parent">
 
@@ -24,16 +24,6 @@
 
 	</android.support.design.widget.TextInputLayout>
 
-	<TextView
-		android:id="@+id/textView"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="10dp"
-		android:textSize="14sp"
-		android:textColor="@color/colorTextPrimary"
-		android:text="Mostly 64 alphanumeric characters"
-		app:layout_constraintTop_toBottomOf="@id/tiyWalletName"/>
-
 	<Button
 		android:id="@+id/btCreate"
 		android:layout_width="match_parent"
@@ -43,9 +33,9 @@
 		android:textColor="@color/colorTextPrimary"
 		android:textSize="15sp"
 		android:textStyle="bold"
-		android:text="Create Wallet"
+		android:text="@string/create_wallet"
 		android:textAllCaps="false"
 		android:background="@drawable/ic_button_background_transparent"
-		app:layout_constraintTop_toBottomOf="@id/textView"/>
+		app:layout_constraintTop_toBottomOf="@id/tiyWalletName"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -8,7 +8,6 @@ import me.ibrahimsn.wallet.ui.addWallet.importWallet.ImportWalletFragment
 import me.ibrahimsn.wallet.ui.addWallet.importWallet.importAddress.ImportAddressFragment
 import me.ibrahimsn.wallet.ui.addWallet.importWallet.importKey.ImportKeyFragment
 import me.ibrahimsn.wallet.ui.addWallet.importWallet.importKeystore.ImportKeystoreFragment
-import me.ibrahimsn.wallet.ui.send.send.SendFragment
 
 @Module
 abstract class AddWalletFragmentBuilder {

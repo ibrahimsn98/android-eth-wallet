@@ -3,8 +3,6 @@
 
 	<string name="menu_wallet">Wallet</string>
 	<string name="menu_transactions">Transactions</string>
-	<string name="menu_receive">Receive</string>
-	<string name="menu_send">Send</string>
 	<string name="menu_menu">Menu</string>
 
 	<string name="eth_sent_amount">-%1$s ETH</string>
@@ -12,4 +10,102 @@
 
 	<string name="eth_sent_amount_real">-$%1$s</string>
 	<string name="eth_received_amount_real">+$%1$s</string>
+
+	<string name="coming_soon">Coming soon..</string>
+	<string name="new_wallet">New Wallet</string>
+
+	<string name="ethereum">Ethereum</string>
+	<string name="ethereum_desc">Main Ethereum network</string>
+	<string name="ropsten">Ropsten</string>
+	<string name="ropsten_desc">Ropsten test network</string>
+	<string name="kovan">Kovan</string>
+	<string name="kovan_desc">Kovan test network</string>
+
+	<string name="get_started">Get Started</string>
+	<string name="add_wallet_description">Create your new wallet or import keys, keystore</string>
+	<string name="create_new_wallet">Create new wallet</string>
+	<string name="already_have_wallet">I already have a wallet</string>
+
+	<string name="from">From</string>
+	<string name="to">To</string>
+	<string name="amount">Amount</string>
+	<string name="network_fee">Network Fee</string>
+	<string name="total">Total</string>
+	<string name="confirm">Confirm</string>
+
+	<string name="wallet_name">Wallet Name</string>
+	<string name="create_wallet">Create Wallet</string>
+	<string name="public_address">Public Address</string>
+	<string name="import_public_address_desc">You can track any public address without explaining your private key. This allows you to view the balance and transactions but cannot create transactions.</string>
+	<string name="import_wallet">Import Wallet</string>
+	<string name="import_private_key_desc">Private key is mostly 64 alphanumeric characters</string>
+	<string name="private_key">Private Key</string>
+	<string name="keystore">Keystore</string>
+	<string name="password">Password</string>
+	<string name="import_keystore_desc">The various lines of text that start with \"{..}\" and the password you use to encrypt</string>
+
+	<string name="import_keystore">Import Keystore</string>
+	<string name="import_private_key">Import Key</string>
+	<string name="import_public_address">Import Address</string>
+
+	<string name="wallets">Wallets</string>
+	<string name="current_wallet">Current Wallet</string>
+	<string name="other">Other</string>
+	<string name="ethereum_network">Ethereum Network</string>
+	<string name="send_feedback">Send Feedback</string>
+	<string name="privacy_policy">Privacy Policy</string>
+	<string name="source_code">Source Code</string>
+
+	<string name="your_address">Your Address</string>
+	<string name="share_qr_code">Share QR Code</string>
+	<string name="share_eth_address">Share ETH Address</string>
+
+	<string name="receiver_address">Receiver Address</string>
+	<string name="gas_price">Gas Price</string>
+	<string name="gas_limit">Gas Limit</string>
+	<string name="gas_price_desc">The higher the gas price, the more expensive your transaction fee will be, but the quicker your transaction will be processed by the network.</string>
+	<string name="gas_limit_desc">The gas limit prevents smart contracts from consuming all your ETH. We will try to calculate the gas limit automatically for you, but some smart contracts may require a custom gas limit.</string>
+	<string name="send">Send</string>
+
+	<string name="empty_title">There\'s nothing here</string>
+	<string name="empty_desc">You\'ve never done anything.</string>
+
+	<string name="init_eth">0.00 ETH</string>
+	<string name="init_usd">0.00 USD</string>
+
+	<string name="receive">Receive</string>
+	<string name="recent_transactions">Recent Transactions</string>
+
+	<string name="save">Save</string>
+	<string name="delete_wallet">Delete Wallet</string>
+	<string name="export_wallet">Export Wallet</string>
+
+	<string name="received_eth">Received Ethereum</string>
+	<string name="sent_eth">Sent Ethereum</string>
+
+	<string name="toast_new_wallet_create">New wallet has been created.</string>
+	<string name="toast_something_wrong">Something went wrong.</string>
+	<string name="toast_wallet_name_error">Wallet name must have at least 3 characters.</string>
+	<string name="toast_wallet_import">Wallet has been imported.</string>
+	<string name="toast_wallet_address_error">Please enter a valid ethereum address.</string>
+	<string name="toast_wallet_private_key_error">Please enter a valid private key.</string>
+	<string name="toast_address_copied">Wallet address has been copied.</string>
+	<string name="toast_transaction_sent">Transaction sent successfully.</string>
+	<string name="toast_transaction_send_error">You can\'t create transaction with this wallet.</string>
+	<string name="toast_amount_error">Please enter a valid amount.</string>
+	<string name="toast_wallet_updated">Wallet has been updated.</string>
+	<string name="toast_wallet_deleted">Wallet has been deleted.</string>
+
+	<string name="preferences">Preferences</string>
+	<string name="receive_eth">Receive Ethereum</string>
+	<string name="verify_transaction">Verify Transaction</string>
+	<string name="send_eth">Send Ethereum</string>
+	<string name="last_transactions">Last Transactions</string>
+	<string name="wallet_detail">Wallet Detail</string>
+	<string name="share_via">Share via</string>
+	<string name=""></string>
+	<string name=""></string>
+	<string name=""></string>
+	<string name=""></string>
+
 </resources>

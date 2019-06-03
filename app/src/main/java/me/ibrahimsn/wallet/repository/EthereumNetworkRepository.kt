@@ -15,7 +15,6 @@ import org.web3j.protocol.Web3j
 import org.web3j.protocol.core.DefaultBlockParameterName
 import org.web3j.protocol.http.HttpService
 import org.web3j.utils.Numeric
-import java.lang.Exception
 import java.math.BigInteger
 import javax.inject.Inject
 
@@ -37,7 +36,7 @@ class EthereumNetworkRepository @Inject constructor(private val preferencesRepos
                     "https://kovan.etherscan.io/api/",
                     "https://kovan.etherscan.io", 42, false))
 
-    private var defaultNetwork = getByName(preferencesRepository.getDefaultNetwork()) ?: NETWORKS[2]
+    private var defaultNetwork = getByName(preferencesRepository.getDefaultNetwork()) ?: NETWORKS[1]
     private var web3j = Web3j.build(HttpService(getDefaultNetwork().rpcServerUrl))
 
     fun setDefaultNetworkInfo(pos: Int) {

@@ -11,6 +11,7 @@ import me.ibrahimsn.wallet.ui.addWallet.createWallet.CreateWalletViewModel
 import me.ibrahimsn.wallet.ui.addWallet.importWallet.importAddress.ImportAddressViewModel
 import me.ibrahimsn.wallet.ui.addWallet.importWallet.importKey.ImportKeyViewModel
 import me.ibrahimsn.wallet.ui.addWallet.importWallet.importKeystore.ImportKeystoreViewModel
+import me.ibrahimsn.wallet.ui.main.MainViewModel
 import me.ibrahimsn.wallet.ui.menu.MenuViewModel
 import me.ibrahimsn.wallet.ui.receive.ReceiveViewModel
 import me.ibrahimsn.wallet.ui.send.SendViewModel
@@ -24,6 +25,11 @@ abstract class ViewModelModule {
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    internal abstract fun bindMainViewModel(viewModel: MainViewModel): ViewModel
 
     @Binds
     @IntoMap

@@ -38,7 +38,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginBottom="1dp"
-					android:text="There's nothing here"
+					android:text="@string/empty_title"
 					android:textSize="14sp"
 					android:textStyle="bold"
 					android:textColor="@color/colorTextPrimary"/>
@@ -46,7 +46,7 @@
 				<TextView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:text="You've never done anything."
+					android:text="@string/empty_desc"
 					android:textSize="14sp"
 					android:textColor="@color/colorTextSecondary"/>
 

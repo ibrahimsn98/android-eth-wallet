@@ -38,22 +38,22 @@ class ImportKeyFragment : BaseFragment<AddWalletActivity>() {
             if (it != null) {
                 viewModel.status.value = null
                 if (it) {
-                    Toast.makeText(activity, "Wallet has been imported.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, R.string.toast_wallet_import, Toast.LENGTH_SHORT).show()
                     activity.finish()
                 } else
-                    Toast.makeText(activity, "Something went wrong.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, R.string.toast_something_wrong, Toast.LENGTH_SHORT).show()
             }
         })
     }
 
     private fun validateForm(name: String, privateKey: String): Boolean {
         if (name.length < 3 || name.length > 30) {
-            Toast.makeText(activity, "Wallet name must have at least 3 characters.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, R.string.toast_wallet_name_error, Toast.LENGTH_SHORT).show()
             return false
         }
 
         if (!Pattern.matches("^\\S{64}\$", privateKey)) {
-            Toast.makeText(activity, "Please enter a valid private key!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, R.string.toast_wallet_private_key_error, Toast.LENGTH_SHORT).show()
             return false
         }
 

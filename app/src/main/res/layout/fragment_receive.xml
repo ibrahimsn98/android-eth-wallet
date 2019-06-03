@@ -19,7 +19,7 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
-			android:hint="Your Address"
+			android:hint="@string/your_address"
 			android:textColorHint="@color/colorTextSecondary">
 
 			<android.support.design.widget.TextInputEditText
@@ -82,7 +82,7 @@
 			android:padding="12dp"
 			android:layout_marginStart="0dp"
 			android:layout_marginEnd="8dp"
-			android:text="Share QR Code"
+			android:text="@string/share_qr_code"
 			android:textSize="12sp"
 			android:textStyle="bold"
 			android:textAllCaps="false"
@@ -99,7 +99,7 @@
 			android:padding="12dp"
 			android:layout_marginStart="8dp"
 			android:layout_marginEnd="0dp"
-			android:text="Share ETH Address"
+			android:text="@string/share_eth_address"
 			android:textSize="12sp"
 			android:textStyle="bold"
 			android:textAllCaps="false"

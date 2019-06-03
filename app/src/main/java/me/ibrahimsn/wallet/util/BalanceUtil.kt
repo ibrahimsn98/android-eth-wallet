@@ -8,23 +8,23 @@ import java.math.RoundingMode
 object BalanceUtil {
 
     private const val ETHER_DECIMALS = 18
-    private const val weiInEth = "1000000000000000000"
+    //private const val weiInEth = "1000000000000000000"
 
     fun weiToEth(wei: BigInteger): BigDecimal {
         return Convert.fromWei(BigDecimal(wei), Convert.Unit.ETHER)
     }
 
-    fun weiToEth(wei: BigInteger, sigFig: Int): String {
+    /*fun weiToEth(wei: BigInteger, sigFig: Int): String {
         val eth = weiToEth(wei)
         val scale = sigFig - eth.precision() + eth.scale()
         val eth_scaled = eth.setScale(scale, RoundingMode.HALF_UP)
         return eth_scaled.toString()
     }
 
-    fun EthToWei(eth: String): String {
+    fun ethToWei(eth: String): String {
         val wei = BigDecimal(eth).multiply(BigDecimal(weiInEth))
         return wei.toBigInteger().toString()
-    }
+    }*/
 
     fun weiToGweiBI(wei: BigInteger): BigDecimal {
         return Convert.fromWei(BigDecimal(wei), Convert.Unit.GWEI)

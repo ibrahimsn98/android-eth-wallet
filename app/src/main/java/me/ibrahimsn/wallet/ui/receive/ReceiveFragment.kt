@@ -3,19 +3,19 @@ package me.ibrahimsn.wallet.ui.receive
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_receive.*
 import me.ibrahimsn.wallet.R
 import me.ibrahimsn.wallet.base.BaseFragment
 import me.ibrahimsn.wallet.ui.home.HomeActivity
 import javax.inject.Inject
-import android.content.ClipData
-import android.content.Context.CLIPBOARD_SERVICE
-import android.content.ClipboardManager
-import android.widget.Toast
 
 class ReceiveFragment : BaseFragment<HomeActivity>() {
 
@@ -31,12 +31,12 @@ class ReceiveFragment : BaseFragment<HomeActivity>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(ReceiveViewModel::class.java)
-        activity.setTitle("Receive Ethereum")
+        activity.setTitle(getString(R.string.receive_eth))
 
         ibCopyAddress.setOnClickListener {
             if (address != "") {
                 copyToClipboard(address)
-                Toast.makeText(activity, "Wallet address has been copied.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, R.string.toast_address_copied, Toast.LENGTH_SHORT).show()
             }
         }
 

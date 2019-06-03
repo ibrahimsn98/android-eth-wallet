@@ -17,7 +17,7 @@ class ImportWalletFragment : BaseFragment<AddWalletActivity>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity.setTitle("Import Wallet")
+        activity.setTitle(getString(R.string.import_wallet))
 
         val adapter = ImportWalletAdapter(childFragmentManager)
         viewPager.adapter = adapter

@@ -15,10 +15,8 @@ import me.ibrahimsn.wallet.ui.send.SendActivity
 import me.ibrahimsn.wallet.ui.send.SendViewModel
 import me.ibrahimsn.wallet.util.BalanceUtil
 import me.ibrahimsn.wallet.util.Constants
-import java.lang.StringBuilder
 import java.math.BigDecimal
 import java.math.BigInteger
-import java.math.RoundingMode
 import java.util.regex.Pattern
 import javax.inject.Inject
 
@@ -41,7 +39,7 @@ class SendFragment : BaseFragment<SendActivity>(), SeekBar.OnSeekBarChangeListen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(activity, viewModelFactory).get(SendViewModel::class.java)
-        activity.setTitle("Send Ethereum")
+        activity.setTitle(getString(R.string.send_eth))
 
         sbGasPrice.setOnSeekBarChangeListener(this)
         sbGasLimit.setOnSeekBarChangeListener(this)
@@ -71,7 +69,7 @@ class SendFragment : BaseFragment<SendActivity>(), SeekBar.OnSeekBarChangeListen
                     activity.navController.navigate(R.id.action_sendFragment_to_confirmFragment)
                 }
             } else
-                Toast.makeText(activity, "You can't create transaction with this wallet.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, R.string.toast_transaction_send_error, Toast.LENGTH_SHORT).show()
         }
 
         viewModel.currentWallet.observe(this, Observer {
@@ -98,12 +96,12 @@ class SendFragment : BaseFragment<SendActivity>(), SeekBar.OnSeekBarChangeListen
 
     private fun validateForm(address: String, amount: String): Boolean {
         if (!Pattern.matches("^0x[a-fA-F0-9]{40}\$", address)) {
-            Toast.makeText(activity, "Please enter a valid ethereum address.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, R.string.toast_wallet_address_error, Toast.LENGTH_SHORT).show()
             return false
         }
 
         if (!Pattern.matches("^\\d+(\\.\\d+)?\$", amount) || amount.toDouble() <= 0) {
-            Toast.makeText(activity, "Please enter a valid amount.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, R.string.toast_amount_error, Toast.LENGTH_SHORT).show()
             return false
         }
 

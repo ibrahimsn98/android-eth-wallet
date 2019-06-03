@@ -6,7 +6,6 @@ import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import me.ibrahimsn.wallet.manager.GethAccountManager
-import me.ibrahimsn.wallet.repository.*
 import me.ibrahimsn.wallet.room.AppDatabase
 import me.ibrahimsn.wallet.room.WalletDao
 import okhttp3.OkHttpClient

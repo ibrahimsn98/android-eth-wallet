@@ -19,4 +19,8 @@
 		<item name="colorControlNormal">#90F5F5F5</item>
 	</style>
 
+	<style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+		<item name="android:windowBackground">@drawable/ic_splash_background</item>
+	</style>
+
 </resources>

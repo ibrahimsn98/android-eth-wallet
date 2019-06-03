@@ -25,7 +25,7 @@ class ConfirmFragment : BaseFragment<SendActivity>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel = ViewModelProviders.of(activity, viewModelFactory).get(SendViewModel::class.java)
-        activity.setTitle("Verify Transaction")
+        activity.setTitle(getString(R.string.verify_transaction))
 
         viewModel.transactionSummary.observe(this, Observer {
             if (it != null) {
@@ -35,9 +35,21 @@ class ConfirmFragment : BaseFragment<SendActivity>() {
                 tvFromName.text = it.from.name
                 tvFromAddress.text = it.from.address
                 tvTo.text = it.to
-                tvAmount.text = amount.toPlainString()
-                tvNetworkFee.text = it.networkFee.toPlainString()
-                tvTotal.text = total.toPlainString()
+
+                tvAmount.text = StringBuilder()
+                        .append(amount)
+                        .append(" ETH")
+                        .toString()
+
+                tvNetworkFee.text = StringBuilder()
+                        .append(it.networkFee)
+                        .append(" ETH")
+                        .toString()
+
+                tvTotal.text = StringBuilder()
+                        .append(total)
+                        .append(" ETH")
+                        .toString()
             }
         })
 
@@ -46,12 +58,14 @@ class ConfirmFragment : BaseFragment<SendActivity>() {
         }
 
         viewModel.transactionStatus.observe(this, Observer {
-            if (it != null)
+            if (it != null) {
+                viewModel.transactionStatus.value = null
                 if (it) {
-                    Toast.makeText(activity, "Transaction sent successfully.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, R.string.toast_transaction_sent, Toast.LENGTH_SHORT).show()
                     activity.finish()
                 } else
-                    Toast.makeText(activity, "Something went wrong.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, R.string.toast_something_wrong, Toast.LENGTH_SHORT).show()
+            }
         })
     }
 }

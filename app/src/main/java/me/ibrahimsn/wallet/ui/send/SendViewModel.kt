@@ -3,7 +3,6 @@ package me.ibrahimsn.wallet.ui.send
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.util.Log
-import android.widget.Toast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -17,7 +16,6 @@ import me.ibrahimsn.wallet.util.BalanceUtil
 import me.ibrahimsn.wallet.util.Constants
 import java.math.BigDecimal
 import java.math.BigInteger
-import java.util.regex.Pattern
 import javax.inject.Inject
 
 class SendViewModel @Inject constructor(private val passwordRepository: PasswordRepository,

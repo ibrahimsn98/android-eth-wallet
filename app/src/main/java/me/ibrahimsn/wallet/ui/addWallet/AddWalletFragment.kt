@@ -14,7 +14,7 @@ class AddWalletFragment : BaseFragment<AddWalletActivity>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity.setTitle("New Wallet")
+        activity.setTitle(getString(R.string.new_wallet))
 
         btCreateWallet.setOnClickListener {
             activity.navController.navigate(R.id.action_addWalletFragment_to_createWalletFragment)

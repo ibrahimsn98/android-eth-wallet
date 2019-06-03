@@ -24,7 +24,7 @@ class CreateWalletFragment : BaseFragment<AddWalletActivity>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(CreateWalletViewModel::class.java)
-        activity.setTitle("New Wallet")
+        activity.setTitle(getString(R.string.new_wallet))
 
         btCreate.setOnClickListener {
             val name = etWalletName.text.toString().trim()
@@ -36,16 +36,16 @@ class CreateWalletFragment : BaseFragment<AddWalletActivity>() {
         viewModel.status.observe(this, Observer {
             if (it != null)
                 if (it) {
-                    Toast.makeText(activity, "New wallet has been created.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, R.string.toast_new_wallet_create, Toast.LENGTH_SHORT).show()
                     activity.finish()
                 } else
-                    Toast.makeText(activity, "Something went wrong.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, R.string.toast_something_wrong, Toast.LENGTH_SHORT).show()
         })
     }
 
     private fun validateForm(name: String): Boolean {
         if (name.length < 3 || name.length > 30) {
-            Toast.makeText(activity, "Wallet name must have at least 3 characters.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, R.string.toast_wallet_name_error, Toast.LENGTH_SHORT).show()
             return false
         }
 

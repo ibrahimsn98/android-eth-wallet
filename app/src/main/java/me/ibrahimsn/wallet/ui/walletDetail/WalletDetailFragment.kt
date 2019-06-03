@@ -25,7 +25,7 @@ class WalletDetailFragment : BaseFragment<HomeActivity>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(activity, viewModelFactory).get(WalletDetailViewModel::class.java)
-        activity.setTitle("Wallet Detail")
+        activity.setTitle(getString(R.string.wallet_detail))
 
         if (viewModel.wallet == null) {
             activity.navController.navigateUp()
@@ -53,10 +53,10 @@ class WalletDetailFragment : BaseFragment<HomeActivity>() {
             if (it != null) {
                 viewModel.updateStatus.value = null
                 if (it) {
-                    Toast.makeText(activity, "Wallet has been updated.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, R.string.toast_wallet_updated, Toast.LENGTH_SHORT).show()
                     activity.navController.navigateUp()
                 } else
-                    Toast.makeText(activity, "Something went wrong.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, R.string.toast_something_wrong, Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -64,22 +64,24 @@ class WalletDetailFragment : BaseFragment<HomeActivity>() {
             if (it != null) {
                 viewModel.updateStatus.value = null
                 if (it) {
-                    Toast.makeText(activity, "Wallet has been deleted.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, R.string.toast_wallet_deleted, Toast.LENGTH_SHORT).show()
                     activity.navController.navigateUp()
                 } else
-                    Toast.makeText(activity, "Something went wrong.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, R.string.toast_something_wrong, Toast.LENGTH_SHORT).show()
             }
         })
 
         viewModel.exportString.observe(this, Observer {
-            if (it != null)
+            if (it != null) {
+                viewModel.exportString.value = null
                 openShareDialog(it)
+            }
         })
     }
 
     private fun validateForm(name: String): Boolean {
         if (name.length < 3 || name.length > 30) {
-            Toast.makeText(activity, "Wallet name must have at least 3 characters.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, R.string.toast_wallet_name_error, Toast.LENGTH_SHORT).show()
             return false
         }
 
@@ -91,6 +93,6 @@ class WalletDetailFragment : BaseFragment<HomeActivity>() {
         sharingIntent.type = "text/plain"
         sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Keystore")
         sharingIntent.putExtra(Intent.EXTRA_TEXT, jsonData)
-        startActivityForResult(Intent.createChooser(sharingIntent, "Share via"), 13)
+        startActivityForResult(Intent.createChooser(sharingIntent, getString(R.string.share_via)), 13)
     }
 }

@@ -36,7 +36,7 @@
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
-				android:text="Sent Ethereum"
+				android:text="@string/sent_eth"
 				android:textColor="@color/colorTextPrimary"
 				android:textStyle="bold"
 				android:textSize="14sp"
@@ -63,7 +63,6 @@
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
 				android:layout_weight="1"
-				android:text="20:13 Aug 13"
 				android:textColor="@color/colorTextSecondary"
 				android:textSize="12sp"
 				android:layout_marginStart="0dp"
@@ -73,7 +72,6 @@
 				android:id="@+id/tvAmountReal"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="-$250"
 				android:textColor="@color/colorTextSecondary"
 				android:textSize="12sp"/>
 

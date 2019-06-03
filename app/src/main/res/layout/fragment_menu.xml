@@ -10,7 +10,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:padding="12dp"
-		android:text="Wallets"
+		android:text="@string/wallets"
 		android:textSize="14sp"
 		android:textColor="@color/colorTextPrimary"
 		android:textStyle="bold" />
@@ -48,7 +48,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="2dp"
-				android:text="Current Wallet"
+				android:text="@string/current_wallet"
 				android:textSize="14sp"
 				android:textColor="@color/colorTextPrimary"
 				android:textStyle="bold" />
@@ -69,7 +69,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:padding="12dp"
-		android:text="Other"
+		android:text="@string/other"
 		android:textSize="14sp"
 		android:textColor="@color/colorTextPrimary"
 		android:textStyle="bold" />
@@ -107,7 +107,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginBottom="2dp"
-				android:text="Ethereum Network"
+				android:text="@string/ethereum_network"
 				android:textSize="14sp"
 				android:textColor="@color/colorTextPrimary"
 				android:textStyle="bold" />
@@ -144,7 +144,7 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
-			android:text="Send Feedback"
+			android:text="@string/send_feedback"
 			android:textSize="14sp"
 			android:textColor="@color/colorTextPrimary"
 			android:textStyle="bold" />
@@ -176,7 +176,7 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
-			android:text="Privacy Policy"
+			android:text="@string/privacy_policy"
 			android:textSize="14sp"
 			android:textColor="@color/colorTextPrimary"
 			android:textStyle="bold" />
@@ -208,7 +208,7 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
-			android:text="Source Code"
+			android:text="@string/source_code"
 			android:textSize="14sp"
 			android:textColor="@color/colorTextPrimary"
 			android:textStyle="bold" />

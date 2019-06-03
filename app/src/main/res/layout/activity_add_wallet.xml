@@ -29,7 +29,7 @@
 			android:textSize="18sp"
 			android:textStyle="bold"
 			android:textColor="@color/colorTextPrimary"
-			android:text="New Wallet"
+			android:text="@string/new_wallet"
 			android:layout_gravity="center_vertical" />
 
 	</FrameLayout>

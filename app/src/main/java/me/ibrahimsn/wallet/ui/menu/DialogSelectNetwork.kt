@@ -5,6 +5,7 @@ import android.support.design.widget.BottomSheetDialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.dialog_select_network.*
 import me.ibrahimsn.wallet.R
 
@@ -20,9 +21,10 @@ class DialogSelectNetwork : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         lyEthereum.setOnClickListener {
-            if (listener != null)
-                listener!!.onNetworkSelected(0)
-            dismiss()
+            Toast.makeText(activity, R.string.coming_soon, Toast.LENGTH_SHORT).show()
+            //if (listener != null)
+            //    listener!!.onNetworkSelected(0)
+            //dismiss()
         }
 
         lyRopsten.setOnClickListener {

@@ -17,6 +17,9 @@ interface WalletDao {
     @Insert
     fun insert(wallet: Wallet): Long
 
+    @Query("SELECT COUNT() FROM wallets")
+    fun count(): Int
+
     @Query("SELECT COUNT(address) FROM wallets WHERE address = :address")
     fun count(address: String): Int
 

@@ -33,7 +33,6 @@
 				android:id="@+id/tvName"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="Ethereum Wallet 01"
 				android:textSize="18sp"
 				android:textStyle="bold"
 				android:textColor="@color/colorTextPrimary"/>
@@ -54,7 +53,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="90dp"
 			android:gravity="center_horizontal"
-			android:text="0.0 ETH"
+			android:text="@string/init_eth"
 			android:textColor="@color/colorTextPrimary"
 			android:textSize="26sp"
 			android:textStyle="bold"
@@ -66,7 +65,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:gravity="center_horizontal"
-			android:text="0.0 USD"
+			android:text="@string/init_usd"
 			android:textColor="@color/colorTextSecondary"
 			android:textSize="15sp"
 			app:layout_constraintTop_toBottomOf="@id/tvBalance"/>
@@ -102,7 +101,7 @@
 			android:padding="12dp"
 			android:layout_marginStart="0dp"
 			android:layout_marginEnd="8dp"
-			android:text="Send"
+			android:text="@string/send"
 			android:textSize="14sp"
 			android:textStyle="bold"
 			android:textAllCaps="false"
@@ -119,7 +118,7 @@
 			android:padding="12dp"
 			android:layout_marginStart="8dp"
 			android:layout_marginEnd="0dp"
-			android:text="Receive"
+			android:text="@string/receive"
 			android:textSize="14sp"
 			android:textStyle="bold"
 			android:textAllCaps="false"
@@ -135,7 +134,7 @@
 		android:layout_marginTop="12dp"
 		android:layout_marginStart="16dp"
 		android:layout_marginEnd="16dp"
-		android:text="Recent Transactions"
+		android:text="@string/recent_transactions"
 		android:textSize="13sp"
 		android:textColor="@color/colorTextPrimary"
 		app:layout_constraintTop_toBottomOf="@id/linearLayout"/>
@@ -173,7 +172,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="1dp"
-			android:text="There's nothing here"
+			android:text="@string/empty_title"
 			android:textSize="14sp"
 			android:textStyle="bold"
 			android:textColor="@color/colorTextPrimary"/>
@@ -181,7 +180,7 @@
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="You've never done anything."
+			android:text="@string/empty_desc"
 			android:textSize="14sp"
 			android:textColor="@color/colorTextSecondary"/>
 

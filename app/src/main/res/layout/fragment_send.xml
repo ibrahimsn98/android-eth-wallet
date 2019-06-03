@@ -5,14 +5,13 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:orientation="vertical"
 	android:gravity="center_horizontal"
-	android:background="@color/colorBackground"
 	android:padding="16dp">
 
 	<android.support.design.widget.TextInputLayout
 		android:id="@+id/tiyReceiverAddress"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:hint="Receiver Address"
+		android:hint="@string/receiver_address"
 		android:textColorHint="@color/colorTextSecondary"
 		app:layout_constraintTop_toTopOf="parent">
 
@@ -32,7 +31,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="14dp"
-		android:hint="Amount"
+		android:hint="@string/amount"
 		android:textColorHint="@color/colorTextSecondary"
 		app:layout_constraintTop_toBottomOf="@id/tiyReceiverAddress">
 
@@ -62,7 +61,7 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
-			android:text="Gas Price"
+			android:text="@string/gas_price"
 			android:textSize="15sp"
 			android:textStyle="bold"
 			android:textColor="@color/colorTextPrimary"/>
@@ -90,7 +89,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="14dp"
-		android:text="The higher the gas price, the more expensive your transaction fee will be, but the quicker your transaction will be processed by the network."
+		android:text="@string/gas_price_desc"
 		android:textSize="14sp"
 		android:textColor="@color/colorTextPrimary"
 		app:layout_constraintTop_toBottomOf="@id/sbGasPrice"/>
@@ -110,7 +109,7 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
-			android:text="Gas Limit"
+			android:text="@string/gas_limit"
 			android:textSize="15sp"
 			android:textStyle="bold"
 			android:textColor="@color/colorTextPrimary"/>
@@ -138,7 +137,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="14dp"
-		android:text="The gas limit prevents smart contracts from consuming all your ETH. We will try to calculate the gas limit automatically for you, but some smart contracts may require a custom gas limit."
+		android:text="@string/gas_limit_desc"
 		android:textSize="14sp"
 		android:textColor="@color/colorTextPrimary"
 		app:layout_constraintTop_toBottomOf="@id/sbGasLimit"/>
@@ -157,7 +156,7 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
-			android:text="Network Fee"
+			android:text="@string/network_fee"
 			android:textSize="15sp"
 			android:textStyle="bold"
 			android:textColor="@color/colorTextPrimary"/>
@@ -179,7 +178,7 @@
 		android:textColor="@color/colorTextPrimary"
 		android:textSize="15sp"
 		android:textStyle="bold"
-		android:text="Send"
+		android:text="@string/send"
 		android:textAllCaps="false"
 		android:background="@drawable/ic_button_background_transparent"
 		app:layout_constraintTop_toBottomOf="@id/linearLayout3"/>

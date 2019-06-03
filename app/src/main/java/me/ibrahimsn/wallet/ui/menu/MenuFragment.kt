@@ -23,7 +23,7 @@ class MenuFragment : BaseFragment<HomeActivity>(), DialogSelectNetwork.OnNetwork
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(activity, viewModelFactory).get(MenuViewModel::class.java)
-        activity.setTitle("Preferences")
+        activity.setTitle(getString(R.string.preferences))
 
         val dialogNetworkSelect =  DialogSelectNetwork()
         dialogNetworkSelect.setOnNetworkSelectedListener(this)

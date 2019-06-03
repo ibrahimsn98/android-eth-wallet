@@ -13,7 +13,6 @@ import me.ibrahimsn.wallet.base.BaseFragment
 import me.ibrahimsn.wallet.ui.home.HomeActivity
 import me.ibrahimsn.wallet.ui.send.SendActivity
 import me.ibrahimsn.wallet.ui.transactions.TransactionAdapter
-import java.lang.StringBuilder
 import javax.inject.Inject
 
 class WalletFragment : BaseFragment<HomeActivity>() {
@@ -28,7 +27,7 @@ class WalletFragment : BaseFragment<HomeActivity>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(activity, viewModelFactory).get(WalletViewModel::class.java)
-        activity.setTitle("Ethereum Wallet")
+        activity.setTitle(getString(R.string.app_name))
 
         val transactionAdapter = TransactionAdapter(activity)
         rvTransactions.layoutManager = LinearLayoutManager(activity)

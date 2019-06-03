@@ -7,9 +7,6 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import kotlinx.android.synthetic.main.fragment_transactions.*
-import kotlinx.android.synthetic.main.fragment_transactions.lyEmpty
-import kotlinx.android.synthetic.main.fragment_transactions.pbLoading
-import kotlinx.android.synthetic.main.fragment_transactions.rvTransactions
 import me.ibrahimsn.wallet.R
 import me.ibrahimsn.wallet.base.BaseFragment
 import me.ibrahimsn.wallet.ui.home.HomeActivity
@@ -27,7 +24,7 @@ class TransactionsFragment : BaseFragment<HomeActivity>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(activity, viewModelFactory).get(TransactionsViewModel::class.java)
-        activity.setTitle("Last Transactions")
+        activity.setTitle(getString(R.string.last_transactions))
 
         val transactionAdapter = TransactionAdapter(activity)
         rvTransactions.layoutManager = LinearLayoutManager(activity)
@@ -35,6 +32,7 @@ class TransactionsFragment : BaseFragment<HomeActivity>() {
 
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
+            // TODO
         }
 
         viewModel.currentWallet.observe(this, Observer {

@@ -23,14 +23,14 @@
 			android:textSize="14sp"
 			android:textStyle="bold"
 			android:textColor="@color/colorTextPrimary"
-			android:text="Ethereum"/>
+			android:text="@string/ethereum"/>
 
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textSize="14sp"
 			android:textColor="@color/colorTextSecondary"
-			android:text="Main Ethereum network"/>
+			android:text="@string/ethereum_desc"/>
 
 	</LinearLayout>
 
@@ -51,14 +51,14 @@
 			android:textSize="14sp"
 			android:textStyle="bold"
 			android:textColor="@color/colorTextPrimary"
-			android:text="Ropsten"/>
+			android:text="@string/ropsten"/>
 
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textSize="14sp"
 			android:textColor="@color/colorTextSecondary"
-			android:text="Ropsten test network"/>
+			android:text="@string/ropsten_desc"/>
 
 	</LinearLayout>
 
@@ -79,14 +79,14 @@
 			android:textSize="14sp"
 			android:textStyle="bold"
 			android:textColor="@color/colorTextPrimary"
-			android:text="Kovan"/>
+			android:text="@string/kovan"/>
 
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textSize="14sp"
 			android:textColor="@color/colorTextSecondary"
-			android:text="Kovan test network"/>
+			android:text="@string/kovan_desc"/>
 
 	</LinearLayout>
 

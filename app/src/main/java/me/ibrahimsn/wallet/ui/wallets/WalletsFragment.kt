@@ -30,8 +30,8 @@ class WalletsFragment : BaseFragment<HomeActivity>(), WalletAdapter.WalletCallba
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(WalletsViewModel::class.java)
-        activity.setTitle("Wallets")
+        viewModel = ViewModelProviders.of(activity, viewModelFactory).get(WalletsViewModel::class.java)
+        activity.setTitle(getString(R.string.wallets))
         setHasOptionsMenu(true)
 
         val walletAdapter = WalletAdapter(this)

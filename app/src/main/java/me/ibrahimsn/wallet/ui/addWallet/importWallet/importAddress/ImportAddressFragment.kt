@@ -38,22 +38,22 @@ class ImportAddressFragment : BaseFragment<AddWalletActivity>() {
             if (it != null) {
                 viewModel.status.value = null
                 if (it) {
-                    Toast.makeText(activity, "Wallet has been imported.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, R.string.toast_wallet_import, Toast.LENGTH_SHORT).show()
                     activity.finish()
                 } else
-                    Toast.makeText(activity, "Something went wrong.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, R.string.toast_something_wrong, Toast.LENGTH_SHORT).show()
             }
         })
     }
 
     private fun validateForm(name: String, address: String): Boolean {
         if (name.length < 3 || name.length > 30) {
-            Toast.makeText(activity, "Wallet name must have at least 3 characters.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, R.string.toast_wallet_name_error, Toast.LENGTH_SHORT).show()
             return false
         }
 
         if (!Pattern.matches("^0x[a-fA-F0-9]{40}\$", address)) {
-            Toast.makeText(activity, "Please enter a valid ethereum address.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, R.string.toast_wallet_address_error, Toast.LENGTH_SHORT).show()
             return false
         }
 
