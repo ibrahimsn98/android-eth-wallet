@@ -1,22 +1,0 @@
-
-¤
-
-9
-android*http://schemas.android.com/apk/res/android
-2
-app'http://schemas.android.com/apk/res-auto	ImageView"Zstyle ?attr/actionModeCloseButtonStyle"2+
-)’€Œøattr/actionModeCloseButtonStyle"‡
-'http://schemas.android.com/apk/res-auto	srcCompat?attr/actionModeCloseDrawable"(¹ƒŒø2(
-&“€Œøattr/actionModeCloseDrawable"L
-*http://schemas.android.com/apk/res/android	clickabletrue"(å„2:@"
-*http://schemas.android.com/apk/res/androidcontentDescription@string/abc_action_mode_done"(ó„„2%
-#ƒ€Äøstring/abc_action_mode_done"L
-*http://schemas.android.com/apk/res/android	focusabletrue"(Ú„2:@"
-*http://schemas.android.com/apk/res/androidid@+id/action_mode_close_button"(Ğ„2%
-#œ€¤øid/action_mode_close_button"a
-*http://schemas.android.com/apk/res/androidlayout_heightmatch_parent"(õ„2:0ÿÿÿÿÿÿÿÿÿ"U
-*http://schemas.android.com/apk/res/androidlayout_marginEnd16dip"(¶‡„2:h "W
-*http://schemas.android.com/apk/res/androidlayout_marginRight16dip"(ù„2:h "`
-*http://schemas.android.com/apk/res/androidlayout_widthwrap_content"(ô„2:0şÿÿÿÿÿÿÿÿ"N
-*http://schemas.android.com/apk/res/androidpaddingLeft8dp"(Ö„2:h"O
-*http://schemas.android.com/apk/res/androidpaddingStart8dp"(³‡„2:h

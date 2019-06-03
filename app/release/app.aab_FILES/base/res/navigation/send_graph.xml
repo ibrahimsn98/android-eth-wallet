@@ -1,38 +1,0 @@
-
-­
-
-9
-android*http://schemas.android.com/apk/res/android
-2
-app'http://schemas.android.com/apk/res-auto
-navigation"r
-'http://schemas.android.com/apk/res-autostartDestination@id/sendFragment"(»ƒŒø2
-â¤øid/sendFragment"k
-*http://schemas.android.com/apk/res/androidid@+id/send_graph.xml"(Ğ„2
-ã¤øid/send_graph.xml*
-
-	)*ì
-ãfragment"g
-*http://schemas.android.com/apk/res/androidid@+id/sendFragment"(Ğ„2
-â¤øid/sendFragment"F
-*http://schemas.android.com/apk/res/androidlabelSendFragment(€„"f
-*http://schemas.android.com/apk/res/androidname-me.ibrahimsn.wallet.ui.send.send.SendFragment(ƒ€„*
-			 *¤
-›action"s
-'http://schemas.android.com/apk/res-autodestination@id/confirmFragment"
-(´Œø2
-Ì€¤øid/confirmFragment"›
-*http://schemas.android.com/apk/res/androidid+@+id/action_sendFragment_to_confirmFragment"
-(Ğ„23
-1€¤ø)id/action_sendFragment_to_confirmFragment
-*
-
-	+*
-
-	*»
-²fragment"m
-*http://schemas.android.com/apk/res/androidid@+id/confirmFragment"(Ğ„2
-Ì€¤øid/confirmFragment"I
-*http://schemas.android.com/apk/res/androidlabelConfirmFragment(€„"l
-*http://schemas.android.com/apk/res/androidname3me.ibrahimsn.wallet.ui.send.confirm.ConfirmFragment(ƒ€„*	
-$

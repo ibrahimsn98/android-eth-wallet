@@ -1,50 +1,0 @@
-
-Í
-9
-android*http://schemas.android.com/apk/res/android
-2
-app'http://schemas.android.com/apk/res-auto
-navigation"|
-'http://schemas.android.com/apk/res-autostartDestination@id/addWalletFragment"(»ƒŒø2
-¥€¤øid/addWalletFragment"w
-*http://schemas.android.com/apk/res/androidid@+id/add_wallet_graph.xml"(Ğ„2!
-¦€¤øid/add_wallet_graph.xml*
-
-	.*ğ
-çfragment"q
-*http://schemas.android.com/apk/res/androidid@+id/addWalletFragment"(Ğ„2
-¥€¤øid/addWalletFragment"K
-*http://schemas.android.com/apk/res/androidlabelAddWalletFragment(€„"k
-*http://schemas.android.com/apk/res/androidname2me.ibrahimsn.wallet.ui.addWallet.AddWalletFragment(ƒ€„*
-			%*Â
-¹action"}
-'http://schemas.android.com/apk/res-autodestination@id/createWalletFragment"
-(´Œø2!
-Ò€¤øid/createWalletFragment"¯
-*http://schemas.android.com/apk/res/androidid5@+id/action_addWalletFragment_to_createWalletFragment"
-(Ğ„2=
-;Š€¤ø3id/action_addWalletFragment_to_createWalletFragment
-*
-		0*Â
-¹action"}
-'http://schemas.android.com/apk/res-autodestination@id/importWalletFragment"(´Œø2!
-Š¤øid/importWalletFragment"¯
-*http://schemas.android.com/apk/res/androidid5@+id/action_addWalletFragment_to_importWalletFragment"(Ğ„2=
-;‹€¤ø3id/action_addWalletFragment_to_importWalletFragment*
-
-	0*
-
-	*Ù
-Ğfragment"w
-*http://schemas.android.com/apk/res/androidid@+id/createWalletFragment"(Ğ„2!
-Ò€¤øid/createWalletFragment"N
-*http://schemas.android.com/apk/res/androidlabelCreateWalletFragment(€„"{
-*http://schemas.android.com/apk/res/androidnameBme.ibrahimsn.wallet.ui.addWallet.createWallet.CreateWalletFragment(ƒ€„*
-
-	)*Ù
-Ğfragment"w
-*http://schemas.android.com/apk/res/androidid@+id/importWalletFragment"(Ğ„2!
-Š¤øid/importWalletFragment"N
-*http://schemas.android.com/apk/res/androidlabelImportWalletFragment(€„"{
-*http://schemas.android.com/apk/res/androidnameBme.ibrahimsn.wallet.ui.addWallet.importWallet.ImportWalletFragment(ƒ€„*	
-)

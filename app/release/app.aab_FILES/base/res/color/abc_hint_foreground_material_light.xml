@@ -1,19 +1,0 @@
-
-ö
-9
-android*http://schemas.android.com/apk/res/androidselector*
-    E*Û
-Òitem"™
-*http://schemas.android.com/apk/res/androidalpha(@dimen/hint_pressed_alpha_material_light"(Ÿ†„21
-/Œ˜ø'dimen/hint_pressed_alpha_material_light"‰
-*http://schemas.android.com/apk/res/androidcolor @color/foreground_material_light"(¥ƒ„2)
-'Æ€”øcolor/foreground_material_light"P
-*http://schemas.android.com/apk/res/androidstate_enabledtrue"(„2:@"P
-*http://schemas.android.com/apk/res/androidstate_pressedtrue"(§„2:@*
-    =*§
-item"‰
-*http://schemas.android.com/apk/res/androidalpha @dimen/hint_alpha_material_light"(Ÿ†„2)
-'Š˜ødimen/hint_alpha_material_light"‰
-*http://schemas.android.com/apk/res/androidcolor @color/foreground_material_light"(¥ƒ„2)
-'Æ€”øcolor/foreground_material_light*	
-=

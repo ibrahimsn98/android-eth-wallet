@@ -1,56 +1,0 @@
-
-é
-9
-android*http://schemas.android.com/apk/res/android
-2
-app'http://schemas.android.com/apk/res-auto0android.support.v7.widget.ActionBarOverlayLayout"T
-*http://schemas.android.com/apk/res/androidfitsSystemWindowstrue"(İ„2:@"w
-*http://schemas.android.com/apk/res/androidid@+id/decor_content_parent"(Ğ„2!
-Ö€¤øid/decor_content_parent"a
-*http://schemas.android.com/apk/res/androidlayout_heightmatch_parent"(õ„2:0ÿÿÿÿÿÿÿÿÿ"`
-*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ*
-
-    %*p
-hinclude"]layout"@layout/abc_screen_content_include"2+
-)”€°ø!layout/abc_screen_content_include*
-
-    :*“
-Š,android.support.v7.widget.ActionBarContainer"Bstyle?attr/actionBarStyle"2
-†€Œøattr/actionBarStyle"I
-*http://schemas.android.com/apk/res/androidgravitytop"(¯„2:80"w
-*http://schemas.android.com/apk/res/androidid@+id/action_bar_container"(Ğ„2!
-€¤øid/action_bar_container"\
-*http://schemas.android.com/apk/res/androidkeyboardNavigationClustertrue"(ÀŠ„2:@"X
-*http://schemas.android.com/apk/res/androidlayout_alignParentToptrue"(Œƒ„2:@"a
-*http://schemas.android.com/apk/res/androidlayout_heightwrap_content"(õ„2:0şÿÿÿÿÿÿÿÿ"`
-*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"(ô„2:0ÿÿÿÿÿÿÿÿÿ"Y
-*http://schemas.android.com/apk/res/androidtouchscreenBlocksFocustrue"(‰„2:@*
-
-
-        #*Á
-¸!android.support.v7.widget.Toolbar">style?attr/toolbarStyle"%2
-Ÿ„Œøattr/toolbarStyle"¨
-'http://schemas.android.com/apk/res-autonavigationContentDescription%@string/abc_action_bar_up_description"%(û‚Œø2.
-,€Äø$string/abc_action_bar_up_description"c
-*http://schemas.android.com/apk/res/androidid@+id/action_bar"%(Ğ„2
-Œ€¤øid/action_bar"a
-*http://schemas.android.com/apk/res/androidlayout_heightwrap_content"%(õ„2:0şÿÿÿÿÿÿÿÿ"`
-*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent"%(ô„2:0ÿÿÿÿÿÿÿÿÿ%*
-
-
-        *(*ı
-ô.android.support.v7.widget.ActionBarContextView"Dstyle?attr/actionModeStyle",2 
-œ€Œøattr/actionModeStyle"s
-*http://schemas.android.com/apk/res/androidid@+id/action_context_bar",(Ğ„2
-”€¤øid/action_context_bar"a
-*http://schemas.android.com/apk/res/androidlayout_heightwrap_content",(õ„2:0şÿÿÿÿÿÿÿÿ"`
-*http://schemas.android.com/apk/res/androidlayout_widthmatch_parent",(ô„2:0ÿÿÿÿÿÿÿÿÿ"s
-*http://schemas.android.com/apk/res/androidtheme?attr/actionBarTheme",(€€„2
-Š€Œøattr/actionBarTheme"M
-*http://schemas.android.com/apk/res/android
-visibilitygone",(Ü„2:0,*
-
-    2+*
-
-
-43
