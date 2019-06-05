@@ -12,8 +12,8 @@ android {
         applicationId "me.ibrahimsn.wallet"
         minSdkVersion 23
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "1.0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         splits {
             abi {
@@ -27,6 +27,9 @@ android {
     buildTypes {
         debug {
             buildConfigField 'String', "EtherscanApi", Etherscan_API
+
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         release {
             buildConfigField 'String', "EtherscanApi", Etherscan_API

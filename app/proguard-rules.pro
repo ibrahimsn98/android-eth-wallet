@@ -20,6 +20,12 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+-keep public class org.web3j.*** { public *; }
+-keep public class org.ethereum.*** { public *; }
+-keep public class com.github.zagum.** { public *; }
+-keep class me.ibrahimsn.wallet.entity.** { *; }
+
+# GLIDE
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public class * extends com.bumptech.glide.module.AppGlideModule
 -keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
